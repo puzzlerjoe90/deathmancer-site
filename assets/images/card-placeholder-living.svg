@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 560" role="img" aria-labelledby="title desc">
+  <title id="title">Living Hero card placeholder</title>
+  <desc id="desc">A dark card frame for a Living Hero with gold line art.</desc>
+  <rect width="420" height="560" fill="#030304"/>
+  <rect x="34" y="34" width="352" height="492" rx="18" fill="#0c0d10" stroke="#d6b65a" stroke-width="4"/>
+  <rect x="60" y="68" width="300" height="260" fill="#121317"/>
+  <circle cx="210" cy="178" r="74" fill="#050506" stroke="#ffe878" stroke-width="7"/>
+  <path d="M156 251c14-58 32-88 54-88s40 30 54 88" fill="none" stroke="#ffe878" stroke-width="8"/>
+  <rect x="72" y="372" width="276" height="14" fill="#d6b65a"/>
+  <rect x="72" y="410" width="220" height="10" fill="#80745f"/>
+  <rect x="72" y="438" width="250" height="10" fill="#80745f"/>
+  <rect x="72" y="466" width="184" height="10" fill="#80745f"/>
+</svg>

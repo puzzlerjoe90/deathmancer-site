@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Deathmancer table layout placeholder</title>
+  <desc id="desc">A simple dark tabletop layout with card zones and gold accents.</desc>
+  <rect width="640" height="420" fill="#030304"/>
+  <rect x="34" y="34" width="572" height="352" fill="#0c0d10" stroke="#ffe878" stroke-width="3" opacity=".9"/>
+  <g fill="#121317" stroke="#d6b65a" stroke-width="2" opacity=".9">
+    <rect x="76" y="82" width="104" height="148" rx="8"/>
+    <rect x="198" y="82" width="104" height="148" rx="8"/>
+    <rect x="320" y="82" width="104" height="148" rx="8"/>
+    <rect x="442" y="82" width="104" height="148" rx="8"/>
+    <rect x="137" y="252" width="104" height="92" rx="8"/>
+    <rect x="268" y="252" width="104" height="92" rx="8"/>
+    <rect x="399" y="252" width="104" height="92" rx="8"/>
+  </g>
+  <g fill="#ffe878" opacity=".72">
+    <circle cx="128" cy="156" r="16"/>
+    <circle cx="250" cy="156" r="16"/>
+    <circle cx="372" cy="156" r="16"/>
+    <circle cx="494" cy="156" r="16"/>
+  </g>
+  <path d="M76 242h470" stroke="#80745f" stroke-width="3" stroke-dasharray="8 12"/>
+</svg>

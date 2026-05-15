@@ -1,56 +1,58 @@
 # Deathmancer Website
 
-Official website and digital companion tools for **Deathmancer**, a competitive engine-building card game where Living Heroes generate score, while Undead units scale the multiplier.
+First static website for **Deathmancer**, a competitive engine-building card game where players race to 100 score over 6 rounds. Living Heroes generate score while Undead units scale the multiplier.
 
-## Project Goals
+## Project Structure
 
-This repository will contain:
+```text
+.
+├── index.html
+├── scorekeeper.html
+├── styles.css
+├── script.js
+├── assets/
+│   ├── downloads/
+│   │   └── deathmancer-rulebook-v1.pdf
+│   └── images/
+│       ├── card-placeholder-living.svg
+│       ├── card-placeholder-undead.svg
+│       ├── deathmancer-hero.svg
+│       ├── deathmancer-playmat.jpg
+│       ├── grief.jpg
+│       ├── mercy.jpg
+│       └── table-placeholder.svg
+```
 
-- A mobile-first Deathmancer website
-- A downloadable rulebook section
-- A card/art gallery
-- A development log
-- A future digital scorekeeper companion tool
+## Local Preview
 
-## Initial Site Structure
+Open `index.html` directly in a browser, or run a tiny static server from this folder:
 
-Planned pages/sections:
+```powershell
+python -m http.server 8000
+```
 
-- Home
-- What is Deathmancer?
-- How it plays
-- Commanders
-- Rulebook download
-- Gallery
-- Development log
-- Scorekeeper / coming soon
+Then visit `http://localhost:8000`.
 
-## Visual Direction
+## Editing Notes
 
-- Dark fantasy tone
-- Charcoal / black background
-- Off-white body text
-- Muted gold accents
-- Clean, modern layout
-- Mobile-first design
+- Main page content lives in `index.html`.
+- The placeholder scorekeeper route is `scorekeeper.html`.
+- Global styles live in `styles.css`.
+- Mobile navigation behavior lives in `script.js`.
+- Final illustrations currently used by the site are `assets/images/grief.jpg` and `assets/images/mercy.jpg`.
+- The gallery also uses `assets/images/deathmancer-playmat.jpg` for the table playmat concept.
+- The rulebook download currently points to `assets/downloads/deathmancer-rulebook-v1.pdf`.
+- Artwork and rulebook content are project assets; preserve credit and copyright notes when publishing.
 
-## Future Scorekeeper Features
+## GitHub Pages Deployment
 
-The scorekeeper should eventually support:
+This site is ready for GitHub Pages because it uses static files only.
 
-- 2 player setup
-- Commander selection
-- Starting score by Commander
-- Round tracking
-- Terrain rolling
-- Initiative reminder based on current score
-- Score calculator using ATK × multiplier
-- Rounding rules
-- Manual score changes
-- Undo last action
-- Local save using browser storage
+1. Push the repository to GitHub.
+2. Open the repository settings.
+3. Go to **Pages**.
+4. Set the source to **Deploy from a branch**.
+5. Choose the `main` branch and the repository root folder.
+6. Save, then wait for GitHub Pages to publish the site.
 
-## Status
-
-Early development / prototype.# deathmancer-site
-Official website and digital companion tools for Deathmancer, a competitive engine-building card game of Living Heroes, Undead multipliers and Commander-led strategy.
+No build command is required.

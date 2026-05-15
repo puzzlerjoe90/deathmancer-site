@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Deathmancer is a competitive engine-building card game where Living Heroes generate score and Undead units scale the multiplier."
+  >
+  <title>Deathmancer | Competitive Engine-Building Card Game</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="Deathmancer home">
+      <span class="brand-mark" aria-hidden="true">D</span>
+      <span>Deathmancer</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" data-nav>
+      <a href="#what">What is it?</a>
+      <a href="#play">How it plays</a>
+      <a href="#commanders">Commanders</a>
+      <a href="#rulebook">Rulebook</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#development-log">Log</a>
+      <a href="./scorekeeper.html">Scorekeeper</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">2 players &middot; 6 rounds &middot; race to 100</p>
+        <h1>Score with the living. Scale with the dead.</h1>
+        <p class="hero__lede">
+          A competitive engine-building card game where Living Heroes generate score, while Undead units scale the multiplier. Death is not the end &mdash; it is transformation.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="./assets/downloads/deathmancer-rulebook-v1.pdf" download>
+            Rulebook Download
+          </a>
+          <a class="button button--ghost" href="./scorekeeper.html">Scorekeeper Coming Soon</a>
+        </div>
+        <dl class="stat-strip" aria-label="Game facts">
+          <div>
+            <dt>Players</dt>
+            <dd>2</dd>
+          </div>
+          <div>
+            <dt>Rounds</dt>
+            <dd>6</dd>
+          </div>
+          <div>
+            <dt>Victory</dt>
+            <dd>100 score</dd>
+          </div>
+        </dl>
+      </div>
+
+      <figure class="hero__art">
+        <img src="./assets/images/grief.jpg" alt="Deathmancer illustration of a crowned figure facing a skull.">
+        <figcaption>Final illustration: Grief</figcaption>
+      </figure>
+    </section>
+
+    <section class="section section--intro" id="what">
+      <div class="section__heading">
+        <p class="eyebrow">What is Deathmancer?</p>
+        <h2>A duel across the Living and Dead Realms.</h2>
+      </div>
+      <p>
+        Deathmancer is a competitive card game for 2 players, with 4-player support planned through expansion. Each player controls a Commander and fights across two connected realms: the Living Realm above and the Dead Realm below. Living Heroes shoot for the heavens by generating score. Undead units increase your multiplier, attack opposing Heroes, and disrupt the opponent.
+      </p>
+    </section>
+
+    <section class="section" id="play">
+      <div class="section__heading">
+        <p class="eyebrow">How it plays</p>
+        <h2>Every turn asks where your power should live.</h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-card__number">01</span>
+          <h3>Draw, score, spend</h3>
+          <p>Draw each round, then use score as both victory track and resource. Score also determines initiative. Recruit Heroes by paying their Soul value, or summon Undead by paying their Attack value.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-card__number">02</span>
+          <h3>Take two actions</h3>
+          <p>On your turn, take one Living Action and one Undead Action. Post score, recruit, summon, attack, trigger an Undead ability, or use Commander Override.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-card__number">03</span>
+          <h3>Transform the fallen</h3>
+          <p>When a Living unit reaches 0 Soul, it dies immediately. Non-Commander Heroes become Fallen tokens in the Dead Realm; Commanders flip to their Undead side.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--split" id="commanders">
+      <div>
+        <p class="eyebrow">Commanders</p>
+        <h2>Your Commander defines your tempo and afterlife.</h2>
+        <p>
+          Each Commander has Living and Undead sides. While Living, your Commander can recruit Heroes or summon Undead. If killed, it flips into the Dead Realm and gains access to Commander Override: score or summon during the Undead Action instead of attacking.
+        </p>
+      </div>
+
+      <div class="commander-list" aria-label="Commander archetypes">
+        <article>
+          <h3>Archimedes, The Virtuous</h3>
+          <p>Starts with initiative. Has increased power in the Living Realm. Defensive and consistent scoring.</p>
+        </article>
+        <article>
+          <h3>Balthazar, The Ascendant Angel</h3>
+          <p>Has greater command over the Undead for an increasingly scaling army. Comes back stronger in Death.</p>
+        </article>
+        <article>
+          <h3>Commanders In-Progress</h3>
+          <p>The Gatekeeper and Time. One controls the boundary, the other the flow between the Living and Dead Realms.</p>
+        </article>
+        <article>
+          <h3>Auto-Summons</h3>
+          <p>Each Commander has an Auto-Summon that enters play at the start of Round 2 for no action point and no score cost.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section rulebook" id="rulebook">
+      <div>
+        <p class="eyebrow">Rulebook</p>
+        <h2>Playtest rules for a six-round race to 100.</h2>
+        <p>
+          The v1 playtest rulebook covers setup, round structure, Living and Undead Actions, scoring, multiplier order, terrain, Purgatory, Fallen tokens, and endgame timing.
+        </p>
+      </div>
+      <a class="button button--primary" href="./assets/downloads/deathmancer-rulebook-v1.pdf" download>
+        Rulebook Download
+      </a>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section__heading">
+        <p class="eyebrow">Gallery</p>
+        <h2>Final illustrations and table direction.</h2>
+      </div>
+
+      <div class="gallery-grid">
+        <figure>
+          <img src="./assets/images/grief.jpg" alt="Grief illustration for Deathmancer.">
+          <figcaption>Grief</figcaption>
+        </figure>
+        <figure>
+          <img src="./assets/images/mercy.jpg" alt="Mercy illustration for Deathmancer.">
+          <figcaption>Mercy</figcaption>
+        </figure>
+        <figure class="gallery-grid__playmat">
+          <img src="./assets/images/deathmancer-playmat.jpg" alt="Deathmancer playmat showing the Living Realm above and Dead Realm below.">
+          <figcaption>Table playmat concept</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="development-log">
+      <div class="section__heading">
+        <p class="eyebrow">Development Log</p>
+        <h2>Follow the road from prototype to table-ready.</h2>
+      </div>
+
+      <ol class="timeline">
+        <li>
+          <time datetime="2026-05-15">May 2026</time>
+          <span>First public website scaffolded with the v1 playtest rulebook, final illustration slots, and scorekeeper teaser.</span>
+        </li>
+        <li>
+          <time datetime="2026-06">Next milestone</time>
+          <span>Add card previews, Commander pages, playtest notes, and a live scorekeeper for ATK totals, multipliers, terrain, and rounding.</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section scorekeeper-callout" id="scorekeeper">
+      <div>
+        <p class="eyebrow">Scorekeeper Coming Soon</p>
+        <h2>A companion for score, multipliers, terrain, and round flow.</h2>
+        <p>
+          The scorekeeper will help players track current score, Living ATK totals, Undead multiplier values, terrain effects, and the race to 100 before Round 6 ends.
+        </p>
+      </div>
+      <a class="button button--ghost" href="./scorekeeper.html">View Placeholder</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Deathmancer is in active development.</p>
+    <a href="#top">Back to top</a>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
