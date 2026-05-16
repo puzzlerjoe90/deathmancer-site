@@ -7,6 +7,7 @@ First static website for **Deathmancer**, a competitive engine-building card gam
 ```text
 .
 ├── index.html
+├── how-to-play.html
 ├── scorekeeper.html
 ├── styles.css
 ├── script.js
@@ -20,6 +21,7 @@ First static website for **Deathmancer**, a competitive engine-building card gam
 │       ├── deathmancer-playmat.jpg
 │       ├── grief.jpg
 │       ├── mercy.jpg
+│       ├── proxy-playtest.jpg
 │       └── table-placeholder.svg
 ```
 
@@ -36,11 +38,12 @@ Then visit `http://localhost:8000`.
 ## Editing Notes
 
 - Main page content lives in `index.html`.
+- The placeholder video guide page is `how-to-play.html`.
 - The placeholder scorekeeper route is `scorekeeper.html`.
 - Global styles live in `styles.css`.
 - Mobile navigation behavior lives in `script.js`.
 - Final illustrations currently used by the site are `assets/images/grief.jpg` and `assets/images/mercy.jpg`.
-- The gallery also uses `assets/images/deathmancer-playmat.jpg` for the table playmat concept.
+- The gallery uses `assets/images/proxy-playtest.jpg` for the early proxy playtest concept.
 - The rulebook download currently points to `assets/downloads/deathmancer-rulebook-v1.pdf`.
 - Artwork and rulebook content are project assets; preserve credit and copyright notes when publishing.
 
