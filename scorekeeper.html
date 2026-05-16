@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta
     name="description"
-    content="Deathmancer scorekeeper placeholder for tracking score, Living ATK, Undead multipliers, terrain, and round flow."
+    content="Deathmancer scorekeeper for tracking score, Living ATK, Undead multipliers, initiative, terrain, spending, and round flow."
   >
-  <title>Scorekeeper Coming Soon | Deathmancer</title>
-  <meta property="og:title" content="Scorekeeper Coming Soon | Deathmancer">
+  <title>Scorekeeper | Deathmancer</title>
+  <meta property="og:title" content="Scorekeeper | Deathmancer">
   <meta
     property="og:description"
-    content="A lightweight Deathmancer companion for score, Living ATK, Undead multipliers, terrain, and round flow."
+    content="A lightweight Deathmancer companion for score, Living ATK, Undead multipliers, initiative, terrain, spending, and round flow."
   >
   <meta property="og:image" content="https://deathmancer.com/assets/images/grief.jpg">
   <meta property="og:image:alt" content="Deathmancer illustration of a crowned figure facing a skull.">
@@ -42,30 +42,143 @@
     </nav>
   </header>
 
-  <main class="scorekeeper-hero">
-    <p class="eyebrow">Scorekeeper Coming Soon</p>
-    <h1>Track the race to 100.</h1>
-    <p class="hero__lede">
-      This page is reserved for the Deathmancer scorekeeper: a lightweight companion for Living ATK totals, Undead multiplier values, terrain effects, Purgatory notes, and Round 6 endgame timing.
-    </p>
+  <main class="scorekeeper-app" data-scorekeeper>
+    <section class="scorekeeper-intro" aria-labelledby="scorekeeper-title">
+      <p class="eyebrow">Scorekeeper Draft</p>
+      <h1 id="scorekeeper-title">Track the race to 100.</h1>
+      <p class="hero__lede">
+        A lightweight table companion for score, Living ATK, Undead multipliers, initiative, terrain, and the six-round race.
+      </p>
+    </section>
 
-    <section class="scorekeeper-panel" aria-label="Planned scorekeeper fields">
-      <dl>
-        <dt>Current score</dt>
-        <dd>0 / 100</dd>
-        <dt>Living ATK total</dt>
-        <dd>Coming soon</dd>
-        <dt>Undead multiplier</dt>
-        <dd>Base 1.0</dd>
-        <dt>Round / terrain</dt>
-        <dd>Round 1</dd>
-      </dl>
-      <a class="button button--ghost" href="./index.html">Return Home</a>
+    <section class="match-panel" aria-label="Match state">
+      <div>
+        <span class="panel-label">Round</span>
+        <strong data-round-display>1</strong>
+        <p data-round-note>Rounds 1-2 have no terrain roll.</p>
+      </div>
+      <div>
+        <span class="panel-label">Initiative</span>
+        <strong data-initiative-display>Player 1</strong>
+        <p>Higher score takes initiative. Ties stay with Player 1 for this draft.</p>
+      </div>
+      <div>
+        <span class="panel-label">Target</span>
+        <strong>100</strong>
+        <p>Highest score wins if nobody reaches 100 before the end of Round 6.</p>
+      </div>
+      <div class="win-banner" data-win-banner hidden aria-live="polite"></div>
+      <div class="match-actions">
+        <button class="button button--ghost" type="button" data-round-prev>Previous Round</button>
+        <button class="button button--primary" type="button" data-round-next>Next Round</button>
+        <button class="button button--ghost" type="button" data-purgatory disabled>Purgatory</button>
+      </div>
+    </section>
+
+    <section class="terrain-panel" aria-labelledby="terrain-title">
+      <div>
+        <p class="eyebrow">Terrain</p>
+        <h2 id="terrain-title">Roll from Round 3 onward.</h2>
+        <p data-terrain-result>No terrain in play yet.</p>
+      </div>
+      <button class="button button--ghost" type="button" data-roll-terrain>Roll Terrain</button>
+    </section>
+
+    <section class="player-grid" aria-label="Player score controls">
+      <article class="player-card" data-player-card data-player="0">
+        <div class="player-card__header">
+          <label>
+            <span>Player name</span>
+            <input type="text" value="Player 1" data-player-name>
+          </label>
+          <strong data-total-score>0</strong>
+        </div>
+
+        <div class="score-preview">
+          <span>Score this turn</span>
+          <strong data-score-preview>0</strong>
+        </div>
+
+        <div class="control-grid">
+          <label>
+            <span>Current score</span>
+            <input type="number" min="0" max="999" step="1" value="0" data-score>
+          </label>
+          <label>
+            <span>Living ATK total</span>
+            <input type="number" min="0" max="99" step="1" value="0" data-living-atk>
+          </label>
+          <label>
+            <span>Undead multiplier</span>
+            <input type="number" min="1" max="20" step="0.1" value="1.0" data-multiplier>
+          </label>
+          <label>
+            <span>Spend score</span>
+            <input type="number" min="0" max="999" step="1" value="0" data-spend>
+          </label>
+        </div>
+
+        <div class="player-actions">
+          <button class="button button--primary" type="button" data-apply-score>Apply Score</button>
+          <button class="button button--ghost" type="button" data-apply-spend>Spend</button>
+        </div>
+      </article>
+
+      <article class="player-card" data-player-card data-player="1">
+        <div class="player-card__header">
+          <label>
+            <span>Player name</span>
+            <input type="text" value="Player 2" data-player-name>
+          </label>
+          <strong data-total-score>0</strong>
+        </div>
+
+        <div class="score-preview">
+          <span>Score this turn</span>
+          <strong data-score-preview>0</strong>
+        </div>
+
+        <div class="control-grid">
+          <label>
+            <span>Current score</span>
+            <input type="number" min="0" max="999" step="1" value="0" data-score>
+          </label>
+          <label>
+            <span>Living ATK total</span>
+            <input type="number" min="0" max="99" step="1" value="0" data-living-atk>
+          </label>
+          <label>
+            <span>Undead multiplier</span>
+            <input type="number" min="1" max="20" step="0.1" value="1.0" data-multiplier>
+          </label>
+          <label>
+            <span>Spend score</span>
+            <input type="number" min="0" max="999" step="1" value="0" data-spend>
+          </label>
+        </div>
+
+        <div class="player-actions">
+          <button class="button button--primary" type="button" data-apply-score>Apply Score</button>
+          <button class="button button--ghost" type="button" data-apply-spend>Spend</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="notes-panel" aria-labelledby="scorekeeper-notes-title">
+      <div>
+        <p class="eyebrow">Table Notes</p>
+        <h2 id="scorekeeper-notes-title">Keep rulings and reminders close.</h2>
+      </div>
+      <label>
+        <span>Notes</span>
+        <textarea rows="5" data-match-notes placeholder="Purgatory, The Fallen, Commander flips, terrain reminders..."></textarea>
+      </label>
+      <button class="button button--ghost" type="button" data-reset-match>Reset Match</button>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Deathmancer &copy; 2026 Joe Green. All rights reserved. Illustrations &copy; Glen Holman.</p>
+    <p>Deathmancer &copy; 2026 Joe Green. All rights reserved. Illustrations &copy; Glen Holman. Contact: <a href="mailto:contact@deathmancer.com">contact@deathmancer.com</a>.</p>
     <a href="./index.html">Back to home</a>
   </footer>
 
