@@ -102,24 +102,37 @@
         <div class="control-grid">
           <label>
             <span>Current score</span>
-            <input type="number" min="0" max="999" step="1" value="0" data-score>
+            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-score>
+            <small>Manual total changes ask for confirmation.</small>
           </label>
-          <label>
+          <div class="control-field">
             <span>Living ATK total</span>
-            <input type="number" min="0" max="99" step="1" value="0" data-living-atk>
-          </label>
-          <label>
+            <div class="number-stepper">
+              <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living ATK total">-</button>
+              <input type="number" inputmode="numeric" min="0" max="99" step="1" value="0" data-living-atk>
+              <button type="button" data-step-field="atk" data-step-amount="1" aria-label="Increase Living ATK total">+</button>
+            </div>
+          </div>
+          <div class="control-field">
             <span>Undead multiplier</span>
-            <input type="number" min="1" max="20" step="0.1" value="1.0" data-multiplier>
-          </label>
-          <label>
+            <div class="number-stepper">
+              <button type="button" data-step-field="multiplier" data-step-amount="-0.1" aria-label="Decrease Undead multiplier">-</button>
+              <input type="number" inputmode="decimal" min="1" max="20" step="0.1" value="1.0" data-multiplier>
+              <button type="button" data-step-field="multiplier" data-step-amount="0.1" aria-label="Increase Undead multiplier">+</button>
+            </div>
+          </div>
+          <div class="control-field">
             <span>Spend score</span>
-            <input type="number" min="0" max="999" step="1" value="0" data-spend>
-          </label>
+            <div class="number-stepper">
+              <button type="button" data-step-field="spend" data-step-amount="-1" aria-label="Decrease score spend">-</button>
+              <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-spend>
+              <button type="button" data-step-field="spend" data-step-amount="1" aria-label="Increase score spend">+</button>
+            </div>
+          </div>
         </div>
 
         <div class="player-actions">
-          <button class="button button--primary" type="button" data-apply-score>Apply Score</button>
+          <button class="button button--primary" type="button" data-apply-score>Post Score</button>
           <button class="button button--ghost" type="button" data-apply-spend>Spend</button>
         </div>
       </article>
@@ -141,24 +154,37 @@
         <div class="control-grid">
           <label>
             <span>Current score</span>
-            <input type="number" min="0" max="999" step="1" value="0" data-score>
+            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-score>
+            <small>Manual total changes ask for confirmation.</small>
           </label>
-          <label>
+          <div class="control-field">
             <span>Living ATK total</span>
-            <input type="number" min="0" max="99" step="1" value="0" data-living-atk>
-          </label>
-          <label>
+            <div class="number-stepper">
+              <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living ATK total">-</button>
+              <input type="number" inputmode="numeric" min="0" max="99" step="1" value="0" data-living-atk>
+              <button type="button" data-step-field="atk" data-step-amount="1" aria-label="Increase Living ATK total">+</button>
+            </div>
+          </div>
+          <div class="control-field">
             <span>Undead multiplier</span>
-            <input type="number" min="1" max="20" step="0.1" value="1.0" data-multiplier>
-          </label>
-          <label>
+            <div class="number-stepper">
+              <button type="button" data-step-field="multiplier" data-step-amount="-0.1" aria-label="Decrease Undead multiplier">-</button>
+              <input type="number" inputmode="decimal" min="1" max="20" step="0.1" value="1.0" data-multiplier>
+              <button type="button" data-step-field="multiplier" data-step-amount="0.1" aria-label="Increase Undead multiplier">+</button>
+            </div>
+          </div>
+          <div class="control-field">
             <span>Spend score</span>
-            <input type="number" min="0" max="999" step="1" value="0" data-spend>
-          </label>
+            <div class="number-stepper">
+              <button type="button" data-step-field="spend" data-step-amount="-1" aria-label="Decrease score spend">-</button>
+              <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-spend>
+              <button type="button" data-step-field="spend" data-step-amount="1" aria-label="Increase score spend">+</button>
+            </div>
+          </div>
         </div>
 
         <div class="player-actions">
-          <button class="button button--primary" type="button" data-apply-score>Apply Score</button>
+          <button class="button button--primary" type="button" data-apply-score>Post Score</button>
           <button class="button button--ghost" type="button" data-apply-spend>Spend</button>
         </div>
       </article>

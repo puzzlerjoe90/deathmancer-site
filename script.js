@@ -126,11 +126,13 @@ if (scorekeeper) {
     localStorage.setItem(storageKey, JSON.stringify(state));
   }
 
-  function updateStateFromInputs() {
+  function updateStateFromInputs({ includeScores = false } = {}) {
     playerCards.forEach((card, index) => {
       const player = state.players[index];
       player.name = card.querySelector("[data-player-name]").value;
-      player.score = clampScore(readNumber(card.querySelector("[data-score]")));
+      if (includeScores) {
+        player.score = clampScore(readNumber(card.querySelector("[data-score]")));
+      }
       player.atk = Math.max(0, readNumber(card.querySelector("[data-living-atk]")));
       player.multiplier = Math.max(1, readNumber(card.querySelector("[data-multiplier]"), 1));
       player.spend = Math.max(0, readNumber(card.querySelector("[data-spend]")));
@@ -139,12 +141,22 @@ if (scorekeeper) {
     state.notes = notesField?.value || "";
   }
 
-  function render() {
+  function setInputValue(input, value, preserveFocusedInput) {
+    if (preserveFocusedInput && document.activeElement === input) {
+      return;
+    }
+
+    input.value = value;
+  }
+
+  function render({ preserveFocusedInput = false } = {}) {
     const suddenDeath = state.round > 6;
     roundDisplay.textContent = suddenDeath ? "Sudden Death" : String(state.round);
     roundNote.textContent = suddenDeath
       ? "Replay Round 6 timing until one player leads."
-      : state.round < 3
+      : state.round === 2
+        ? "Round 2: remember to resolve Auto-Summons."
+        : state.round < 3
         ? "Rounds 1-2 have no terrain roll."
         : "Roll terrain at the start of the round.";
 
@@ -163,11 +175,11 @@ if (scorekeeper) {
 
     playerCards.forEach((card, index) => {
       const player = state.players[index];
-      card.querySelector("[data-player-name]").value = player.name;
-      card.querySelector("[data-score]").value = player.score;
-      card.querySelector("[data-living-atk]").value = player.atk;
-      card.querySelector("[data-multiplier]").value = player.multiplier.toFixed(1);
-      card.querySelector("[data-spend]").value = player.spend;
+      setInputValue(card.querySelector("[data-player-name]"), player.name, preserveFocusedInput);
+      setInputValue(card.querySelector("[data-score]"), player.score, preserveFocusedInput);
+      setInputValue(card.querySelector("[data-living-atk]"), player.atk, preserveFocusedInput);
+      setInputValue(card.querySelector("[data-multiplier]"), player.multiplier.toFixed(1), preserveFocusedInput);
+      setInputValue(card.querySelector("[data-spend]"), player.spend, preserveFocusedInput);
       card.querySelector("[data-total-score]").textContent = player.score;
       card.querySelector("[data-score-preview]").textContent = scoreForTurn(player);
       card.classList.toggle("has-initiative", index === initiativeIndex);
@@ -189,10 +201,55 @@ if (scorekeeper) {
     purgatoryButton.disabled = !state.lastSnapshot;
 
     if (notesField) {
-      notesField.value = state.notes;
+      setInputValue(notesField, state.notes, preserveFocusedInput);
     }
 
     saveState();
+  }
+
+  function confirmScoreOverride(card, index) {
+    const scoreInput = card.querySelector("[data-score]");
+    const nextScore = clampScore(readNumber(scoreInput));
+    const currentScore = state.players[index].score;
+
+    if (nextScore === currentScore) {
+      scoreInput.classList.remove("is-pending");
+      render();
+      return;
+    }
+
+    const playerName = getPlayerName(index);
+    const confirmed = window.confirm(
+      `Override ${playerName}'s running score from ${currentScore} to ${nextScore}? Use Post Score for normal scoring.`
+    );
+
+    if (confirmed) {
+      updateStateFromInputs();
+      rememberLastAction();
+      state.players[index].score = nextScore;
+    }
+
+    scoreInput.classList.remove("is-pending");
+    render();
+  }
+
+  function stepPlayerField(index, field, amount) {
+    updateStateFromInputs();
+    const player = state.players[index];
+
+    if (field === "multiplier") {
+      player.multiplier = Math.max(1, Math.round((player.multiplier + amount) * 10) / 10);
+    }
+
+    if (field === "atk") {
+      player.atk = Math.max(0, Math.round(player.atk + amount));
+    }
+
+    if (field === "spend") {
+      player.spend = Math.max(0, Math.round(player.spend + amount));
+    }
+
+    render();
   }
 
   function loadState() {
@@ -221,9 +278,41 @@ if (scorekeeper) {
   }
 
   playerCards.forEach((card, index) => {
-    card.addEventListener("input", () => {
+    card.addEventListener("input", (event) => {
+      if (event.target?.matches("[data-score]")) {
+        event.target.classList.add("is-pending");
+        return;
+      }
+
       updateStateFromInputs();
-      render();
+      render({ preserveFocusedInput: true });
+    });
+
+    card.addEventListener("change", (event) => {
+      if (event.target?.matches("[data-score]")) {
+        confirmScoreOverride(card, index);
+      }
+    });
+
+    card.addEventListener("keydown", (event) => {
+      if (event.target?.matches("[data-score]") && event.key === "Enter") {
+        event.preventDefault();
+        confirmScoreOverride(card, index);
+      }
+    });
+
+    card.addEventListener("click", (event) => {
+      const stepButton = event.target.closest("[data-step-field]");
+
+      if (!stepButton) {
+        return;
+      }
+
+      stepPlayerField(
+        index,
+        stepButton.dataset.stepField,
+        Number.parseFloat(stepButton.dataset.stepAmount)
+      );
     });
 
     card.querySelector("[data-apply-score]").addEventListener("click", () => {

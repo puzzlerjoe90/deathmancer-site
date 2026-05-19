@@ -525,6 +525,7 @@ p {
 
 .panel-label,
 .player-card label span,
+.control-field span,
 .notes-panel label span,
 .score-preview span {
   display: block;
@@ -621,6 +622,10 @@ p {
   gap: 0.85rem;
 }
 
+.control-field {
+  display: grid;
+}
+
 .player-card input,
 .notes-panel textarea {
   width: 100%;
@@ -634,6 +639,47 @@ p {
 .player-card input {
   min-height: 3rem;
   padding: 0.65rem 0.75rem;
+}
+
+.player-card small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--faint);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.player-card input.is-pending {
+  border-color: var(--gold-bright);
+  background: rgba(241, 215, 120, 0.1);
+}
+
+.number-stepper {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) 3rem;
+}
+
+.number-stepper input {
+  border-inline: 0;
+  text-align: center;
+}
+
+.number-stepper button {
+  min-height: 3rem;
+  border: 1px solid rgba(241, 215, 120, 0.52);
+  background: #08090b;
+  color: var(--gold-bright);
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.number-stepper button:active,
+.number-stepper button:focus-visible {
+  background: rgba(241, 215, 120, 0.16);
+  outline: 2px solid rgba(241, 215, 120, 0.2);
+  outline-offset: 2px;
 }
 
 .player-card input:focus,
