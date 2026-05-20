@@ -409,6 +409,12 @@ p {
   max-width: 42rem;
 }
 
+.rulebook__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
 .gallery-grid figure {
   margin: 0;
   overflow: hidden;
