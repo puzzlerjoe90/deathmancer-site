@@ -40,6 +40,8 @@ Then visit `http://localhost:8000`.
 - Main page content lives in `index.html`.
 - The placeholder video guide page is `how-to-play.html`.
 - The placeholder scorekeeper route is `scorekeeper.html`.
+- The gated Gatekeeper prototype route is `gatekeeper.html`.
+- Gatekeeper story data and engine logic live in `gatekeeper-story.js`, `gatekeeper-engine.js`, and `gatekeeper-access.js`.
 - Global styles live in `styles.css`.
 - Mobile navigation behavior lives in `script.js`.
 - Final illustrations currently used by the site are `assets/images/grief.jpg` and `assets/images/mercy.jpg`.
