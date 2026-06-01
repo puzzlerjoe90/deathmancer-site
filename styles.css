@@ -789,6 +789,24 @@ p {
   backdrop-filter: blur(14px);
 }
 
+.music-toggle {
+  min-height: 2.6rem;
+  border: 1px solid rgba(241, 215, 120, 0.35);
+  background: rgba(18, 19, 23, 0.92);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.music-toggle.is-playing {
+  border-color: rgba(135, 208, 196, 0.72);
+  color: #dffcf6;
+}
+
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -918,6 +936,16 @@ p {
   background-image: url("./assets/images/deathmancer-playmat.jpg");
 }
 
+.story-art[data-scene-art="title"] {
+  background-image: url("./assets/images/gatekeeper-title.png");
+  background-position: center top;
+}
+
+.story-art[data-scene-art="gameover"] {
+  background-image: url("./assets/images/gatekeeper-game-over.png");
+  background-position: center top;
+}
+
 .story-art[data-scene-art="petitioners"] {
   background-image: url("./assets/images/mercy.jpg");
   background-position: center 28%;
@@ -935,6 +963,13 @@ p {
 .story-art[data-scene-art="undead"] {
   background-position: center 60%;
   filter: saturate(0.72) contrast(1.08);
+}
+
+.story-art[data-scene-art="title"]::before,
+.story-art[data-scene-art="gameover"]::before {
+  background:
+    linear-gradient(180deg, rgba(5, 5, 6, 0), rgba(5, 5, 6, 0.48) 70%, rgba(5, 5, 6, 0.94)),
+    radial-gradient(circle at 50% 16%, rgba(241, 215, 120, 0.12), transparent 18rem);
 }
 
 .story-panel {
@@ -1002,7 +1037,8 @@ p {
 }
 
 .choice-button,
-.icon-button {
+.icon-button,
+.dice-button {
   min-height: 3.25rem;
   border: 1px solid rgba(241, 215, 120, 0.35);
   background: rgba(18, 19, 23, 0.92);
@@ -1023,19 +1059,23 @@ p {
 .choice-button:hover,
 .choice-button:focus-visible,
 .icon-button:hover,
-.icon-button:focus-visible {
+.icon-button:focus-visible,
+.dice-button:hover,
+.dice-button:focus-visible {
   border-color: rgba(241, 215, 120, 0.86);
   background: rgba(36, 33, 28, 0.96);
   color: var(--gold-bright);
 }
 
 .choice-button:active,
-.icon-button:active {
+.icon-button:active,
+.dice-button:active {
   transform: translateY(1px);
 }
 
 .choice-button:disabled,
-.icon-button:disabled {
+.icon-button:disabled,
+.dice-button:disabled {
   border-color: rgba(255, 255, 255, 0.08);
   color: rgba(244, 240, 231, 0.42);
   cursor: not-allowed;
@@ -1043,16 +1083,39 @@ p {
 
 .game-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr) minmax(0, 0.85fr);
   gap: 0.6rem;
 }
 
-.icon-button {
+.icon-button,
+.dice-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem;
   text-align: center;
+}
+
+.icon-button span {
+  margin-left: 0.25rem;
+}
+
+.dice-button {
+  min-height: 4.15rem;
+  padding-inline: 1rem;
+  clip-path: polygon(50% 0, 88% 18%, 100% 55%, 72% 100%, 28% 100%, 0 55%, 12% 18%);
+  color: rgba(244, 240, 231, 0.48);
+  font-size: 0.78rem;
+  line-height: 1.15;
+}
+
+.dice-button.is-available {
+  border-color: rgba(241, 215, 120, 0.92);
+  background:
+    radial-gradient(circle at 50% 24%, rgba(241, 215, 120, 0.2), transparent 2.2rem),
+    rgba(18, 19, 23, 0.96);
+  color: var(--gold-bright);
+  box-shadow: 0 0 1.2rem rgba(241, 215, 120, 0.18);
 }
 
 .video-page,
@@ -1133,7 +1196,7 @@ p {
   }
 
   .game-topbar {
-    grid-template-columns: minmax(20rem, 1fr) minmax(13rem, 0.55fr) minmax(13rem, 0.55fr);
+    grid-template-columns: minmax(20rem, 1fr) minmax(13rem, 0.55fr) minmax(13rem, 0.55fr) auto;
     align-items: center;
   }
 

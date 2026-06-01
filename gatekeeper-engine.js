@@ -24,11 +24,16 @@
   const art = app.querySelector("[data-scene-art]");
   const rewindButton = app.querySelector("[data-rewind]");
   const restartButton = app.querySelector("[data-restart]");
+  const diceButton = app.querySelector("[data-dice-roll]");
+  const musicButton = app.querySelector("[data-music-toggle]");
+  const music = document.querySelector("[data-background-music]");
 
   let state = clone(story.initialState);
   let currentSceneId = story.startingScene;
-  let history = [];
   let lastResult = null;
+  let checkpoint = null;
+  let lastCheckpointSceneId = null;
+  let isRolling = false;
 
   if ("scrollRestoration" in window.history) {
     window.history.scrollRestoration = "manual";
@@ -42,6 +47,10 @@
     return Math.max(min, Math.min(max, value));
   }
 
+  function currentScene() {
+    return story.scenes[currentSceneId];
+  }
+
   function alignmentName(value) {
     if (value <= -35) return "Merciful";
     if (value >= 35) return "Wrathful";
@@ -51,18 +60,9 @@
   }
 
   function modifierFor(stat) {
-    if (stat === "mercy") {
-      return Math.round(-state.alignment / 25);
-    }
-
-    if (stat === "wrath") {
-      return Math.round(state.alignment / 25);
-    }
-
-    if (stat === "gate") {
-      return state.gateStability >= 55 ? 1 : -1;
-    }
-
+    if (stat === "mercy") return Math.round(-state.alignment / 25);
+    if (stat === "wrath") return Math.round(state.alignment / 25);
+    if (stat === "gate") return state.gateStability >= 55 ? 1 : -1;
     return 0;
   }
 
@@ -98,76 +98,26 @@
 
   function hasEnough(cost) {
     if (!cost) return true;
-
     return Object.keys(cost).every((key) => state[key] >= cost[key]);
   }
 
   function conditionMet(condition) {
     if (!condition) return true;
 
-    if (condition.flagNot && state.flags[condition.flagNot]) {
-      return false;
-    }
-
-    if (condition.flags && !condition.flags.every((flag) => state.flags[flag])) {
-      return false;
-    }
+    if (condition.flagNot && state.flags[condition.flagNot]) return false;
+    if (condition.flags && !condition.flags.every((flag) => state.flags[flag])) return false;
 
     return true;
   }
 
   function visibleChoices(scene) {
-    return scene.choices.filter((choice) => conditionMet(choice.condition));
+    return (scene.choices || []).filter((choice) => conditionMet(choice.condition)).slice(0, 4);
   }
 
-  function pushHistory() {
-    history.push({
-      sceneId: currentSceneId,
-      state: clone(state),
-      result: clone(lastResult)
-    });
-  }
-
-  function rewind() {
-    if (state.rewinds <= 0 || history.length === 0) {
-      lastResult = {
-        title: "No rewind",
-        body: "The thread will not move. You have no rewinds left for this chapter."
-      };
-      render();
-      return;
-    }
-
-    const snapshot = history.pop();
-    const rewindsLeft = state.rewinds - 1;
-    currentSceneId = snapshot.sceneId;
-    state = snapshot.state;
-    state.rewinds = rewindsLeft;
-    lastResult = {
-      title: "Rewound",
-      body: "The mist folds back one judgement. The cost remains."
-    };
-    render(true);
-  }
-
-  function restart() {
-    state = clone(story.initialState);
-    currentSceneId = story.startingScene;
-    history = [];
-    lastResult = null;
-    render(true);
-  }
-
-  function formatChange(change) {
-    const labels = {
-      health: "Health",
-      souls: "Souls",
-      tokens: "Tokens",
-      gateStability: "Gate Stability",
-      alignment: "Alignment"
-    };
-    const sign = change.delta > 0 ? "+" : "";
-    return `${labels[change.key] || change.key} ${sign}${change.delta}`;
+  function choiceIsDisabled(choice) {
+    if (!hasEnough(choice.cost)) return true;
+    if (choice.rewind && (!checkpoint || state.rewinds <= 0)) return true;
+    return false;
   }
 
   function costText(cost) {
@@ -176,6 +126,33 @@
     return Object.keys(cost)
       .map((key) => `${cost[key]} ${key}`)
       .join(", ");
+  }
+
+  function formatChange(change) {
+    const labels = {
+      health: "Health",
+      souls: "Souls",
+      tokens: "Tokens",
+      gateStability: "Gate Stability",
+      alignment: "Temper"
+    };
+    const sign = change.delta > 0 ? "+" : "";
+    return `${labels[change.key] || change.key} ${sign}${change.delta}`;
+  }
+
+  function rememberCheckpoint(sceneId) {
+    const scene = story.scenes[sceneId];
+
+    if (!scene?.checkpoint || lastCheckpointSceneId === sceneId) {
+      return;
+    }
+
+    state.rewinds = 1;
+    checkpoint = {
+      sceneId,
+      state: clone(state)
+    };
+    lastCheckpointSceneId = sceneId;
   }
 
   function failIfNeeded() {
@@ -190,6 +167,42 @@
     }
 
     return false;
+  }
+
+  function changeScene(sceneId) {
+    currentSceneId = sceneId;
+    rememberCheckpoint(sceneId);
+  }
+
+  function rewind() {
+    if (!checkpoint || state.rewinds <= 0) {
+      lastResult = {
+        title: "No rewind",
+        body: "The thread will not move. You need a checkpoint with a rewind remaining."
+      };
+      render();
+      return;
+    }
+
+    const rewindsLeft = state.rewinds - 1;
+    currentSceneId = checkpoint.sceneId;
+    state = clone(checkpoint.state);
+    state.rewinds = rewindsLeft;
+    lastResult = {
+      title: "Rewound to checkpoint",
+      body: "The mist folds back to the last place the Gates remembered you."
+    };
+    render(true);
+  }
+
+  function restart() {
+    state = clone(story.initialState);
+    currentSceneId = story.startingScene;
+    checkpoint = null;
+    lastCheckpointSceneId = null;
+    lastResult = null;
+    rememberCheckpoint(currentSceneId);
+    render(true);
   }
 
   function choose(choice) {
@@ -212,8 +225,6 @@
       return;
     }
 
-    pushHistory();
-
     if (choice.mockUnlock) {
       lastResult = {
         title: "Mock purchase gate",
@@ -233,41 +244,55 @@
       changes = changes.concat(applyEffects(paidCost));
     }
 
-    if (choice.roll) {
-      const mod = modifierFor(choice.roll.stat) + (choice.roll.modifier || 0);
-      const die = Math.floor(Math.random() * 20) + 1;
-      const total = die + mod;
-      const passed = total >= choice.roll.dc;
-      const rollEffects = passed ? choice.roll.successEffects : choice.roll.failureEffects;
-      const rollText = passed ? choice.roll.successText : choice.roll.failureText;
-
-      changes = changes.concat(applyEffects(rollEffects));
-      setFlags(choice.setFlags);
-
-      lastResult = {
-        title: `D20 ${die} ${mod >= 0 ? "+" : ""}${mod} = ${total} vs DC ${choice.roll.dc}`,
-        body: rollText,
-        changes
-      };
-
-      currentSceneId = passed ? choice.roll.successGoto : choice.roll.failureGoto;
-      failIfNeeded();
-      render(true);
-      return;
-    }
-
     changes = changes.concat(applyEffects(choice.effects));
     setFlags(choice.setFlags);
 
-    lastResult = {
-      title: choice.text ? "Consequence" : "The mist shifts",
-      body: choice.text || "The Gates answer your choice.",
-      changes
-    };
+    lastResult = choice.text
+      ? { title: "Consequence", body: choice.text, changes }
+      : null;
 
-    currentSceneId = choice.goto || currentSceneId;
+    changeScene(choice.goto || currentSceneId);
     failIfNeeded();
     render(true);
+  }
+
+  function rollCurrentScene() {
+    const scene = currentScene();
+    const roll = scene.roll;
+
+    if (!roll || isRolling) {
+      return;
+    }
+
+    isRolling = true;
+    diceButton.disabled = true;
+
+    let ticks = 0;
+    const animation = window.setInterval(() => {
+      ticks += 1;
+      diceButton.textContent = `D20 ${Math.floor(Math.random() * 20) + 1}`;
+
+      if (ticks < 12) return;
+
+      window.clearInterval(animation);
+
+      const die = Math.floor(Math.random() * 20) + 1;
+      const total = die + modifierFor(roll.stat) + (roll.modifier || 0);
+      const passed = total >= roll.dc;
+      const changes = applyEffects(passed ? roll.successEffects : roll.failureEffects);
+      setFlags(passed ? roll.successFlags : roll.failureFlags);
+
+      lastResult = {
+        title: `D20 Result: ${die}`,
+        body: passed ? roll.successText : roll.failureText,
+        changes
+      };
+
+      isRolling = false;
+      changeScene(passed ? roll.successGoto : roll.failureGoto);
+      failIfNeeded();
+      render(true);
+    }, 55);
   }
 
   function renderStats() {
@@ -301,8 +326,15 @@
     `;
   }
 
+  function renderDice(scene) {
+    const roll = scene.roll;
+    diceButton.classList.toggle("is-available", Boolean(roll));
+    diceButton.disabled = !roll || isRolling;
+    diceButton.textContent = roll ? `Roll: ${roll.label}` : "D20 unavailable";
+  }
+
   function renderScene() {
-    const scene = story.scenes[currentSceneId];
+    const scene = currentScene();
     chapterTitle.textContent = scene.chapter;
     sceneTitle.textContent = scene.title;
     art.dataset.sceneArt = scene.art;
@@ -318,22 +350,49 @@
       button.className = "choice-button";
       button.textContent = choice.label;
 
-      if (!hasEnough(choice.cost)) {
+      if (choiceIsDisabled(choice)) {
         button.disabled = true;
-        button.title = `Need ${costText(choice.cost)}`;
+        button.title = choice.rewind ? "No checkpoint rewind available" : `Need ${costText(choice.cost)}`;
       }
 
       button.addEventListener("click", () => choose(choice));
       choiceList.append(button);
     });
+
+    renderDice(scene);
+  }
+
+  function updateMusicButton() {
+    if (!musicButton || !music) return;
+
+    musicButton.textContent = music.paused ? "Music Off" : "Music On";
+    musicButton.classList.toggle("is-playing", !music.paused);
+  }
+
+  async function toggleMusic() {
+    if (!music) return;
+
+    if (music.paused) {
+      try {
+        music.volume = 0.45;
+        await music.play();
+      } catch {
+        // Browsers may require another direct user gesture before audio can start.
+      }
+    } else {
+      music.pause();
+    }
+
+    updateMusicButton();
   }
 
   function render(shouldScroll) {
     renderStats();
     renderResult();
     renderScene();
+    updateMusicButton();
 
-    rewindButton.disabled = state.rewinds <= 0 || history.length === 0;
+    rewindButton.disabled = !checkpoint || state.rewinds <= 0 || currentSceneId === checkpoint.sceneId;
 
     if (shouldScroll) {
       window.requestAnimationFrame(() => {
@@ -342,8 +401,14 @@
     }
   }
 
+  diceButton.addEventListener("click", rollCurrentScene);
   rewindButton.addEventListener("click", rewind);
   restartButton.addEventListener("click", restart);
+  musicButton?.addEventListener("click", toggleMusic);
+  music?.addEventListener("play", updateMusicButton);
+  music?.addEventListener("pause", updateMusicButton);
 
+  rememberCheckpoint(currentSceneId);
+  toggleMusic();
   render(true);
 })();
