@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Play Chapter One of The Gatekeeper: Roll for Judgement, a dark fantasy D20 mobile gamebook prototype."
+  >
+  <title>The Gatekeeper: Roll for Judgement | Deathmancer</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="gatekeeper-page">
+  <header class="site-header" data-header>
+    <a class="brand" href="./index.html" aria-label="Deathmancer home">
+      <span class="brand-mark" aria-hidden="true">G</span>
+      <span>The Gatekeeper</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" data-nav>
+      <a href="./index.html">Deathmancer</a>
+      <a href="./scorekeeper.html">Scorekeeper</a>
+      <a href="#gatekeeper-game">Prototype</a>
+    </nav>
+  </header>
+
+  <section class="prototype-gate" data-prototype-gate>
+    <div class="prototype-gate__panel">
+      <p class="eyebrow">Work in Progress</p>
+      <h1>Prototype access</h1>
+      <p>
+        The Gatekeeper: Roll for Judgement is an early playable slice. Enter the prototype password to continue.
+      </p>
+      <form class="prototype-gate__form" data-prototype-form>
+        <label for="prototype-password">Password</label>
+        <div class="prototype-gate__controls">
+          <input
+            id="prototype-password"
+            name="prototype-password"
+            type="password"
+            autocomplete="current-password"
+            data-prototype-password
+          >
+          <button class="button button--primary" type="submit">Unlock</button>
+        </div>
+        <p class="prototype-gate__status" data-prototype-status aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <main class="game-shell" id="gatekeeper-game" data-gatekeeper-app hidden>
+    <section class="game-topbar" aria-label="Gatekeeper resources">
+      <div class="resource-grid">
+        <div class="resource-chip">
+          <span class="resource-chip__label">Health</span>
+          <strong data-stat="health">10</strong>
+        </div>
+        <div class="resource-chip">
+          <span class="resource-chip__label">Souls</span>
+          <strong data-stat="souls">0</strong>
+        </div>
+        <div class="resource-chip">
+          <span class="resource-chip__label">Tokens</span>
+          <strong data-stat="tokens">0</strong>
+        </div>
+      </div>
+
+      <div class="meter-block">
+        <div class="meter-block__header">
+          <span>Gate Stability</span>
+          <strong data-stat="gateStability">76%</strong>
+        </div>
+        <div class="stability-meter" aria-hidden="true">
+          <span data-meter="gate"></span>
+        </div>
+      </div>
+
+      <div class="meter-block">
+        <div class="meter-block__header">
+          <span>Mercy</span>
+          <strong data-stat="alignmentLabel">Balanced</strong>
+          <span>Wrath</span>
+        </div>
+        <div class="alignment-meter" aria-hidden="true">
+          <span data-meter="alignment"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-stage" aria-live="polite">
+      <div class="story-art" data-scene-art>
+        <div class="story-art__veil"></div>
+      </div>
+
+      <div class="story-panel">
+        <p class="eyebrow" data-chapter-title>Chapter One</p>
+        <h1 data-scene-title>The Gates Wake</h1>
+        <div class="story-copy" data-story-copy></div>
+
+        <aside class="roll-panel" data-roll-panel hidden></aside>
+
+        <div class="choice-list" data-choice-list></div>
+
+        <div class="game-actions">
+          <button class="icon-button" type="button" data-rewind>
+            Rewind <span data-stat="rewinds">3</span>
+          </button>
+          <button class="icon-button" type="button" data-restart>Restart</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+  <script src="./gatekeeper-access.js"></script>
+</body>
+</html>
