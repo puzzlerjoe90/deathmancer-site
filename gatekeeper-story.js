@@ -1,5 +1,5 @@
 window.GATEKEEPER_STORY = {
-  startingScene: "title",
+  startingScene: "chapter_one",
   initialState: {
     health: 10,
     maxHealth: 10,
@@ -11,6 +11,20 @@ window.GATEKEEPER_STORY = {
     flags: {}
   },
   scenes: {
+    chapter_one: {
+      chapter: "The Gatekeeper: Roll for Judgement",
+      title: "Chapter One",
+      art: "title",
+      paragraphs: [
+        "The Gates do not open for the living. Tonight, they open on your command."
+      ],
+      choices: [
+        {
+          label: "Begin As The New Gatekeeper",
+          goto: "title"
+        }
+      ]
+    },
     title: {
       chapter: "The Gatekeeper: Roll for Judgement",
       title: "The Contract",
@@ -100,8 +114,10 @@ window.GATEKEEPER_STORY = {
         {
           label: "Push the Gates open with both hands",
           text: "The Gates open for no man or being's hands. They open for judgement. You learn this a little too late.",
+          condition: { flagNot: "pushedGatesByHand" },
+          setFlags: { pushedGatesByHand: true },
           effects: { health: -1 },
-          goto: "failure_gate"
+          goto: "world_before"
         }
       ]
     },
@@ -131,8 +147,10 @@ window.GATEKEEPER_STORY = {
         {
           label: "Ask him to open the Gates for you",
           text: "Sebastien's face remains resolute. Almost. \"That,\" he says, \"may be how your world ends one day. But alas, no.\"",
+          condition: { flagNot: "askedSebastienToOpenGates" },
+          setFlags: { askedSebastienToOpenGates: true },
           effects: { health: -1 },
-          goto: "failure_gate"
+          goto: "sebastien_arrives"
         }
       ]
     },

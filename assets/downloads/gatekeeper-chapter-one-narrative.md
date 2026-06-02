@@ -10,7 +10,7 @@ This version keeps the current prototype structure, but rewrites the chapter so 
 
 ### Design Notes Preserved
 
-The game begins with the contract, not the ring.
+The game begins with a Chapter One title screen before the contract.
 
 The player starts at Health 10/10.
 
@@ -50,8 +50,24 @@ Mercy/Wrath Alignment: Balanced
 
 Rewind: 1, usable only after checkpoint
 
-Retain the opening page (scene: chapter_one), i.e. title art, display title "Chapter One", text "The Gates do not open for the living.  Tonight, they open on your command."  Selection: "Begin The New Gatekeeper".
+Retain the opening page (scene: chapter_one), i.e. title art, display title "Chapter One", text "The Gates do not open for the living. Tonight, they open on your command." Selection: "Begin As The New Gatekeeper".
 
+---
+
+## Scene: chapter_one
+
+- Art: Title art
+- Purpose: Begin the game, displaying Chapter One.
+### Display Title
+
+- Chapter One
+### Text
+
+The Gates do not open for the living. Tonight, they open on your command.
+
+### Choice
+
+- Begin As The New Gatekeeper. -> title
 ---
 
 ## Scene: title
@@ -165,9 +181,11 @@ A crack of gold widens above the arch, then seals itself like a wound that need 
 ### Choices
 
 - Stand and face the line of Souls. -> sebastien_arrives
-- Attempt to push the Gates open with both hands. -> failure_gate
-  - Effects: Health -1, Gate Stability -0
-  - Failure text: The Gates open for no man or being's hands. They open for judgement. You learn this a little too late.
+- Attempt to push the Gates open with both hands. -> world_before
+  - Effects: Health -1
+  - Consequence text: The Gates open for no man or being's hands. They open for judgement. You learn this a little too late.
+  - Set flag: pushedGatesByHand
+  - Follow-up: re-enter world_before with this choice removed.
   - [The scene repeats, this time without the option to push the Gates]
 ---
 
@@ -200,9 +218,11 @@ He opens the ledger. The pages are blank until he looks at them.
 
 - Ask what a Gatekeeper does. -> sebastien_rules
 - Ask why your name evades you. -> sebastien_name
-- Ask him to open the Gates for you. -> failure_gate
-  - Effects: Gate Stability -0, Health -1.
-  - Failure text: Sebastien's face remains resolute. Almost. "That," he says, "may be how your world ends one day. But alas, no."
+- Ask him to open the Gates for you. -> sebastien_arrives
+  - Effects: Health -1.
+  - Consequence text: Sebastien's face remains resolute. Almost. "That," he says, "may be how your world ends one day. But alas, no."
+  - Set flag: askedSebastienToOpenGates
+  - Follow-up: re-enter sebastien_arrives with this choice removed.
 ---
 
 ## Scene: sebastien_name
