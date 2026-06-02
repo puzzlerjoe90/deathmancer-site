@@ -947,6 +947,11 @@ p {
   background-position: center top;
 }
 
+.story-art[data-scene-art="sebastien"] {
+  background-image: url("./assets/images/gatekeeper-sebastien.png");
+  background-position: center 18%;
+}
+
 .story-art[data-scene-art="petitioners"] {
   background-image: url("./assets/images/mercy.jpg");
   background-position: center 28%;
@@ -967,6 +972,7 @@ p {
 }
 
 .story-art[data-scene-art="title"]::before,
+.story-art[data-scene-art="sebastien"]::before,
 .story-art[data-scene-art="gameover"]::before {
   background:
     linear-gradient(180deg, rgba(5, 5, 6, 0), rgba(5, 5, 6, 0.48) 70%, rgba(5, 5, 6, 0.94)),
