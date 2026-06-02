@@ -2,421 +2,442 @@
 
 ## Chapter One: The New Gatekeeper
 
-Human-editable story draft for the current local prototype. This is designed to be reviewed, rewritten, and handed back to Codex for conversion into `gatekeeper-story.js`.
+Human-editable draft for the current web prototype. This is intentionally written in a form you can review, rewrite, and send back to Codex to convert into `gatekeeper-story.js`.
 
-## Design Intent For This Pass
+## Current Design Notes
 
-- Novel-like first, game second.
-- Challenge should feel fair, not random.
-- Some choices are narrative-only.
-- Some choices reduce Health or Gate Stability.
-- Some choices are clearly dangerous and lead directly to Game Over.
-- Only one checkpoint exists in Chapter One.
-- Rewind returns to that checkpoint and is limited to one use.
-- If the player fails before reaching the checkpoint, they must restart.
+- The game begins with the contract, not the ring.
+- The player starts at Health 10/10.
+- Pressing **Accept the contract** causes the skull pain and drops Health to 5/10.
+- Gate Stability starts at 50%.
+- The first act is slower and more novel-like, with more setting before the first judgement.
+- The player chooses one of four light-touch backstory contexts:
+  - Scholar
+  - Creative
+  - Sportsman
+  - Strong
+- These are not classes. They only provide subtle hidden help on certain checks.
+- The first judgement section presents three petitioners, but only two play out.
+- After two petitioners, the game forces the undead/Gate attack event.
+- There is one checkpoint in Chapter One, immediately before the undead event.
+- Rewind is disabled before that checkpoint and can be used once after reaching it.
+- The D20 button is the progression method on check scenes.
+- D20 results should show the rolled number and narrative impact, not DC maths.
 
 ## Starting State
 
-- Health: 5 / 10
+- Health: 10 / 10
 - Gate Stability: 50%
 - Souls: 0
 - Tokens: 0
-- Rewind: 1, but only usable after the chapter checkpoint is reached
-
-## Single Checkpoint
-
-Checkpoint scene: `threshold_warning`
-
-This occurs after the first judgement sequence, just before the undead incursion. It replenishes Rewind to 1.
-
----
-
-## Failure Routes Overview
-
-### Immediate / Doomed Failure Choices
-
-These are choices that should read as obviously dangerous:
-
-- `awakening`: Push the Gates open with both hands
-  - Health -5, Gate Stability -50
-  - Game Over: Gates lost
-
-- `ring`: Tear the ring from your finger
-  - Health -5
-  - Game Over: connection severed
-
-- `sebastien`: Order every Soul through at once
-  - Gate Stability -50
-  - Game Over: wrong Soul slips through
-
-- `second_choice`: Open the Gates a finger-width to prove command
-  - Gate Stability -50
-  - Game Over: threshold breach
-
-- `threshold_warning`: Step aside and let Sebastien handle it
-  - Gate Stability -50
-  - Game Over: Sebastien is not the Gatekeeper
-
-- `incursion`: Offer your own name to the undead
-  - Health -5
-  - Game Over: something takes the name before you remember it
-
-### Longer Failure Paths
-
-These are not instant death, but can stack into failure:
-
-- Refusing Mara until she finds an offering
-  - Health -2
-
-- Making Edric wait in the mist
-  - Health -2
-
-- Breaking the masked Soul
-  - Health -3, Gate Stability -30
-
-- Failing to read the mask
-  - Health -3
-
-- Holding the line and making all Souls wait
-  - Health -2
-
-- Letting the Gate take the undead blow
-  - Gate Stability -28
-
-- Failing the undead D20 roll
-  - Health -3, Gate Stability -24
+- Rewind: 1, usable only after checkpoint
 
 ---
 
 ## Scene: title
 
-Purpose: Title-art splash.
+Art: title art
 
-Art: title
+Purpose: Establish contract premise and ominous world tone.
 
-Text:
+Text summary:
 
-- The Gates do not open for the living.
-- Tonight, they open for you.
+- There is a table in the dark.
+- A contract waits on it, written in a hand the player almost recognises.
+- The words change when read.
+- A black iron ring waits beside the signature line.
+- A voice explains the vacancy is immediate, benefits are limited, consequences are traditional.
 
-Choices:
+Choice:
 
-- Begin The New Gatekeeper -> awakening
-
----
-
-## Scene: awakening
-
-Purpose: Establish the nameless protagonist and the Gates.
-
-Art: title
-
-Text:
-
-- You wake on your feet, which feels wrong before you understand why.
-- The ground beneath you is black glass veined with gold. It remembers footsteps that have not happened yet. Ahead, two impossible Gates rise out of the mist, their bars twisting upward into a dark that has no stars.
-- Your chest aches as if someone has reached into it and tied a knot around your heart. You know your hands. You know pain. You do not know your name.
-
-Choices:
-
-- Touch the iron ring on your finger -> ring
-- Listen to the Gates breathing -> gates_breathe
-- Push the Gates open with both hands -> Game Over
-  - Effects: Health -5, Gate Stability -50
-
----
-
-## Scene: gates_breathe
-
-Purpose: Optional world-building.
-
-Art: gate
-
-Choices:
-
-- Touch the iron ring -> ring
-
----
-
-## Scene: ring
-
-Purpose: Introduce the ring and first clear doomed temptation.
-
-Art: title
-
-Choices:
-
-- Turn toward the voice -> sebastien
-- Tear the ring from your finger -> Game Over
+- Accept the contract -> contract_pain
   - Effects: Health -5
+  - Narrative: skull pain, blinding, stunning, old life split apart
 
 ---
 
-## Scene: sebastien
+## Scene: contract_pain
 
-Purpose: Introduce Sebastien, the role, and the first queue.
+Art: title art
 
-Art: gate
+Purpose: The player awakens after accepting the contract and chooses a backstory context.
+
+Text summary:
+
+- The player wakes kneeling on black glass.
+- Their name is gone.
+- The Gates rise ahead.
+- The ring is already on their finger.
 
 Choices:
 
-- Ask what happened to your name -> name_question
-- Ask what the dead want -> rules_question
-- Step toward the first Souls -> first_queue
-- Order every Soul through at once -> Game Over
+- Remember study and old books
+  - Backstory: Scholar
+  - Hidden bonus: truth-style checks
+
+- Remember making things
+  - Backstory: Creative
+  - Hidden bonus: empathy-style checks
+
+- Remember motion and competition
+  - Backstory: Sportsman
+  - Hidden bonus: reflex-style checks
+
+- Remember strength
+  - Backstory: Strong
+  - Hidden bonus: force-style checks
+
+All route to `world_before`.
+
+---
+
+## Scene: world_before
+
+Art: title art
+
+Purpose: World-building before judgement begins.
+
+Text summary:
+
+- The place before the Gates is not heaven or hell.
+- It is a border office built by grief, a court with no roof, a harbour where every ship has already sunk.
+- Souls wait in a line that bends beyond sight.
+- Offerings can be coins, rings, locks of hair, promises folded into objects.
+- The Gates are ancient, wounded, alive, and weakening.
+
+Choices:
+
+- Stand and face the line of Souls -> sebastien_arrives
+- Push the Gates open with both hands -> Game Over
+  - Effects: Health -10, Gate Stability -50
+
+---
+
+## Scene: sebastien_arrives
+
+Art: title art
+
+Purpose: Introduce Sebastien and his dry, formal, slightly cruel style.
+
+Text summary:
+
+- Sebastien emerges with a ledger.
+- He is immaculate, narrow, and dressed for a disappointing funeral.
+- He describes himself as steward of the threshold, clerk of impossible cases, and the player's best chance of remaining useful.
+- He confirms the contract has been accepted.
+
+Choices:
+
+- Ask what a Gatekeeper does -> sebastien_rules
+- Ask why your name is gone -> sebastien_name
+- Tell him to open the Gates for everyone -> Game Over
   - Effects: Gate Stability -50
+
+---
+
+## Scene: sebastien_name
+
+Purpose: Explain the missing Living name without revealing too much.
+
+Choices:
+
+- Ask what a Gatekeeper does -> sebastien_rules
+- Approach the first petitioners -> first_queue
+
+---
+
+## Scene: sebastien_rules
+
+Purpose: Explain judgement options in-world.
+
+Rules introduced:
+
+- Pass a Soul.
+- Hold a Soul in Purgatory.
+- Demand or accept a Token toll.
+- Spend Souls to steady or bind.
+- The dead can lie.
+
+Choice:
+
+- Approach the first petitioners -> first_queue
 
 ---
 
 ## Scene: first_queue
 
-Purpose: Start the first judgement. The player chooses who to hear first, but this does not loop back to the same static three-Souls screen.
+Purpose: Present the three first petitioners, but only two will be judged before the undead event.
 
-Art: petitioners
+Petitioners:
+
+- Mara Vale: poor woman, river death, no declared offering.
+- Lord Edric Vane: nobleman, five polished funeral coins, morally suspect.
+- Masked figure: mouthless porcelain mask, shadow points toward the Living world.
 
 Choices:
 
-- Hear the poor woman first -> widow_heard
-- Let the nobleman speak -> noble_heard
-- Study the masked figure -> mask_heard
+- Hear the poor woman -> Mara branch
+- Hear the nobleman -> Edric branch
+- Hear the masked figure -> Mask branch
 
 ---
 
-## Judgement: Mara Vale
+## Mara Branch
 
-Scene: `widow_heard`
+### Scene: mara_first_words
+
+Purpose: Establish Mara as ordinary but emotionally rich.
 
 Choices:
 
-- Pass Mara gently -> after_first_mercy
+- Ask about the child -> mara_child
+- Ask what the river took -> mara_river
+- Demand a Token toll -> mara_toll
+
+### Scene: mara_child
+
+Final judgement choices:
+
+- Pass her and let her keep the coin
   - Effects: Souls +1, Mercy shift
 
-- Ask what she is hiding -> widow_secret
-  - Narrative-only investigation
+- Take the coin as toll, then pass her
+  - Effects: Souls +1, Tokens +1, Wrath/transactional shift
 
-- Refuse her until an offering is found -> after_first_hard
+- Keep her in Purgatory until the child is safe
+  - Effects: Health -1, slight Mercy shift
+
+### Scene: mara_river
+
+Final judgement choices:
+
+- Pass her without payment
+  - Effects: Souls +1, Mercy shift
+
+- Ask for a memory as toll
+  - Effects: Souls +1, Tokens +1, transactional shift
+
+- Refuse her for arriving empty-handed
   - Effects: Health -2, Wrath shift
-  - Longer failure risk
 
-Scene: `widow_secret`
+### Scene: mara_toll
 
-Choices:
+Final judgement choices:
 
-- Let her keep the coin and pass -> after_first_mercy
+- Refuse the memory and pass her
   - Effects: Souls +1, Mercy shift
 
-- Take the coin as Token, then pass her -> after_first_hard
-  - Effects: Souls +1, Tokens +1, Wrath shift
+- Take the memory as Token
+  - Effects: Souls +1, Tokens +1, Wrath/transactional shift
 
 ---
 
-## Judgement: Lord Edric Vane
+## Edric Branch
 
-Scene: `noble_heard`
+### Scene: edric_first_words
+
+Purpose: Token temptation and suspicion.
 
 Choices:
 
-- Accept the Tokens and pass him -> after_first_hard
-  - Effects: Souls +1, Tokens +5, Wrath shift
+- Ask who polished the coins -> edric_accounts
+- Accept all five Tokens immediately
+  - Effects: Souls +1, Tokens +5, Gate Stability -8, Wrath shift
+  - Reason: passing a corrupt Soul harms the far side.
+- Send him to Purgatory while you inspect -> edric_roll
 
-- Refuse the bribe and question him -> noble_questioned
-  - Narrative-only investigation
+### Scene: edric_roll
 
-- Pass him without taking payment -> after_first_mercy
+D20 progression scene:
+
+- D20 button text: Roll: Read the Coins
+- Success: reveals debts, gives Tokens +2, slight Mercy shift
+- Failure: contempt backlash, Health -2, Wrath shift
+- Both route to edric_accounts
+
+### Scene: edric_accounts
+
+Final judgement choices:
+
+- Make him pay three Tokens as toll
+  - Effects: Souls +1, Tokens +3
+
+- Keep him in Purgatory
+  - Effects: Health -2
+
+- Pass him for free to deny his bargain
   - Effects: Souls +1, Mercy shift
-
-Scene: `noble_questioned`
-
-Choices:
-
-- Make him wait in the mist -> after_first_hard
-  - Effects: Health -2, slight Mercy shift
-  - Longer failure risk
-
-- Take two Tokens as tithe and pass him -> after_first_hard
-  - Effects: Souls +1, Tokens +2, Wrath shift
 
 ---
 
-## Judgement: The Masked Figure
+## Mask Branch
 
-Scene: `mask_heard`
+### Scene: mask_first_words
+
+Purpose: Mystery and danger.
 
 Choices:
 
-- Spend 1 Soul to Glimpse Truth -> mask_roll
-  - Disabled unless Souls are available.
-
-- Command the mask to remember -> mask_roll
-  - Risky D20 route.
-
-- Let it wait and judge another -> after_first_mask
-  - Narrative progression.
-
-- Break the mask with your ring -> after_first_mask
+- Ask what it remembers -> mask_memory
+- Reach through the crack -> mask_roll
+- Break the mask with your ring
   - Effects: Health -3, Gate Stability -30, Wrath shift
-  - Longer failure risk. Can become fatal if followed by later bad choices.
+  - Risky but not always immediate failure
 
-Scene: `mask_roll`
+### Scene: mask_memory
 
-D20 Button:
+Choices:
 
-- Prompt: Roll: Read the Mask
+- Read it through the ring -> mask_roll
+- Hold it in Purgatory
+  - Effects: slight Mercy shift
+- Pass it without understanding
+  - Effects: Souls +2, Gate Stability -18, Wrath shift
+  - Reason: it may not be truly dead
 
-Success:
+### Scene: mask_roll
 
-- Reveals a Living heartbeat caught in a dead echo.
-- Effects: Souls +2, Mercy shift
-- Route: after_first_mask
+D20 progression scene:
 
-Failure:
-
-- Mental drowning backlash.
-- Effects: Health -3, Wrath shift
-- Route: after_first_mask
+- D20 button text: Roll: Read the Mask
+- Success: reveals a Living heartbeat caught in a dead echo
+  - Effects: Souls +2, Mercy shift
+- Failure: mental drowning backlash
+  - Effects: Health -3, Wrath shift
 
 ---
 
 ## After First Judgement
 
-Scenes:
+Scene: after_first_judgement
 
-- `after_first_mercy`
-- `after_first_hard`
-- `after_first_mask`
-
-Purpose: The queue has changed. The player should not return to the original three-Souls screen.
+Purpose: The queue changes. The player does not return to the untouched original three-Souls screen.
 
 Choices:
 
-- Hear one more Soul -> second_choice
-- Ask Sebastien what the mark means / heartbeat means -> mark_explained
-
----
-
-## Scene: second_choice
-
-Purpose: One more action before the compulsory undead event.
-
-Choices:
-
-- Take a Token from the richest hand -> threshold_warning
-  - Effects: Tokens +1, Wrath shift
-
-- Let the quietest Soul pass unseen -> threshold_warning
-  - Effects: Souls +1, Mercy shift
-
-- Hold the line and make them wait -> threshold_warning
-  - Effects: Health -2
-  - Longer failure risk
-
+- Hear one more Soul -> second_queue
 - Open the Gates a finger-width to prove command -> Game Over
   - Effects: Gate Stability -50
 
 ---
 
-## Scene: threshold_warning
+## Second Queue
 
-Purpose: The only checkpoint in Chapter One. Sets up the undead incursion.
+Scene: second_queue
 
-Checkpoint: yes
+Purpose: Player chooses one remaining unresolved petitioner. The third will not be judged in Chapter One.
+
+Visible choices depend on who has already been resolved:
+
+- Hear Mara Vale
+- Hear Lord Edric Vane
+- Hear the masked figure
+
+After the second petitioner is resolved, route to `after_second_judgement`.
+
+---
+
+## After Second Judgement
+
+Scene: after_second_judgement
+
+Purpose: Force the next event. No third judgement.
+
+Text summary:
+
+- The third petitioner remains in the mist.
+- There is no time to judge them.
+- The Gates shake.
+- Something is testing the lock.
 
 Choices:
 
-- Stand before the threshold -> incursion
-
+- Stand before the threshold -> threshold_warning
 - Step aside and let Sebastien handle it -> Game Over
   - Effects: Gate Stability -50
 
 ---
 
-## Scene: incursion
+## Single Checkpoint
 
-Purpose: First direct Gate attack.
+Scene: threshold_warning
 
-Choices:
+Purpose: One chapter checkpoint before the undead incursion.
 
-- Spend 2 Souls: Bind the Restless -> after_attack
-  - Effects: Souls -2, Gate Stability +8
-  - Strong choice if the player earned enough Souls.
+Checkpoint: yes
 
-- Roll D20 to force it back -> force_gate_roll
-  - Risky but does not require resources.
+Choice:
 
-- Let the Gate take the blow -> after_attack
-  - Effects: Gate Stability -28
-  - Longer failure risk.
-
-- Offer your own name to the undead -> Game Over
-  - Effects: Health -5
-  - Doomed choice.
-
-Scene: `force_gate_roll`
-
-D20 Button:
-
-- Prompt: Roll: Force it back
-
-Success:
-
-- Effects: Souls +1, Gate Stability +5, Wrath shift
-- Route: after_attack
-
-Failure:
-
-- Effects: Health -3, Gate Stability -24, Wrath shift
-- Route: after_attack, unless Health or Gate Stability hits 0
+- Face the unpaid dead -> incursion
 
 ---
 
-## Scene: after_attack
+## Undead Event
 
-Purpose: Aftermath, but not a checkpoint in this pass.
+Scene: incursion
+
+Choices:
+
+- Spend 2 Souls: Bind the Restless
+  - Effects: Souls -2, Gate Stability +8
+
+- Force it back yourself -> force_gate_roll
+
+- Let the Gate take the blow
+  - Effects: Gate Stability -28
+
+- Offer your own name to the undead -> Game Over
+  - Effects: Health -10
+
+### Scene: force_gate_roll
+
+D20 progression scene:
+
+- D20 button text: Roll: Force it back
+- Success: Souls +1, Gate Stability +5
+- Failure: Health -3, Gate Stability -24
+
+---
+
+## Ending
+
+Scene: after_attack
+
+Purpose: Survived first incursion.
 
 Choices:
 
 - Ask what touched the Gate -> living_hand
-- Check the masked Soul -> living_hand
+- Look for the petitioner left behind -> living_hand
 
----
+Scene: living_hand
 
-## Scene: living_hand
+Purpose: Cliffhanger. A Living handprint remains where a Soul stood.
 
-Purpose: Cliffhanger.
-
-Choices:
+Choice:
 
 - End Chapter One -> trial_gate
 
----
-
-## Scene: trial_gate
-
-Purpose: Mock end of free trial.
+Scene: trial_gate
 
 Choices:
 
 - Unlock Chapter Two - GBP 0.99
-  - Mock purchase only.
-
 - Replay Chapter One
 
 ---
 
-## Game Over Scenes
+## Game Over
 
 Scenes:
 
-- `failure_health`
-- `failure_gate`
+- failure_health
+- failure_gate
 
-Display:
-
-- Game Over art asset.
+Art: Game Over art
 
 Choices:
 
 - Rewind to checkpoint
-  - Disabled if no checkpoint has been reached.
-
+  - Disabled if checkpoint has not been reached.
 - Restart chapter

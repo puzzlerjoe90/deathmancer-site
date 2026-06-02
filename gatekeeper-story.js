@@ -1,7 +1,7 @@
 window.GATEKEEPER_STORY = {
   startingScene: "title",
   initialState: {
-    health: 5,
+    health: 10,
     maxHealth: 10,
     souls: 0,
     tokens: 0,
@@ -13,346 +13,435 @@ window.GATEKEEPER_STORY = {
   scenes: {
     title: {
       chapter: "The Gatekeeper: Roll for Judgement",
-      title: "Chapter One",
+      title: "The Contract",
       art: "title",
       paragraphs: [
-        "The Gates do not open for the living.",
-        "Tonight, they open for you."
+        "There is a table in the dark, and on the table is a contract written in a hand you almost recognise.",
+        "The page smells of candle smoke, winter rain, and old blood polished thin by ceremony. Above the signature line, the words keep changing whenever you try to read them. Below it waits a black iron ring.",
+        "You do not remember coming here. You do not remember agreeing to anything. But somewhere beyond the room, the dead are already gathering, and the Gates are beginning to fail.",
+        "A voice like silk dragged over a knife says, \"The vacancy is immediate. The benefits are limited. The consequences are traditional.\""
       ],
       choices: [
         {
-          label: "Begin The New Gatekeeper",
-          goto: "awakening"
+          label: "Accept the contract",
+          text: "The moment your mark touches the page, a white pain blooms behind your eyes. Something sharp hooks into your skull and pulls until the room, the table, and your old life split apart.",
+          effects: { health: -5 },
+          goto: "contract_pain"
         }
       ]
     },
-    awakening: {
+    contract_pain: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Gates Wake",
+      title: "A Name Left Behind",
       art: "title",
       paragraphs: [
-        "You wake on your feet, which feels wrong before you understand why.",
-        "The ground beneath you is black glass veined with gold. It remembers footsteps that have not happened yet. Ahead, two impossible Gates rise out of the mist, their bars twisting upward into a dark that has no stars.",
-        "Your chest aches as if someone has reached into it and tied a knot around your heart. You know your hands. You know pain. You do not know your name."
+        "You wake kneeling on black glass. The pain in your skull fades into a hard, bright ache. Your mouth is full of a name you cannot say.",
+        "Ahead of you rise the Gates between the Living and the Dead. They are not doors so much as a decision the universe keeps making: who may pass, who must wait, and who must never be allowed through.",
+        "The ring is already on your finger. It is too cold to be metal and too heavy to be jewellery."
       ],
       choices: [
         {
-          label: "Touch the iron ring on your finger",
-          goto: "ring"
+          label: "Remember study and old books",
+          text: "You remember margins crowded with notes, dead languages, and the comfort of understanding one page before turning to the next.",
+          setFlags: { background: "scholar" },
+          goto: "world_before"
         },
         {
-          label: "Listen to the Gates breathing",
-          goto: "gates_breathe"
+          label: "Remember making things",
+          text: "You remember ink on your hands, half-finished songs, painted masks, and the private terror of showing someone what you made.",
+          setFlags: { background: "creative" },
+          goto: "world_before"
+        },
+        {
+          label: "Remember motion and competition",
+          text: "You remember lungs burning, a crowd becoming thunder, and the clean moment when thought disappeared into movement.",
+          setFlags: { background: "sportsman" },
+          goto: "world_before"
+        },
+        {
+          label: "Remember strength",
+          text: "You remember weight in your hands, labour in your shoulders, and the stubborn dignity of standing when others expected you to fall.",
+          setFlags: { background: "strong" },
+          goto: "world_before"
+        }
+      ]
+    },
+    world_before: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Place Between",
+      art: "title",
+      paragraphs: [
+        "The place before the Gates is not heaven, hell, or any story the Living tell to soften the dark. It is a border office built by grief. A court with no roof. A harbour where every ship has already sunk.",
+        "Mist moves in slow bands across the black glass. Within it, Souls wait in a line that bends farther than sight. Some look almost human. Some have forgotten the arrangement of a face. A few carry offerings: coins, rings, locks of hair, promises folded until they became objects.",
+        "The Gates themselves are ancient, wounded, and alive enough to resent being stared at. Gold light pulses in the cracks. Each pulse is weaker than the last."
+      ],
+      choices: [
+        {
+          label: "Stand and face the line of Souls",
+          goto: "sebastien_arrives"
         },
         {
           label: "Push the Gates open with both hands",
           text: "The Gates answer strength with strength. The threshold tears through you and keeps tearing.",
-          effects: { health: -5, gateStability: -50, alignment: 10 },
+          effects: { health: -10, gateStability: -50, alignment: 10 },
           goto: "failure_gate"
         }
       ]
     },
-    gates_breathe: {
-      chapter: "Chapter One: The New Gatekeeper",
-      title: "The Sound Between Worlds",
-      art: "gate",
-      paragraphs: [
-        "The Gates breathe in long, patient measures. Not air. Names.",
-        "Somewhere beyond them, a thousand dead voices wait their turn. Somewhere behind you, the Living world goes on without noticing that its dead are gathering at a broken threshold.",
-        "When the Gates exhale, you taste ash, rainwater, and old coins."
-      ],
-      choices: [
-        {
-          label: "Touch the iron ring",
-          goto: "ring"
-        }
-      ]
-    },
-    ring: {
-      chapter: "Chapter One: The New Gatekeeper",
-      title: "The Ring Knows You",
-      art: "title",
-      paragraphs: [
-        "The ring is cold enough to burn. It is made of black iron, but a thin gold mark glows beneath its surface: a pair of scales, balanced over a skull.",
-        "You try to pull it free. The ring tightens. A memory almost rises with the pain, then slips back into the dark.",
-        "A voice behind you says, \"I would not do that again. The last one screamed for a week.\""
-      ],
-      choices: [
-        {
-          label: "Turn toward the voice",
-          goto: "sebastien"
-        },
-        {
-          label: "Tear the ring from your finger",
-          text: "The ring comes loose for less than a heartbeat. So does everything holding you here.",
-          effects: { health: -5 },
-          goto: "failure_health"
-        }
-      ]
-    },
-    sebastien: {
+    sebastien_arrives: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "Sebastien",
-      art: "gate",
+      art: "title",
       paragraphs: [
-        "A thin man in a funeral coat steps from the mist. He carries a ledger under one arm and wears the expression of someone who has watched many disasters become routine.",
-        "\"Sebastien,\" he says, bowing. \"Steward, witness, occasional liar when kindness requires it. You are The Gatekeeper now. I would explain more, but the dead are already losing patience.\"",
-        "Past him, three Souls wait where the path narrows: a poor woman with rain in her apron, a nobleman with coins bright enough to bruise the eye, and a small masked figure whose shadow does not touch the ground."
+        "A man steps from the mist carrying a ledger under one arm. He is narrow, immaculate, and dressed for a funeral where he expects to be disappointed by the speeches.",
+        "\"Sebastien,\" he says, bowing with the exact depth of someone offering respect while reserving judgement. \"Steward of the threshold, clerk of impossible cases, and, until you learn not to do anything theatrical, your best chance of remaining useful.\"",
+        "He glances at your ring. \"You have accepted the contract. That means the dead may petition you, the Gates may punish you, and I may say I told you so at legally significant moments.\""
       ],
       choices: [
         {
-          label: "Ask what happened to your name",
-          goto: "name_question"
+          label: "Ask what a Gatekeeper does",
+          goto: "sebastien_rules"
         },
         {
-          label: "Ask what the dead want",
-          goto: "rules_question"
+          label: "Ask why your name is gone",
+          goto: "sebastien_name"
         },
         {
-          label: "Step toward the first Souls",
-          goto: "first_queue"
-        },
-        {
-          label: "Order every Soul through at once",
-          text: "The dead surge forward before the Gates have weighed them. Something hungry slips through inside the rush.",
+          label: "Tell him to open the Gates for everyone",
+          text: "Sebastien's smile dies first. The dead surge forward before the Gates can weigh them. Something hungry rides the rush.",
           effects: { gateStability: -50 },
           goto: "failure_gate"
         }
       ]
     },
-    name_question: {
+    sebastien_name: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Missing Name",
-      art: "gate",
+      title: "A Closed Door",
+      art: "title",
       paragraphs: [
-        "Sebastien looks at the ring instead of your face.",
-        "\"A Living name is a door. Yours has been closed for now. Perhaps for mercy. Perhaps for punishment. I recommend surviving long enough to resent the distinction.\"",
-        "The answer settles badly in you. The Gates creak, impatient."
+        "\"A Living name is a door,\" Sebastien says. \"Yours has been closed. Perhaps by mercy. Perhaps by contract law, which is rarely merciful but often thorough.\"",
+        "He turns the ledger toward you. The page is blank until your eyes ache. \"Names return when they are useful, dangerous, or no longer yours. I would not hurry the matter.\""
       ],
       choices: [
         {
-          label: "Ask what the dead want",
-          goto: "rules_question"
+          label: "Ask what a Gatekeeper does",
+          goto: "sebastien_rules"
         },
         {
-          label: "Step toward the first Souls",
+          label: "Approach the first petitioners",
           goto: "first_queue"
         }
       ]
     },
-    rules_question: {
+    sebastien_rules: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The First Rule",
-      art: "gate",
+      title: "The Work",
+      art: "title",
       paragraphs: [
-        "\"The dead want what the living wanted,\" Sebastien says. \"To be understood. To be forgiven. To be paid attention to by someone with authority.\"",
-        "He opens the ledger. Its pages are blank until you look away. \"You may pass a Soul, refuse it, bind it, or break it. Passing grants power. Offerings grant Tokens. Mercy and wrath will both keep you alive, if you do not mistake either for goodness.\"",
-        "The three Souls wait. None of them look harmless for the same reason."
+        "\"You judge,\" Sebastien says. \"Not because you are wise. Because someone signed.\"",
+        "\"A Soul may pass if the Gates accept your verdict. A Soul may remain in Purgatory if truth is unfinished. A Soul may pay a Token toll, though payment is not innocence. You may spend gathered Souls to steady the threshold or bind what should not move.\"",
+        "He looks toward the line. \"Be careful. The dead lie as beautifully as the living, and with fewer consequences.\""
       ],
       choices: [
         {
-          label: "Approach the first Souls",
+          label: "Approach the first petitioners",
           goto: "first_queue"
         }
       ]
     },
     first_queue: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The First Queue",
-      art: "petitioners",
+      title: "The First Petitioners",
+      art: "title",
       paragraphs: [
-        "The poor woman stands nearest. Her hair is pinned for a funeral, but the pins are rusted with river water. She keeps patting her apron as if something precious is still folded inside.",
-        "The nobleman waits behind her, smiling with all the patience money can buy. Five funeral coins gleam between his fingers.",
-        "The masked figure says nothing. Its porcelain mask has no mouth, but you hear it breathing anyway."
+        "Three Souls stand at the front of the line, not because they arrived first, but because the mist has decided they matter.",
+        "A poor woman clutches an apron dark with river water. A nobleman holds five polished funeral coins and a smile too practiced to be grief. Between them waits a small masked figure whose shadow points toward the Living world.",
+        "Sebastien lowers his voice. \"Choose one to hear. You will not have time for all three. The Gates are already listening to something else.\""
       ],
       choices: [
         {
-          label: "Hear the poor woman first",
-          setFlags: { firstSoul: "widow" },
-          goto: "widow_heard"
+          label: "Hear the poor woman",
+          setFlags: { maraActive: true },
+          goto: "mara_first_words"
         },
         {
-          label: "Let the nobleman speak",
-          setFlags: { firstSoul: "noble" },
-          goto: "noble_heard"
+          label: "Hear the nobleman",
+          setFlags: { edricActive: true },
+          goto: "edric_first_words"
         },
         {
-          label: "Study the masked figure",
-          setFlags: { firstSoul: "mask" },
-          goto: "mask_heard"
+          label: "Hear the masked figure",
+          setFlags: { maskActive: true },
+          goto: "mask_first_words"
         }
       ]
     },
-    widow_heard: {
+    mara_first_words: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Woman With Rain In Her Apron",
+      title: "Mara Vale",
       art: "petitioners",
       paragraphs: [
-        "\"Mara Vale,\" the woman says, though you did not ask. \"Was that my name? It feels smaller now.\"",
-        "She opens her apron. There is no coin inside, only a smell of vegetable soup and wet wool. A kitchen memory. Two children asleep by a hearth. A third chair left empty for someone who never came home.",
-        "Sebastien murmurs, \"No offering. Ordinary Soul. Clean grief, mostly. The Gates will accept her if you do.\""
+        "\"Mara Vale,\" the woman says, though the name sounds borrowed from a warmer room. \"I think I died in the river. I think I was carrying bread. I think my youngest was waiting.\"",
+        "Her apron is empty except for rain. When she twists the cloth in her hands, you smell soup left cooling on a hearth and hear a child trying not to cry.",
+        "Sebastien murmurs, \"Ordinary Soul. No offering declared. Ordinary does not mean simple.\""
       ],
       choices: [
         {
-          label: "Pass Mara gently",
-          text: "Mara steps through with both hands over her heart. A pale Soul settles into your palm like a coal that remembers warmth.",
+          label: "Ask about the child",
+          goto: "mara_child"
+        },
+        {
+          label: "Ask what the river took",
+          goto: "mara_river"
+        },
+        {
+          label: "Demand a Token toll",
+          goto: "mara_toll"
+        }
+      ]
+    },
+    mara_child: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Empty Chair",
+      art: "petitioners",
+      paragraphs: [
+        "Mara's face changes when you ask. Not into sorrow. Into work. The kind a person does because collapse would take too long.",
+        "\"He was ill,\" she says. \"I hid one coin for medicine. Not for death. Death has enough coins.\"",
+        "A blackened coin appears in her palm. It is small, river-dirty, and held with more shame than greed."
+      ],
+      choices: [
+        {
+          label: "Pass her and let her keep the coin",
+          text: "Mara steps through with the coin still closed in her fist. The Gates accept the mercy. A pale Soul settles into your palm like a coal remembering warmth.",
           effects: { souls: 1, alignment: -8 },
-          setFlags: { judgedFirst: true, maraPassed: true },
-          goto: "after_first_mercy"
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Ask what she is hiding",
-          goto: "widow_secret"
+          label: "Take the coin as toll, then pass her",
+          text: "The coin becomes a Token in your keeping. Mara does not curse you. That makes it worse.",
+          effects: { souls: 1, tokens: 1, alignment: 5 },
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Refuse her until an offering is found",
-          text: "Mara flinches. The hurt of it crosses the threshold and strikes behind your eyes.",
+          label: "Keep her in Purgatory until the child is safe",
+          text: "Mara nods because she understands waiting. Her grief folds inward and brushes your mind like cold cloth.",
+          effects: { health: -1, alignment: -2 },
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
+        }
+      ]
+    },
+    mara_river: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The River's Version",
+      art: "petitioners",
+      paragraphs: [
+        "The river answers before Mara can. It rises in her voice: black water, a broken bridge, hands grabbing for bread that floated away like a ridiculous little boat.",
+        "There was no villain in the river. Only weather, poverty, and the terrible speed with which a life can become a story told by someone else.",
+        "Mara looks at you, suddenly afraid you will require a grander sin before you believe she matters."
+      ],
+      choices: [
+        {
+          label: "Pass her without payment",
+          text: "The Gates open just enough for Mara. Her thank-you is quiet, and therefore harder to bear.",
+          effects: { souls: 1, alignment: -7 },
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
+        },
+        {
+          label: "Ask for a memory as toll",
+          text: "Mara gives up the smell of her kitchen. It becomes a Token in your hand. She passes lighter, and less herself.",
+          effects: { souls: 1, tokens: 1, alignment: 4 },
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
+        },
+        {
+          label: "Refuse her for arriving empty-handed",
+          text: "Mara's hurt lashes through you, not violent but intimate. The Gates do not move.",
           effects: { health: -2, alignment: 8 },
-          setFlags: { judgedFirst: true, maraRefused: true },
-          goto: "after_first_hard"
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         }
       ]
     },
-    widow_secret: {
+    mara_toll: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "A Small Untruth",
+      title: "The Cost Of Bread",
       art: "petitioners",
       paragraphs: [
-        "Mara looks back toward the mist. \"I kept a coin,\" she whispers. \"Not for the ferryman. For my youngest. I thought if I held one thing back, death would have to send me home for it.\"",
-        "The coin appears in her palm, black with river silt. It is not much. To her, it is almost everything."
+        "\"I have nothing,\" Mara says.",
+        "Sebastien clears his throat. \"That is frequently untrue. The dead are full of valuables. Names. Last sights. Regrets. The trick is deciding what you can take without becoming a thief with better lighting.\"",
+        "Mara offers you the memory of her youngest laughing through a fever."
       ],
       choices: [
         {
-          label: "Let her keep the coin and pass",
-          text: "The Gates accept the mercy. Mara vanishes into a warm rain you cannot feel.",
-          effects: { souls: 1, alignment: -10 },
-          setFlags: { judgedFirst: true, maraPassed: true },
-          goto: "after_first_mercy"
+          label: "Refuse the memory and pass her",
+          text: "The memory stays with Mara. The Gates accept her. You feel poorer and cleaner.",
+          effects: { souls: 1, alignment: -8 },
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Take the coin as Token, then pass her",
-          text: "The coin becomes a Token in your hand. Mara does not curse you. That makes it worse.",
-          effects: { souls: 1, tokens: 1, alignment: 6 },
-          setFlags: { judgedFirst: true, maraPassed: true },
-          goto: "after_first_hard"
+          label: "Take the memory as Token",
+          text: "The memory hardens into a Token. Mara passes without remembering why she had smiled.",
+          effects: { souls: 1, tokens: 1, alignment: 8 },
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         }
       ]
     },
-    noble_heard: {
+    edric_first_words: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Nobleman's Smile",
+      title: "Lord Edric Vane",
       art: "petitioners",
       paragraphs: [
-        "\"Lord Edric Vane,\" the nobleman says, before you can ask. \"Patron of three chapels, protector of six villages, victim of an ungrateful knife.\"",
-        "His coins are old, heavy, and clean. Too clean. Their faces have been polished away by nervous thumbs.",
-        "\"I understand institutions require maintenance,\" he says. \"Five Tokens for a prompt passage. No sermon necessary.\""
+        "\"Lord Edric Vane,\" says the nobleman, with the tone of a man announcing a weather system. \"Patron of chapels, defender of villages, victim of a knife wielded by ingratitude.\"",
+        "His five coins shine too brightly. Each has been polished until the face stamped into it is gone.",
+        "\"I assume,\" he says, \"that even death keeps accounts.\""
       ],
       choices: [
         {
-          label: "Accept the Tokens and pass him",
-          text: "The coins slide into your keeping. Edric passes with a bow shallow enough to be insult.",
-          effects: { souls: 1, tokens: 5, alignment: 8 },
-          setFlags: { judgedFirst: true, noblePassed: true },
-          goto: "after_first_hard"
+          label: "Ask who polished the coins",
+          goto: "edric_accounts"
         },
         {
-          label: "Refuse the bribe and question him",
-          goto: "noble_questioned"
+          label: "Accept all five Tokens immediately",
+          text: "The coins leap into your hand. Edric passes smiling. Behind the Gates, something complains in a servant's voice.",
+          effects: { souls: 1, tokens: 5, gateStability: -8, alignment: 10 },
+          setFlags: { edricResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Pass him without taking payment",
-          text: "For the first time, Edric looks unsure. The Gates take him. His coins fall uselessly through the mist.",
-          effects: { souls: 1, alignment: -4 },
-          setFlags: { judgedFirst: true, noblePassed: true },
-          goto: "after_first_mercy"
+          label: "Send him to Purgatory while you inspect",
+          goto: "edric_roll"
         }
       ]
     },
-    noble_questioned: {
+    edric_accounts: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Knife's Memory",
+      title: "The Unpaid Ledger",
       art: "petitioners",
       paragraphs: [
-        "The nobleman's smile thins. The coins in his hand begin to show faces again: not kings, but servants.",
-        "\"Debts,\" Sebastien says quietly. \"Wages withheld. Funerals unpaid. Grief converted into silver.\"",
-        "Edric's Soul lashes out, not with claws but with entitlement so old it has become a weapon."
+        "Edric's smile remains, but the coins tremble. Faces rise through the polish: servants, grooms, washerwomen, a mason with dust in his beard.",
+        "\"Sentiment,\" Edric says. \"The lower classes leave it everywhere.\"",
+        "Sebastien writes without looking down. \"Unpaid funerals. Withheld wages. A chapel roof repaired after the congregation drowned beneath it.\""
       ],
       choices: [
         {
-          label: "Make him wait in the mist",
-          text: "Edric recoils as if struck. You do not feel kinder, but you feel clearer.",
-          effects: { health: -2, alignment: -2 },
-          setFlags: { judgedFirst: true, nobleDelayed: true },
-          goto: "after_first_hard"
+          label: "Make him pay three Tokens as toll",
+          text: "Three coins become Tokens. Edric passes stripped of some shine, though not of pride.",
+          effects: { souls: 1, tokens: 3, alignment: 4 },
+          setFlags: { edricResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Take two Tokens as tithe and pass him",
-          text: "Two coins remain in your hand. The others turn black and vanish with him.",
-          effects: { souls: 1, tokens: 2, alignment: 5 },
-          setFlags: { judgedFirst: true, noblePassed: true },
-          goto: "after_first_hard"
+          label: "Keep him in Purgatory",
+          text: "Edric's outrage strikes like a thrown glass. You keep your feet, barely.",
+          effects: { health: -2, alignment: -1 },
+          setFlags: { edricResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
+        },
+        {
+          label: "Pass him for free to deny his bargain",
+          text: "Edric passes without purchase. He looks more insulted by mercy than by punishment.",
+          effects: { souls: 1, alignment: -3 },
+          setFlags: { edricResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         }
       ]
     },
-    mask_heard: {
+    edric_roll: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Mask Without A Mouth",
+      title: "Read The Coins",
+      art: "petitioners",
+      paragraphs: [
+        "You hold one of Edric's coins against the ring. The metal sweats black water.",
+        "A judgement can be bought. Truth cannot, though it may be rented briefly by pain."
+      ],
+      roll: {
+        label: "Read the Coins",
+        stat: "truth",
+        dc: 12,
+        successText: "The coin gives up its dead. You see every debt Edric carried into the grave.",
+        failureText: "The coin turns blank in your hand. Edric's contempt slides beneath your skull like a needle.",
+        successEffects: { tokens: 2, alignment: -2 },
+        failureEffects: { health: -2, alignment: 5 },
+        successGoto: "edric_accounts",
+        failureGoto: "edric_accounts"
+      },
+      choices: []
+    },
+    mask_first_words: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Masked Figure",
       art: "mask",
       paragraphs: [
-        "The masked figure is small enough to be mistaken for a child until it moves. Then the mist moves with it.",
-        "Its porcelain face is cracked from brow to chin. Behind the crack, something glows with the green-blue light of deep water.",
-        "Sebastien shuts the ledger. \"Careful. Some Souls arrive wearing the shape of a question because an answer would kill them.\""
+        "The masked figure does not walk so much as arrive in increments, each step deciding whether to exist.",
+        "Its porcelain face has no mouth. A crack runs from brow to chin, and behind that crack glows a green-blue light like deep water under moonless ice.",
+        "Sebastien shuts the ledger. \"I dislike cases that make the book nervous.\""
       ],
       choices: [
         {
-          label: "Spend 1 Soul to Glimpse Truth",
-          cost: { souls: 1 },
-          goto: "mask_roll"
+          label: "Ask what it remembers",
+          goto: "mask_memory"
         },
         {
-          label: "Command the mask to remember",
+          label: "Reach through the crack",
           goto: "mask_roll"
-        },
-        {
-          label: "Let it wait and judge another",
-          text: "The mask bows. Its shadow stays upright a moment longer than it should.",
-          setFlags: { judgedFirst: true, maskDelayed: true },
-          goto: "after_first_mask"
         },
         {
           label: "Break the mask with your ring",
           text: "The mask shatters. The Living heartbeat inside screams through the Gates, and the threshold buckles around the sound.",
           effects: { health: -3, gateStability: -30, alignment: 15 },
-          setFlags: { judgedFirst: true, maskBroken: true },
-          goto: "after_first_mask"
+          setFlags: { maskResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         }
       ]
     },
-    mask_no_souls: {
+    mask_memory: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "An Empty Hand",
+      title: "A Heartbeat Behind Porcelain",
       art: "mask",
       paragraphs: [
-        "You reach for power and find only the ache where power should be.",
-        "Sebastien's voice is almost gentle. \"Not yet. A Gatekeeper cannot spend what he has not gathered.\""
+        "The figure raises one hand. Its fingers are too small for the shadow they cast.",
+        "You hear a heartbeat that is not yours and not dead. You hear a door opening in the Living world. You hear someone whisper, \"Not yet.\"",
+        "Sebastien steps back. \"Gatekeeper. Decide carefully. That Soul may be wearing a body somewhere else.\""
       ],
       choices: [
         {
-          label: "Command the mask without power",
+          label: "Read it through the ring",
           goto: "mask_roll"
         },
         {
-          label: "Let it wait",
-          text: "The mask bows. Its shadow stays upright a moment longer than it should.",
-          setFlags: { judgedFirst: true, maskDelayed: true },
-          goto: "after_first_mask"
+          label: "Hold it in Purgatory",
+          text: "The mask bows. Its shadow stays upright, watching you after the figure retreats.",
+          effects: { alignment: -2 },
+          setFlags: { maskResolved: true, maskHeld: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Break the mask instead",
-          text: "The porcelain splits beneath the ring. You hear a living throat scream on the wrong side of the world.",
-          effects: { health: -3, gateStability: -30, alignment: 15 },
-          setFlags: { judgedFirst: true, maskBroken: true },
-          goto: "after_first_mask"
+          label: "Pass it without understanding",
+          text: "The Gates open. Something crosses that is not entirely dead. The threshold flinches.",
+          effects: { souls: 2, gateStability: -18, alignment: 7 },
+          setFlags: { maskResolved: true, maskPassed: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
         }
       ]
     },
@@ -366,122 +455,34 @@ window.GATEKEEPER_STORY = {
       ],
       roll: {
         label: "Read the Mask",
-        stat: "mercy",
+        stat: "empathy",
         dc: 12,
         successText: "The mask opens inward. Beneath it is not a face, but a Living heartbeat caught in a dead echo.",
         failureText: "The mask cracks wider. The thing behind it panics and floods your mind with borrowed drowning.",
         successEffects: { souls: 2, alignment: -4 },
         failureEffects: { health: -3, alignment: 6 },
-        successFlags: { judgedFirst: true, maskRead: true },
-        failureFlags: { judgedFirst: true, maskWounded: true },
-        successGoto: "after_first_mask",
-        failureGoto: "after_first_mask"
+        successFlags: { maskResolved: true, maskRead: true },
+        failureFlags: { maskResolved: true, maskWounded: true },
+        successGoto: "after_first_judgement",
+        failureGoto: "after_first_judgement",
+        successGotoIfFlag: { secondJudgement: "after_second_judgement" },
+        failureGotoIfFlag: { secondJudgement: "after_second_judgement" }
       },
       choices: []
     },
-    after_first_mercy: {
+    after_first_judgement: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Line Changes",
-      art: "petitioners",
+      title: "The Line Learns You",
+      art: "title",
       paragraphs: [
-        "The first judgement leaves a mark in the air. The remaining Souls shift around it, measuring you.",
-        "The nobleman stops smiling quite so easily. The masked figure turns its blank face toward the Gates.",
-        "You understand then that judgement is not a single verdict. It is a reputation being born."
+        "Your first judgement changes the air. The Souls do not simply watch you now; they study the shape of your mercy, the reach of your greed, the sharpness of your fear.",
+        "Sebastien marks the ledger with a pen that has no nib. \"One verdict is an accident. Two begin a reputation.\"",
+        "The Gates shudder faintly. You have time for one more petitioner before whatever is touching the threshold arrives."
       ],
       choices: [
         {
           label: "Hear one more Soul",
-          goto: "second_choice"
-        },
-        {
-          label: "Ask Sebastien what the mark means",
-          goto: "mark_explained"
-        }
-      ]
-    },
-    after_first_hard: {
-      chapter: "Chapter One: The New Gatekeeper",
-      title: "The Line Learns Fear",
-      art: "petitioners",
-      paragraphs: [
-        "The first judgement leaves a colder mark. The remaining Souls lower their voices. Even the mist seems to take a careful step back.",
-        "Sebastien writes something in the blank ledger. When you glance down, the page clears itself.",
-        "\"Do not worry,\" he says. \"The Gates have seen worse men than you. Whether they survived is a separate matter.\""
-      ],
-      choices: [
-        {
-          label: "Hear one more Soul",
-          goto: "second_choice"
-        },
-        {
-          label: "Ask Sebastien what he wrote",
-          goto: "mark_explained"
-        }
-      ]
-    },
-    after_first_mask: {
-      chapter: "Chapter One: The New Gatekeeper",
-      title: "Something Breathes Wrong",
-      art: "mask",
-      paragraphs: [
-        "The masked figure retreats into the line, or perhaps the line retreats around it.",
-        "A heartbeat continues in the silence after it moves away. Not yours. Not Sebastien's.",
-        "The Gates hear it too. Their hinges tighten like teeth."
-      ],
-      choices: [
-        {
-          label: "Hear one more Soul",
-          goto: "second_choice"
-        },
-        {
-          label: "Ask Sebastien about the heartbeat",
-          goto: "mark_explained"
-        }
-      ]
-    },
-    mark_explained: {
-      chapter: "Chapter One: The New Gatekeeper",
-      title: "A Reputation Being Born",
-      art: "gate",
-      paragraphs: [
-        "\"Every judgement teaches the dead how to approach you,\" Sebastien says.",
-        "\"Some will bring offerings. Some will bring lies. Some will bring knives made from their own regrets. If you become predictable, the clever ones will survive you.\"",
-        "The Gates groan before you can answer. A sound like coins pouring into a grave rolls through the threshold."
-      ],
-      choices: [
-        {
-          label: "Turn toward the sound",
-          goto: "threshold_warning"
-        }
-      ]
-    },
-    second_choice: {
-      chapter: "Chapter One: The New Gatekeeper",
-      title: "The Second Petition",
-      art: "petitioners",
-      paragraphs: [
-        "You reach for the next Soul, but the queue is no longer orderly.",
-        "Mara's absence, Edric's anger, or the mask's impossible heartbeat has disturbed the line. The remaining dead press close enough for their memories to brush your skin.",
-        "You may settle one more matter before the Gates demand your whole attention."
-      ],
-      choices: [
-        {
-          label: "Take a Token from the richest hand",
-          text: "A coin passes into your keeping. Its owner does not step forward. That may be gratitude. It may be strategy.",
-          effects: { tokens: 1, alignment: 3 },
-          goto: "threshold_warning"
-        },
-        {
-          label: "Let the quietest Soul pass unseen",
-          text: "A small, tired Soul slips through before fear can teach it to lie. You feel a thin warmth answer.",
-          effects: { souls: 1, alignment: -4 },
-          goto: "threshold_warning"
-        },
-        {
-          label: "Hold the line and make them wait",
-          text: "The dead obey, but resentment travels through them like frost through a window.",
-          effects: { health: -2 },
-          goto: "threshold_warning"
+          goto: "second_queue"
         },
         {
           label: "Open the Gates a finger-width to prove command",
@@ -491,20 +492,49 @@ window.GATEKEEPER_STORY = {
         }
       ]
     },
-    threshold_warning: {
+    second_queue: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Gates Shudder",
-      art: "gate",
-      checkpoint: true,
+      title: "One More Before The Breach",
+      art: "title",
       paragraphs: [
-        "The Gates shudder once.",
-        "The line of Souls falls silent. Sebastien turns very pale for a man who may not be alive.",
-        "\"That was not a petitioner,\" he says. \"That was something touching the Gate from the wrong side.\""
+        "The original line is gone. Not vanished, but rearranged by what you have already done.",
+        "The remaining petitioners know you can be moved, bought, resisted, or hurt. Each approaches with that knowledge folded into their posture.",
+        "You choose one more case. The third will have to wait in Purgatory, whether it deserves to or not."
+      ],
+      choices: [
+        {
+          label: "Hear Mara Vale",
+          condition: { flagNot: "maraResolved" },
+          setFlags: { secondJudgement: true },
+          goto: "mara_first_words"
+        },
+        {
+          label: "Hear Lord Edric Vane",
+          condition: { flagNot: "edricResolved" },
+          setFlags: { secondJudgement: true },
+          goto: "edric_first_words"
+        },
+        {
+          label: "Hear the masked figure",
+          condition: { flagNot: "maskResolved" },
+          setFlags: { secondJudgement: true },
+          goto: "mask_first_words"
+        }
+      ]
+    },
+    after_second_judgement: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Third Must Wait",
+      art: "title",
+      paragraphs: [
+        "The third petitioner remains in the mist. You feel their disappointment, or relief, or hunger. There is no time to learn which.",
+        "The Gates shake once, hard enough to split a gold vein in the glass beneath your feet.",
+        "Sebastien goes still. \"That was not a Soul asking permission. That was something testing the lock.\""
       ],
       choices: [
         {
           label: "Stand before the threshold",
-          goto: "incursion"
+          goto: "threshold_warning"
         },
         {
           label: "Step aside and let Sebastien handle it",
@@ -514,13 +544,30 @@ window.GATEKEEPER_STORY = {
         }
       ]
     },
+    threshold_warning: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Gate Remembers You",
+      art: "title",
+      checkpoint: true,
+      paragraphs: [
+        "You step into the centre of the threshold. The ring burns. For the first time, the Gates seem to know where you are.",
+        "This is the chapter's mercy: one fixed point in a place built from endings. If you fall beyond this moment, the mist may return you here once.",
+        "Then the dead thing begins to climb through."
+      ],
+      choices: [
+        {
+          label: "Face the unpaid dead",
+          goto: "incursion"
+        }
+      ]
+    },
     incursion: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "The Unpaid Dead",
-      art: "undead",
+      art: "title",
       paragraphs: [
         "A hand made of funeral coins claws through the bars. Then another. Then a face, if a heap of owed wages and unburied bones can be called a face.",
-        "It is not asking to pass. It is trying to make the Gates remember every death that was paid for too late.",
+        "It is not asking to pass. It is trying to make the Gates remember every death paid for too late.",
         "The hinges scream."
       ],
       choices: [
@@ -532,7 +579,7 @@ window.GATEKEEPER_STORY = {
           goto: "after_attack"
         },
         {
-          label: "Roll D20 to force it back",
+          label: "Force it back yourself",
           goto: "force_gate_roll"
         },
         {
@@ -544,7 +591,7 @@ window.GATEKEEPER_STORY = {
         {
           label: "Offer your own name to the undead",
           text: "You reach for the name you do not remember. Something reaches back faster.",
-          effects: { health: -5, alignment: 6 },
+          effects: { health: -10, alignment: 6 },
           goto: "failure_health"
         }
       ]
@@ -552,14 +599,14 @@ window.GATEKEEPER_STORY = {
     force_gate_roll: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "Hold The Gate",
-      art: "undead",
+      art: "title",
       paragraphs: [
         "You plant your feet in the black glass. The coin-thing drags itself closer.",
         "For a heartbeat, you are certain the Gates are not behind you. They are inside your ribs."
       ],
       roll: {
         label: "Force it back",
-        stat: "wrath",
+        stat: "force",
         dc: 13,
         successText: "Your command lands like a hammer. The undead mass bursts into cold sparks and unpaid names.",
         failureText: "Your voice breaks. The creature slams into you and the hinges together.",
@@ -573,7 +620,7 @@ window.GATEKEEPER_STORY = {
     after_attack: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "After The Breach",
-      art: "gate",
+      art: "title",
       paragraphs: [
         "The coin-thing breaks apart. Its last pieces scatter across the path, then turn to dust before any Soul can stoop for them.",
         "The Gates remain closed. Not whole. Not safe. Closed.",
@@ -585,7 +632,7 @@ window.GATEKEEPER_STORY = {
           goto: "living_hand"
         },
         {
-          label: "Check the masked Soul",
+          label: "Look for the petitioner left behind",
           goto: "living_hand"
         }
       ]
@@ -593,11 +640,11 @@ window.GATEKEEPER_STORY = {
     living_hand: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "A Living Hand",
-      art: "mask",
+      art: "title",
       paragraphs: [
-        "The masked Soul is gone.",
-        "Where it stood, the black glass holds a handprint burned into frost. Five fingers. A thumb. A Living mark.",
-        "Sebastien closes the ledger slowly. \"No Soul should leave that behind.\""
+        "Where one petitioner stood, the black glass holds a handprint burned into frost. Five fingers. A thumb. A Living mark.",
+        "Sebastien closes the ledger slowly. \"No Soul should leave that behind.\"",
+        "Your ring tightens. Somewhere beyond the threshold, something that is not dead has learned that you are new."
       ],
       choices: [
         {
@@ -612,7 +659,6 @@ window.GATEKEEPER_STORY = {
       art: "title",
       paragraphs: [
         "The Gates have accepted you, for now.",
-        "Your ring tightens. Somewhere beyond the threshold, something that is not dead has learned that you are new.",
         "Your forgotten name waits in the dark with its eyes open."
       ],
       choices: [

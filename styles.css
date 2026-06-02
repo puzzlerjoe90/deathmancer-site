@@ -933,7 +933,8 @@ p {
 }
 
 .story-art[data-scene-art="gate"] {
-  background-image: url("./assets/images/deathmancer-playmat.jpg");
+  background-image: url("./assets/images/gatekeeper-title.png");
+  background-position: center top;
 }
 
 .story-art[data-scene-art="title"] {

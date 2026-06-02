@@ -60,6 +60,18 @@
   }
 
   function modifierFor(stat) {
+    const background = state.flags.background;
+    const backgroundBonuses = {
+      scholar: { truth: 2 },
+      creative: { empathy: 2 },
+      sportsman: { reflex: 2 },
+      strong: { force: 2 }
+    };
+
+    if (backgroundBonuses[background]?.[stat]) {
+      return backgroundBonuses[background][stat];
+    }
+
     if (stat === "mercy") return Math.round(-state.alignment / 25);
     if (stat === "wrath") return Math.round(state.alignment / 25);
     if (stat === "gate") return state.gateStability >= 55 ? 1 : -1;
@@ -251,9 +263,21 @@
       ? { title: "Consequence", body: choice.text, changes }
       : null;
 
-    changeScene(choice.goto || currentSceneId);
+    changeScene(resolveGoto(choice));
     failIfNeeded();
     render(true);
+  }
+
+  function resolveGoto(choice) {
+    if (choice.gotoIfFlag) {
+      const matchedFlag = Object.keys(choice.gotoIfFlag).find((flag) => state.flags[flag]);
+
+      if (matchedFlag) {
+        return choice.gotoIfFlag[matchedFlag];
+      }
+    }
+
+    return choice.goto || currentSceneId;
   }
 
   function rollCurrentScene() {
@@ -289,10 +313,24 @@
       };
 
       isRolling = false;
-      changeScene(passed ? roll.successGoto : roll.failureGoto);
+      changeScene(resolveRollGoto(roll, passed));
       failIfNeeded();
       render(true);
     }, 55);
+  }
+
+  function resolveRollGoto(roll, passed) {
+    const conditionalRoutes = passed ? roll.successGotoIfFlag : roll.failureGotoIfFlag;
+
+    if (conditionalRoutes) {
+      const matchedFlag = Object.keys(conditionalRoutes).find((flag) => state.flags[flag]);
+
+      if (matchedFlag) {
+        return conditionalRoutes[matchedFlag];
+      }
+    }
+
+    return passed ? roll.successGoto : roll.failureGoto;
   }
 
   function renderStats() {
