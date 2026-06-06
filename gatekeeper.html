@@ -104,13 +104,23 @@
       <div class="story-panel">
         <p class="eyebrow" data-chapter-title>Chapter One</p>
         <h1 data-scene-title>The Gates Wake</h1>
-        <div class="story-copy" data-story-copy></div>
 
         <aside class="roll-panel" data-roll-panel hidden></aside>
 
+        <div class="story-copy" data-story-copy></div>
+
+        <section class="chapter-score" data-chapter-score hidden aria-label="Chapter score">
+          <div class="chapter-score__breakdown" data-score-breakdown></div>
+          <div class="chapter-score__grade">
+            <span>Chapter Grade</span>
+            <strong data-score-grade>S</strong>
+            <small data-score-points>100 / 100</small>
+          </div>
+        </section>
+
         <div class="choice-list" data-choice-list></div>
 
-        <div class="game-actions">
+        <div class="game-actions" data-game-actions>
           <button class="dice-button" type="button" data-dice-roll disabled>D20 unavailable</button>
           <button class="icon-button" type="button" data-rewind>
             Rewind <span data-stat="rewinds">1</span>
@@ -119,6 +129,8 @@
         </div>
       </div>
     </section>
+
+    <div class="game-effect-flash" data-effect-flash aria-hidden="true"></div>
   </main>
 
   <audio src="./assets/audio/gothic-aether-gate.mp3" loop preload="auto" data-background-music></audio>

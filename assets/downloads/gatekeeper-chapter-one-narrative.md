@@ -36,6 +36,24 @@ Rewind is disabled before that checkpoint and can be used once after reaching it
 
 D20 results should show the rolled number and narrative impact, not visible DC maths.
 
+Consequence presentation:
+
+- Show the consequence box before the new scene prose.
+- Present resource feedback in this order when multiple changes occur: Souls, Tokens, Health, Gate Stability.
+- Soul gains use a graceful glow and holy sound.
+- Token gains use a coin-pouch sound.
+- Health damage uses a red damage flash and impact sound.
+- Gate Stability damage uses a threshold flash and Gate impact sound.
+- Label alignment changes as Mercy or Wrath, never Temper.
+- Show Balanced from 40% through 60% of the Mercy/Wrath track, Merciful below 40%, and Wrathful above 60%.
+
+Chapter completion:
+
+- Calculate and display a Chapter Grade only when the completion scene is reached.
+- Grades are S, A, B, or C. Failure scenes do not receive a score.
+- Display Health, Gate Stability, Souls, Tokens, Rewinds Unused, and Judgement on the left.
+- Display the large grade and total score on the right.
+
 ### Starting State
 
 Health: 10 / 10

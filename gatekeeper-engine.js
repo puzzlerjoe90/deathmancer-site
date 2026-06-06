@@ -21,6 +21,13 @@
   const storyCopy = app.querySelector("[data-story-copy]");
   const choiceList = app.querySelector("[data-choice-list]");
   const rollPanel = app.querySelector("[data-roll-panel]");
+  const storyPanel = app.querySelector(".story-panel");
+  const scorePanel = app.querySelector("[data-chapter-score]");
+  const scoreBreakdown = app.querySelector("[data-score-breakdown]");
+  const scoreGrade = app.querySelector("[data-score-grade]");
+  const scorePoints = app.querySelector("[data-score-points]");
+  const gameActions = app.querySelector("[data-game-actions]");
+  const effectFlash = app.querySelector("[data-effect-flash]");
   const art = app.querySelector("[data-scene-art]");
   const rewindButton = app.querySelector("[data-rewind]");
   const restartButton = app.querySelector("[data-restart]");
@@ -34,6 +41,8 @@
   let checkpoint = null;
   let lastCheckpointSceneId = null;
   let isRolling = false;
+  let isResolving = false;
+  let audioContext = null;
 
   if ("scrollRestoration" in window.history) {
     window.history.scrollRestoration = "manual";
@@ -51,11 +60,14 @@
     return story.scenes[currentSceneId];
   }
 
+  function alignmentPosition(value) {
+    return clamp(((value + 60) / 120) * 100, 0, 100);
+  }
+
   function alignmentName(value) {
-    if (value <= -35) return "Merciful";
-    if (value >= 35) return "Wrathful";
-    if (value <= -12) return "Mercy-leaning";
-    if (value >= 12) return "Wrath-leaning";
+    const position = alignmentPosition(value);
+    if (position < 40) return "Merciful";
+    if (position > 60) return "Wrathful";
     return "Balanced";
   }
 
@@ -127,6 +139,7 @@
   }
 
   function choiceIsDisabled(choice) {
+    if (isResolving) return true;
     if (!hasEnough(choice.cost)) return true;
     if (choice.rewind && (!checkpoint || state.rewinds <= 0)) return true;
     return false;
@@ -145,11 +158,150 @@
       health: "Health",
       souls: "Souls",
       tokens: "Tokens",
-      gateStability: "Gate Stability",
-      alignment: "Temper"
+      gateStability: "Gate Stability"
     };
+
+    if (change.key === "alignment") {
+      return change.delta < 0
+        ? `Mercy +${Math.abs(change.delta)}`
+        : `Wrath +${Math.abs(change.delta)}`;
+    }
+
     const sign = change.delta > 0 ? "+" : "";
     return `${labels[change.key] || change.key} ${sign}${change.delta}`;
+  }
+
+  function ensureAudioContext() {
+    if (!window.AudioContext && !window.webkitAudioContext) return null;
+
+    if (!audioContext) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      audioContext = new AudioContextClass();
+    }
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    return audioContext;
+  }
+
+  function playTone(frequency, duration, options = {}) {
+    const context = ensureAudioContext();
+    if (!context) return;
+
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    const now = context.currentTime + (options.delay || 0);
+    const end = now + duration;
+
+    oscillator.type = options.type || "sine";
+    oscillator.frequency.setValueAtTime(frequency, now);
+    if (options.endFrequency) {
+      oscillator.frequency.exponentialRampToValueAtTime(options.endFrequency, end);
+    }
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(options.volume || 0.14, now + 0.025);
+    gain.gain.exponentialRampToValueAtTime(0.0001, end);
+
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+    oscillator.start(now);
+    oscillator.stop(end + 0.03);
+  }
+
+  function playNoise(duration, options = {}) {
+    const context = ensureAudioContext();
+    if (!context) return;
+
+    const length = Math.max(1, Math.floor(context.sampleRate * duration));
+    const buffer = context.createBuffer(1, length, context.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let index = 0; index < length; index += 1) {
+      data[index] = Math.random() * 2 - 1;
+    }
+
+    const source = context.createBufferSource();
+    const filter = context.createBiquadFilter();
+    const gain = context.createGain();
+    const now = context.currentTime + (options.delay || 0);
+
+    filter.type = options.filterType || "lowpass";
+    filter.frequency.value = options.frequency || 180;
+    gain.gain.setValueAtTime(options.volume || 0.09, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    source.buffer = buffer;
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(context.destination);
+    source.start(now);
+  }
+
+  function playFeedbackSound(type) {
+    if (type === "souls") {
+      playTone(392, 0.55, { endFrequency: 784, volume: 0.1 });
+      playTone(587, 0.5, { delay: 0.09, endFrequency: 1174, volume: 0.07 });
+      playTone(880, 0.42, { delay: 0.18, volume: 0.05 });
+      return;
+    }
+
+    if (type === "tokens") {
+      playTone(1568, 0.16, { type: "triangle", endFrequency: 1174, volume: 0.08 });
+      playTone(1318, 0.18, { delay: 0.1, type: "triangle", endFrequency: 988, volume: 0.08 });
+      playTone(1046, 0.22, { delay: 0.2, type: "triangle", endFrequency: 784, volume: 0.07 });
+      return;
+    }
+
+    if (type === "health") {
+      playNoise(0.36, { filterType: "bandpass", frequency: 120, volume: 0.13 });
+      playTone(105, 0.4, { type: "sawtooth", endFrequency: 58, volume: 0.1 });
+      return;
+    }
+
+    if (type === "gate") {
+      playNoise(0.52, { filterType: "lowpass", frequency: 95, volume: 0.14 });
+      playTone(82, 0.58, { type: "square", endFrequency: 42, volume: 0.08 });
+      playTone(740, 0.22, { delay: 0.08, type: "triangle", endFrequency: 260, volume: 0.05 });
+    }
+  }
+
+  function restartAnimation(node, className) {
+    if (!node) return;
+    node.classList.remove(className);
+    void node.offsetWidth;
+    node.classList.add(className);
+  }
+
+  function wait(milliseconds) {
+    return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+  }
+
+  async function playChangeSequence(changes) {
+    const feedback = [
+      changes.find((change) => change.key === "souls" && change.delta > 0)
+        ? { type: "souls", duration: 720, node: statNodes.souls.closest(".resource-chip"), className: "is-soul-gain" }
+        : null,
+      changes.find((change) => change.key === "tokens" && change.delta > 0)
+        ? { type: "tokens", duration: 520, node: statNodes.tokens.closest(".resource-chip"), className: "is-token-gain" }
+        : null,
+      changes.find((change) => change.key === "health" && change.delta < 0)
+        ? { type: "health", duration: 520, node: statNodes.health.closest(".resource-chip"), className: "is-health-damage" }
+        : null,
+      changes.find((change) => change.key === "gateStability" && change.delta < 0)
+        ? { type: "gate", duration: 620, node: gateMeter.closest(".meter-block"), className: "is-gate-damage" }
+        : null
+    ].filter(Boolean);
+
+    for (const item of feedback) {
+      restartAnimation(effectFlash, `is-${item.type}`);
+      restartAnimation(item.node, item.className);
+      playFeedbackSound(item.type);
+      await wait(item.duration + 90);
+      effectFlash?.classList.remove(`is-${item.type}`);
+      item.node?.classList.remove(item.className);
+    }
   }
 
   function rememberCheckpoint(sceneId) {
@@ -217,7 +369,10 @@
     render(true);
   }
 
-  function choose(choice) {
+  async function choose(choice) {
+    if (isResolving) return;
+    ensureAudioContext();
+
     if (!hasEnough(choice.cost)) {
       lastResult = {
         title: "Not enough",
@@ -246,6 +401,7 @@
       return;
     }
 
+    isResolving = true;
     let changes = [];
 
     if (choice.cost) {
@@ -266,6 +422,9 @@
     changeScene(resolveGoto(choice));
     failIfNeeded();
     render(true);
+    await playChangeSequence(changes);
+    isResolving = false;
+    render();
   }
 
   function resolveGoto(choice) {
@@ -288,6 +447,7 @@
       return;
     }
 
+    ensureAudioContext();
     isRolling = true;
     diceButton.disabled = true;
 
@@ -313,9 +473,14 @@
       };
 
       isRolling = false;
+      isResolving = true;
       changeScene(resolveRollGoto(roll, passed));
       failIfNeeded();
       render(true);
+      playChangeSequence(changes).finally(() => {
+        isResolving = false;
+        render();
+      });
     }, 55);
   }
 
@@ -342,7 +507,7 @@
     statNodes.rewinds.textContent = state.rewinds;
 
     gateMeter.style.width = `${state.gateStability}%`;
-    alignmentMeter.style.left = `${clamp(((state.alignment + 60) / 120) * 100, 0, 100)}%`;
+    alignmentMeter.style.left = `${alignmentPosition(state.alignment)}%`;
   }
 
   function renderResult() {
@@ -367,8 +532,84 @@
   function renderDice(scene) {
     const roll = scene.roll;
     diceButton.classList.toggle("is-available", Boolean(roll));
-    diceButton.disabled = !roll || isRolling;
+    diceButton.disabled = !roll || isRolling || isResolving;
     diceButton.textContent = roll ? `Roll: ${roll.label}` : "D20 unavailable";
+  }
+
+  function calculateScore(scoreConfig) {
+    const factors = [
+      {
+        key: "health",
+        label: "Health",
+        value: state.health,
+        display: `${state.health}/${state.maxHealth}`
+      },
+      {
+        key: "gateStability",
+        label: "Gate Stability",
+        value: state.gateStability,
+        display: `${state.gateStability}/100`
+      },
+      {
+        key: "souls",
+        label: "Souls",
+        value: state.souls,
+        display: `${state.souls}/${scoreConfig.reference.souls}`
+      },
+      {
+        key: "tokens",
+        label: "Tokens",
+        value: state.tokens,
+        display: `${state.tokens}/${scoreConfig.reference.tokens}`
+      },
+      {
+        key: "rewinds",
+        label: "Rewinds Unused",
+        value: state.rewinds,
+        display: `${state.rewinds}/${scoreConfig.reference.rewinds}`
+      }
+    ].map((factor) => {
+      const reference = scoreConfig.reference[factor.key];
+      const weight = scoreConfig.weights[factor.key];
+      const points = Math.round(clamp(factor.value / reference, 0, 1) * weight);
+      return { ...factor, points, weight };
+    });
+
+    const total = factors.reduce((sum, factor) => sum + factor.points, 0);
+    const maximum = Object.values(scoreConfig.weights).reduce((sum, weight) => sum + weight, 0);
+    const grade = scoreConfig.grades.find((entry) => total >= entry.minimum)?.grade || "C";
+
+    return { factors, total, maximum, grade };
+  }
+
+  function renderScore(scene) {
+    const hasScore = Boolean(scene.score);
+    scorePanel.hidden = !hasScore;
+    storyPanel.classList.toggle("is-score-scene", hasScore);
+
+    if (!hasScore) {
+      scoreBreakdown.innerHTML = "";
+      return;
+    }
+
+    const score = calculateScore(scene.score);
+    scoreBreakdown.innerHTML = `
+      <h2>${scene.score.title}</h2>
+      <dl>
+        ${score.factors.map((factor) => `
+          <div>
+            <dt>${factor.label}</dt>
+            <dd>${factor.display} <small>${factor.points}/${factor.weight} pts</small></dd>
+          </div>
+        `).join("")}
+        <div>
+          <dt>Judgement</dt>
+          <dd>${alignmentName(state.alignment)}</dd>
+        </div>
+      </dl>
+    `;
+    scoreGrade.textContent = score.grade;
+    scorePoints.textContent = `${score.total} / ${score.maximum}`;
   }
 
   function renderScene() {
@@ -397,6 +638,7 @@
       choiceList.append(button);
     });
 
+    renderScore(scene);
     renderDice(scene);
   }
 
@@ -430,7 +672,9 @@
     renderScene();
     updateMusicButton();
 
-    rewindButton.disabled = !checkpoint || state.rewinds <= 0 || currentSceneId === checkpoint.sceneId;
+    rewindButton.disabled = isResolving || !checkpoint || state.rewinds <= 0 || currentSceneId === checkpoint.sceneId;
+    restartButton.disabled = isResolving;
+    gameActions.setAttribute("aria-hidden", currentScene().score ? "true" : "false");
 
     if (shouldScroll) {
       window.requestAnimationFrame(() => {

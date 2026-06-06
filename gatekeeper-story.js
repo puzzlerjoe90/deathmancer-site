@@ -94,7 +94,7 @@ window.GATEKEEPER_STORY = {
     world_before: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "The Place Between",
-      art: "title",
+      art: "queue",
       paragraphs: [
         "The place before the Gates is not Heaven. Neither is it Hell. Though some in the queue have clearly brought their own.",
         "It is a border office built on grief. A court with no roof. A harbour where every ship has already sunk.",
@@ -815,6 +815,29 @@ window.GATEKEEPER_STORY = {
       chapter: "Free Trial Complete",
       title: "End of Chapter One",
       art: "title",
+      score: {
+        title: "Chapter One Score",
+        reference: {
+          health: 5,
+          gateStability: 50,
+          souls: 4,
+          tokens: 6,
+          rewinds: 1
+        },
+        weights: {
+          health: 30,
+          gateStability: 30,
+          souls: 15,
+          tokens: 10,
+          rewinds: 15
+        },
+        grades: [
+          { minimum: 85, grade: "S" },
+          { minimum: 70, grade: "A" },
+          { minimum: 55, grade: "B" },
+          { minimum: 0, grade: "C" }
+        ]
+      },
       paragraphs: [
         "You have judged the dead.",
         "You have taken offerings.",

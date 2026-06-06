@@ -840,6 +840,22 @@ p {
   line-height: 1.1;
 }
 
+.resource-chip.is-soul-gain {
+  animation: soul-resource-glow 720ms ease;
+}
+
+.resource-chip.is-token-gain {
+  animation: token-resource-clink 520ms ease;
+}
+
+.resource-chip.is-health-damage {
+  animation: health-resource-hit 520ms ease;
+}
+
+.meter-block.is-gate-damage {
+  animation: gate-resource-hit 620ms ease;
+}
+
 .meter-block {
   display: grid;
   gap: 0.35rem;
@@ -952,9 +968,10 @@ p {
   background-position: center 18%;
 }
 
+.story-art[data-scene-art="queue"],
 .story-art[data-scene-art="petitioners"] {
-  background-image: url("./assets/images/mercy.jpg");
-  background-position: center 28%;
+  background-image: url("./assets/images/gatekeeper-undead-queue.png");
+  background-position: center 34%;
 }
 
 .story-art[data-scene-art="mask"],
@@ -973,6 +990,8 @@ p {
 
 .story-art[data-scene-art="title"]::before,
 .story-art[data-scene-art="sebastien"]::before,
+.story-art[data-scene-art="queue"]::before,
+.story-art[data-scene-art="petitioners"]::before,
 .story-art[data-scene-art="gameover"]::before {
   background:
     linear-gradient(180deg, rgba(5, 5, 6, 0), rgba(5, 5, 6, 0.48) 70%, rgba(5, 5, 6, 0.94)),
@@ -1036,6 +1055,193 @@ p {
   color: var(--gold-bright);
   font-size: 0.78rem;
   font-weight: 800;
+}
+
+.chapter-score {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(241, 215, 120, 0.52);
+  background:
+    linear-gradient(145deg, rgba(241, 215, 120, 0.09), transparent 46%),
+    rgba(8, 9, 11, 0.94);
+  box-shadow: inset 0 0 2.5rem rgba(241, 215, 120, 0.04);
+}
+
+.chapter-score[hidden] {
+  display: none;
+}
+
+.chapter-score__breakdown {
+  display: grid;
+  align-content: center;
+  gap: 0.55rem;
+}
+
+.chapter-score__breakdown h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.35rem;
+}
+
+.chapter-score__breakdown dl {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.chapter-score__breakdown div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(241, 215, 120, 0.15);
+}
+
+.chapter-score__breakdown dt {
+  color: var(--muted);
+}
+
+.chapter-score__breakdown dd {
+  margin: 0;
+  color: #fff8df;
+  font-weight: 800;
+  text-align: right;
+}
+
+.chapter-score__breakdown small {
+  color: var(--faint);
+  font-weight: 600;
+}
+
+.chapter-score__grade {
+  display: grid;
+  min-height: 12rem;
+  place-content: center;
+  justify-items: center;
+  border-left: 0;
+  border-top: 1px solid rgba(241, 215, 120, 0.3);
+  color: var(--gold-bright);
+  text-align: center;
+}
+
+.chapter-score__grade span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chapter-score__grade strong {
+  color: #fff3ad;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 7rem;
+  line-height: 0.9;
+  text-shadow:
+    0 0 0.8rem rgba(241, 215, 120, 0.7),
+    0 0 2.4rem rgba(212, 173, 69, 0.32);
+}
+
+.chapter-score__grade small {
+  margin-top: 0.55rem;
+  color: var(--gold-bright);
+  font-weight: 800;
+}
+
+.story-panel.is-score-scene .choice-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.story-panel.is-score-scene .game-actions {
+  display: none;
+}
+
+.game-effect-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.game-effect-flash.is-souls {
+  animation: soul-screen-glow 720ms ease-out;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(219, 255, 243, 0.38), transparent 28%),
+    rgba(113, 230, 198, 0.12);
+}
+
+.game-effect-flash.is-tokens {
+  animation: token-screen-glint 520ms ease-out;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 224, 126, 0.28), transparent 26%),
+    rgba(212, 173, 69, 0.08);
+}
+
+.game-effect-flash.is-health {
+  animation: health-screen-flash 520ms ease-out;
+  background: rgba(169, 25, 38, 0.42);
+}
+
+.game-effect-flash.is-gate {
+  animation: gate-screen-flash 620ms ease-out;
+  background:
+    repeating-linear-gradient(112deg, transparent 0 18%, rgba(197, 255, 247, 0.22) 18.5% 19%, transparent 19.5% 31%),
+    rgba(48, 141, 152, 0.24);
+}
+
+@keyframes soul-screen-glow {
+  0% { opacity: 0; }
+  28% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes token-screen-glint {
+  0% { opacity: 0; }
+  35% { opacity: 0.86; }
+  100% { opacity: 0; }
+}
+
+@keyframes health-screen-flash {
+  0% { opacity: 0; }
+  18% { opacity: 1; }
+  34% { opacity: 0.18; }
+  52% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+@keyframes gate-screen-flash {
+  0% { opacity: 0; }
+  24% { opacity: 1; }
+  45% { opacity: 0.24; }
+  70% { opacity: 0.72; }
+  100% { opacity: 0; }
+}
+
+@keyframes soul-resource-glow {
+  0%, 100% { border-color: rgba(241, 215, 120, 0.24); box-shadow: none; }
+  40% { border-color: rgba(153, 255, 225, 0.9); box-shadow: 0 0 1.2rem rgba(113, 230, 198, 0.42); }
+}
+
+@keyframes token-resource-clink {
+  0%, 100% { transform: translateY(0); border-color: rgba(241, 215, 120, 0.24); }
+  32% { transform: translateY(-2px); border-color: rgba(255, 224, 126, 0.9); }
+  52% { transform: translateY(1px); }
+}
+
+@keyframes health-resource-hit {
+  0%, 100% { transform: translateX(0); border-color: rgba(241, 215, 120, 0.24); }
+  20% { transform: translateX(-3px); border-color: rgba(255, 91, 103, 0.92); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-2px); }
+}
+
+@keyframes gate-resource-hit {
+  0%, 100% { transform: translateX(0); filter: none; }
+  25% { transform: translateX(-2px); filter: brightness(1.6); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-1px); }
 }
 
 .choice-list {
@@ -1215,6 +1421,15 @@ p {
     min-height: 42rem;
   }
 
+  .chapter-score {
+    grid-template-columns: minmax(0, 1.35fr) minmax(11rem, 0.65fr);
+  }
+
+  .chapter-score__grade {
+    border-top: 0;
+    border-left: 1px solid rgba(241, 215, 120, 0.3);
+  }
+
   .prototype-gate__controls {
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: stretch;
@@ -1275,5 +1490,18 @@ p {
 @media (max-width: 420px) {
   .button {
     width: 100%;
+  }
+
+  .story-panel.is-score-scene .choice-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-effect-flash,
+  .resource-chip,
+  .meter-block {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
