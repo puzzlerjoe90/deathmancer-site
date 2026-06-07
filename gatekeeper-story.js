@@ -224,14 +224,14 @@ window.GATEKEEPER_STORY = {
       ],
       choices: [
         {
-          label: "Hear Mara Vale, the river-woman",
-          setFlags: { maraActive: true },
-          goto: "mara_first_words"
-        },
-        {
           label: "Hear Lord Edric Beaumont, the coin-bearer",
           setFlags: { edricActive: true },
           goto: "edric_first_words"
+        },
+        {
+          label: "Hear Mara Vale, the river-woman",
+          setFlags: { maraActive: true },
+          goto: "mara_first_words"
         },
         {
           label: "Hear the masked Soul",
@@ -307,6 +307,10 @@ window.GATEKEEPER_STORY = {
           setFlags: { maraResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
+        },
+        {
+          label: "Ask what she remembers about the flood",
+          goto: "mara_river"
         }
       ]
     },
@@ -358,12 +362,25 @@ window.GATEKEEPER_STORY = {
     mara_river2: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "The Price of Knowledge",
-      art: "mara-son",
+      art: "mara",
       paragraphs: [
         "Sebastien turns to you, nods and closes his eyes.",
         "Warmth passes over your body as the strength imbued by the last Soul courses through your mind and into your eyes. They flash bright and then, like the trace that remains after staring directly at the sun, you see the truth.",
         "You see a young, bright-eyed and wily-looking scrap of a lad scaling a tree with ease despite his size and frame. He is strong. His foot slips on the wet branch in the storm, but he regains it. In the next instant, you see a panic-stricken dark-haired woman - Mara - as her head sinks beneath the force of the waves. The boy cries out a heart-wrenching cry of 'Mamma', but his grip remains true.",
-        "The flickering memory speeds quicker. You see him telling tales of his mother to crowds at a celebratory event - a wedding, perhaps. Later, on his deathbed, he is surrounded by loved ones and children of his own.",
+        "The flickering memory speeds quicker. You see him telling tales of his mother to crowds at a celebratory event - a wedding, perhaps. Later, on his deathbed, he is surrounded by loved ones and children of his own."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "mara_river3"
+        }
+      ]
+    },
+    mara_river3: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Fated Reunion",
+      art: "mara-son",
+      paragraphs: [
         "Sebastien's ledger flicks open to a new page as a name emblazons in rich golden hue.",
         "Jeremiah Vale.",
         "A proud man with grey hair, strong despite his age, emerges from the queue and walks toward you.",
@@ -784,7 +801,7 @@ window.GATEKEEPER_STORY = {
           label: "Spend 2 Souls: Bind the Restless",
           cost: { souls: 2 },
           text: "You speak through the ring. The undead lock in place, furious and ringing, while the Gates pull themselves straighter.",
-          effects: { souls: -2, gateStability: 8, alignment: 4 },
+          effects: { gateStability: 8, alignment: 4 },
           goto: "after_attack"
         },
         {

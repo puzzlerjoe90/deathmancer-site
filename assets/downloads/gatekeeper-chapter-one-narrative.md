@@ -17,6 +17,7 @@ This file combines the current Word work-in-progress with protected implementati
 - Sequence audiovisual resource feedback as Souls, Tokens, Health, then Gate Stability.
 - D20 checks progress through the persistent D20 control. Show the rolled number and narrative effect, never visible DC arithmetic.
 - Use no more than four visible choices per scene.
+- Display every resource-bearing choice with `(Cost: X Resource)` beside its label. Apply that cost exactly once, separately from narrative effects.
 - Present three initial petitioners, judge only two, then force the undead event.
 - Use one checkpoint in Chapter One, immediately before the undead event. Rewind replenishes there and is otherwise unavailable.
 - A non-fatal tried choice returns to its preceding scene, sets a unique flag, and removes only that choice. It causes Game Over only if Health or Gate Stability actually reaches 0.
@@ -327,8 +328,8 @@ For the first time, he raises an eyebrow and breaks an ounce of composure.
 
 ### Choices
 
-- Hear Mara Vale, the river-woman. -> mara_first_words
 - Hear Lord Edric Beaumont, the coin-bearer. -> edric_first_words
+- Hear Mara Vale, the river-woman. -> mara_first_words
 - Hear the masked Soul. -> mask_first_words
 ## Mara Branch
 
@@ -396,6 +397,7 @@ Though not judging.  That's your task as Gatekeeper.
 - Keep her in Purgatory until the child is safe. -> after_judgement_router
   - Effects: Mercy shift.
   - Result text: You suggest that she should wait until the truth catches up. The decision hurts. Something resents delay. Mara bows as if you have given her a gift.
+- Ask what she remembers about the flood. -> mara_river
 ---
 
 ## Scene: mara_river
@@ -446,6 +448,18 @@ You feel warmth pass over your body as the strength imbued by the last Soul cour
 You see a young, bright-eyed and wily looking scrap of a lad scaling a tree with ease, despite his size and frame.  He's strong.  His foot slips with the slick of the wet branch in stormy weather, but he regains it momentarily.  In the next instance, you see a panic-stricken dark-haired woman - Mara - as her head sinks underneath the strong flowing flash of waves.  The boy cries out a heart-wrenching cry of 'Mamma', but his grip remains true.
 
 The flickering memory speeds quicker now as you see him standing telling tales of his mother to crowds at a celebratory event - a wedding, perhaps.  Later, on his deathbed surrounded by loved ones - children of his own.
+
+#### Choices
+
+- Continue. -> mara_river3
+---
+
+## Scene: mara_river3
+
+#### Display Title
+
+- Fated Reunion
+#### Text
 
 At this moment, Sebastien's ledger book flicks open to a new page as a name emblazons in rich golden hue.
 

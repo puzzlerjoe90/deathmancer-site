@@ -163,8 +163,18 @@
   function costText(cost) {
     if (!cost) return "";
 
-    return Object.keys(cost)
-      .map((key) => `${cost[key]} ${key}`)
+    const labels = {
+      health: ["Health", "Health"],
+      souls: ["Soul", "Souls"],
+      tokens: ["Token", "Tokens"],
+      gateStability: ["Gate Stability", "Gate Stability"]
+    };
+
+    return Object.entries(cost)
+      .map(([key, amount]) => {
+        const label = labels[key] || [key, key];
+        return `${amount} ${amount === 1 ? label[0] : label[1]}`;
+      })
       .join(", ");
   }
 
@@ -642,7 +652,8 @@
       const button = document.createElement("button");
       button.type = "button";
       button.className = "choice-button";
-      button.textContent = choice.label;
+      const cost = choice.cost ? ` (Cost: ${costText(choice.cost)})` : "";
+      button.textContent = `${choice.label}${cost}`;
 
       if (choiceIsDisabled(choice)) {
         button.disabled = true;
