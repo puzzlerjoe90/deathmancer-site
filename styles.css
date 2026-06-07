@@ -974,13 +974,33 @@ p {
   background-position: center 34%;
 }
 
-.story-art[data-scene-art="mask"],
-.story-art[data-scene-art="undead"] {
-  background-image: url("./assets/images/grief.jpg");
+.story-art[data-scene-art="mara"] {
+  background-image: url("./assets/images/gatekeeper-mara-vale.png");
+  background-position: center 18%;
 }
 
-.story-art[data-scene-art="mask"] {
-  background-position: center 20%;
+.story-art[data-scene-art="mara-son"] {
+  background-image: url("./assets/images/gatekeeper-mara-son.png");
+  background-position: center 42%;
+}
+
+.story-art[data-scene-art="edric"] {
+  background-image: url("./assets/images/gatekeeper-lord-edric.png");
+  background-position: center 18%;
+}
+
+.story-art[data-scene-art="edric-transformed"] {
+  background-image: url("./assets/images/gatekeeper-edric-transformed.png");
+  background-position: center 24%;
+}
+
+.story-art[data-scene-art="mask-doll"] {
+  background-image: url("./assets/images/gatekeeper-masked-doll.png");
+  background-position: center 22%;
+}
+
+.story-art[data-scene-art="undead"] {
+  background-image: url("./assets/images/grief.jpg");
 }
 
 .story-art[data-scene-art="undead"] {
@@ -992,6 +1012,11 @@ p {
 .story-art[data-scene-art="sebastien"]::before,
 .story-art[data-scene-art="queue"]::before,
 .story-art[data-scene-art="petitioners"]::before,
+.story-art[data-scene-art="mara"]::before,
+.story-art[data-scene-art="mara-son"]::before,
+.story-art[data-scene-art="edric"]::before,
+.story-art[data-scene-art="edric-transformed"]::before,
+.story-art[data-scene-art="mask-doll"]::before,
 .story-art[data-scene-art="gameover"]::before {
   background:
     linear-gradient(180deg, rgba(5, 5, 6, 0), rgba(5, 5, 6, 0.48) 70%, rgba(5, 5, 6, 0.94)),

@@ -16,7 +16,8 @@ window.GATEKEEPER_STORY = {
       title: "Chapter One",
       art: "title",
       paragraphs: [
-        "The Gates do not open for the living. Tonight, they open on your command."
+        "The Gates do not open for the living.",
+        "Tonight, they open for you."
       ],
       choices: [
         {
@@ -31,9 +32,9 @@ window.GATEKEEPER_STORY = {
       art: "title",
       paragraphs: [
         "There is a table sitting elevated in a vast chasm of darkness, illuminated only by a subtle ethereal light.",
-        "Not a room. Not a cave. Not anywhere a table has any right to be, you suppose.",
-        "All you can make out is the table. Black onyx wood. One chair with golden inlays to its otherwise ashen black wood. A candle hangs in the air above the table, illuminating its contents...a contract on parchment waits in the centre.",
-        "The words appear as though they shift as you begin to read them.",
+        "Not a room, or a cave. Not anywhere a table has any right to be, you suppose.",
+        "All you can make out is the table. Black onyx wood. One chair with golden inlays set against ashen black wood. A candle hangs in the air above the table, illuminating its contents...a contract on parchment waits in the centre.",
+        "The words appear to shift and distort as you begin to read them.",
         "Vacancy: immediate. Tenure: indefinite. Benefits: unlimited. Consequences: unimaginable.",
         "The last word is written in an angry font that sends a shiver down your back. Beside the signature line, you now make out, rests a single golden bullet. How odd. It is plain, heavy and somehow warm. Like it has recently discharged.",
         "A voice speaks from afar in the darkness.",
@@ -42,7 +43,7 @@ window.GATEKEEPER_STORY = {
       choices: [
         {
           label: "Accept the contract",
-          text: "The bullet flies towards your skull in an instant. Pain blooms unimaginably behind your right eye. It is not a wound in the traditional sense. It is a signature.",
+          text: "An intense pain emanates from deep in your skull. A blinding rupture. Your life force feels writhed apart from its corporeal body.",
           effects: { health: -5 },
           goto: "contract_pain"
         }
@@ -53,7 +54,7 @@ window.GATEKEEPER_STORY = {
       title: "A Name Left Behind",
       art: "title",
       paragraphs: [
-        "It feels like deja vu, accompanied by intense pain that feels tied to your psyche.",
+        "It is not a wound in the traditional sense. It is a signature. Like a feeling of deja vu, accompanied by intense pain that feels tied to your psyche.",
         "Its memory burns through bone, vision, thought...and memories. Everything that once answered when the world called out your name is lost.",
         "You regain conscious thought, kneeling on black glass beneath the table.",
         "Ahead of you in starkest contrast to the black void is a towering set of vibrant Gates. The Gates.",
@@ -66,26 +67,26 @@ window.GATEKEEPER_STORY = {
       ],
       choices: [
         {
-          label: "Remember study and long fantasy novels",
-          text: "You remember long nights with old books, academic challenge, and the comfort of finding rules inside impossible things.",
+          label: "Remember study, long fantasy novels and academic challenge",
+          text: "You remember study, long fantasy novels and the comfort of academic challenge.",
           setFlags: { background: "scholar" },
           goto: "world_before"
         },
         {
-          label: "Remember making things by hand",
-          text: "You remember shaping meaning into substance: ink, card, paint, scraps, rules, songs, and ideas stubborn enough to become real.",
+          label: "Remember making things with your hands",
+          text: "You remember making things with your hands, shaping meaning into substance.",
           setFlags: { background: "creative" },
           goto: "world_before"
         },
         {
-          label: "Remember motion and camaraderie",
-          text: "You remember exhilarating motion, competition, tight air in your chest, and the clean focus of moving before fear can catch up.",
+          label: "Remember motion, competition and camaraderie",
+          text: "You remember exhilarating motion, competition and camaraderie, tight air in your chest.",
           setFlags: { background: "sportsman" },
           goto: "world_before"
         },
         {
           label: "Remember strength and determination",
-          text: "You remember innate strength, determination, and the desire to change what your exterior was capable of carrying.",
+          text: "You remember innate strength, determination and the desire to change your exterior capabilities.",
           setFlags: { background: "strong" },
           goto: "world_before"
         }
@@ -98,13 +99,13 @@ window.GATEKEEPER_STORY = {
       paragraphs: [
         "The place before the Gates is not Heaven. Neither is it Hell. Though some in the queue have clearly brought their own.",
         "It is a border office built on grief. A court with no roof. A harbour where every ship has already sunk.",
-        "Souls now wait in a seemingly endless line that bends as it twists into far off mist. Some shapes are nearly human. Some have forgotten their shape. One is nothing but a wedding veil filled with moths. Another is clearly a soldier, yet made from ash, holding his own crumbling jaw in both hands so he can speak when called.",
+        "Souls now wait in a seemingly endless line that bends as it twists into far off mist. Some shapes are nearly human. Some have forgotten their shape. One is nothing but a wedding veil filled with moths. Another, a soldier made of ash, holding his crumbling jaw in both hands so he can speak when called.",
         "Some carry offerings.",
-        "Coins from closed eyes. Rings from clenched fingers. Locks of hair tied in ribbon. Teeth. Knives. Ornate daggers. Promises folded into little paper scrolls.",
-        "Tokens. They are Tokens for the dead.",
+        "Coins from closed eyes. Rings from clenched fingers. Locks of hair tied in ribbon. Teeth. Knives. Ornate daggers. Promises folded into little paper notes.",
+        "Tokens.",
         "You understand the word before anyone need teach it to you.",
         "The Gates shudder and pulse.",
-        "A crack of gold widens above the arch, then seals itself like a wound that need not bleed."
+        "A crack of gold widens above the arch, then seals itself like a wound."
       ],
       choices: [
         {
@@ -112,7 +113,7 @@ window.GATEKEEPER_STORY = {
           goto: "sebastien_arrives"
         },
         {
-          label: "Push the Gates open with both hands",
+          label: "Attempt to push the Gates open with both hands",
           text: "The Gates open for no man or being's hands. They open for judgement. You learn this a little too late.",
           condition: { flagNot: "pushedGatesByHand" },
           setFlags: { pushedGatesByHand: true },
@@ -127,13 +128,13 @@ window.GATEKEEPER_STORY = {
       art: "sebastien",
       paragraphs: [
         "A man steps out of the mist carrying a ledger bound in dark weathered leather.",
-        "He is slender, immaculate and dressed for a quirky funeral. His skin is black. His smile seems luminously white.",
+        "He is slender, immaculate and dressed for a quirky funeral. His skin is black. His smile luminously white.",
         "\"Good,\" he says, as if you have arrived only mildly late. \"You are standing. That already places you above several of your predecessors.\"",
         "You try to ask who he is, but your mouth fumbles upon the attempt.",
         "He bows with the smallest possible amount of respect.",
         "\"Sebastien. Steward of this threshold. Clerk of impossible cases. Witness to poor decisions. And, for the foreseeable future, your best chance of remaining useful.\"",
         "He opens the ledger. The pages are blank until he looks at them.",
-        "\"The contract has been accepted. The role is filled. The queue is restless. Try not to disappoint the dead.\""
+        "\"The contract now accepted. The role is filled. The queue is restless. Try not to disappoint the dead.\""
       ],
       choices: [
         {
@@ -149,25 +150,25 @@ window.GATEKEEPER_STORY = {
           text: "Sebastien's face remains resolute. Almost. \"That,\" he says, \"may be how your world ends one day. But alas, no.\"",
           condition: { flagNot: "askedSebastienToOpenGates" },
           setFlags: { askedSebastienToOpenGates: true },
-          effects: { health: -1 },
+          effects: { health: -1, gateStability: -5 },
           goto: "sebastien_arrives"
         }
       ]
     },
     sebastien_name: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "A Useful Absence",
+      title: "An Absence of Self",
       art: "sebastien",
       paragraphs: [
         "\"My name,\" you say. Or try to.",
-        "The missing word scrapes against your teeth.",
-        "Sebastien dips his pen into an ink bottle that contains no ink. \"A Living name is an anchor. Useful for birthdays, debts, love letters, petty grudges. Quite dangerous here.\"",
-        "He turns the ledger toward you. Where your name should be, the page has burned clean through.",
-        "\"If the dead know who you were, they will tug at you. If the Living know what you are, they will pray at you. Both are tedious. Both are fatal in quantity.\"",
+        "The missing word remains at the tip of your tongue.",
+        "Sebastien dips his pen into an ink bottle that seems to contain no obvious ink. \"A Living name is an anchor to that world. Useful for birthdays, debts and love letters. Quite meaningless here.\"",
+        "He turns the ledger toward you. Where your name should be, the page is empty.",
+        "\"If the dead know who you were, they will try to corrupt and influence you. If the Living know what you are, they will pray at you. Both are tedious and of little consequence.\"",
         "He closes the ledger.",
-        "\"For now, you are the office. The office is you.\"",
-        "The Gates groan behind him.",
-        "\"And the office has work.\""
+        "\"For now, you are The Gatekeeper.\"",
+        "The Gates beckon behind him.",
+        "\"And you have work to do.\""
       ],
       choices: [
         {
@@ -182,20 +183,21 @@ window.GATEKEEPER_STORY = {
     },
     sebastien_rules: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Rules of Passing",
+      title: "The Rules of Judgement",
       art: "sebastien",
       paragraphs: [
-        "Sebastien walks beside you without seeming to move.",
+        "Sebastien walks beside you now.",
         "\"A Soul comes forward. You hear it. You weigh it. You pass it, hold it, or refuse it.\"",
-        "He lifts one gloved finger.",
-        "\"Passing a Soul feeds the Gates. Some Souls are little more than candle-smoke. Others are bonfires pretending to be people. The stronger the Soul, the greater the power you draw.\"",
-        "A second finger.",
-        "\"Tokens are offerings. Funeral coins, relics, memories, bribes, apologies, lies with polish on them. Take them when you must. Rely on them and you will become the sort of thing that takes them.\"",
-        "A third.",
-        "\"The dead can lie.\"",
-        "The Gates tremble again. Something knocks from the far side. Not politely.",
-        "Sebastien glances at the crack of gold above the arch.",
-        "\"And when the restless press against the threshold, you may spend Souls to bind, steady, seal, or cast away. If you have none, you may use your body. I do not recommend making that a habit.\""
+        "He lifts one finger with a truly striking ornate ruby and gold ring.",
+        "\"Passing a Soul feeds your power here at the Gates. You'll need that strength to face the challenges that yet await you. Some Souls are little more than smoke from a candle extinguished. Others are bonfires masquerading as people. The stronger the Soul, the greater the power you can draw.\"",
+        "A second finger raised to the air.",
+        "\"Tokens are offerings. Old world coins, relics, memories, bribes. Often lies with polish on them. Take them when you must. They have their uses as a form of currency. Rely on them however and you will become the sort of thing that craves them.\"",
+        "A third finger now.",
+        "\"The dead can, will and do lie. Adjudicate the worth of the Soul.\"",
+        "The Gates tremble now. Something imperceptible knocks at it. Not politely.",
+        "Sebastien glances at the crack of gold stretching above the arch.",
+        "\"If the restless press too hard against the magic of the threshold, you may spend your power from Souls to bind, steady or seal them. If you have none, you may use your body. I do not recommend making that a habit.\"",
+        "\"There is also a rather odd little fellow in these parts. He is a merchant of this place. He was denied passage beyond the Gates and now spends his time amassing Tokens to exchange for Tokens. An attempt to make his time here meaningful. He can be a useful irritation.\""
       ],
       choices: [
         {
@@ -206,19 +208,19 @@ window.GATEKEEPER_STORY = {
     },
     first_queue: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The First Three",
+      title: "The Three",
       art: "petitioners",
       paragraphs: [
-        "Sebastien taps the ledger. Three names bleed through the page.",
-        "The first Soul is a woman in a river-soaked dress. Her hair clings to her cheeks in black ropes. She holds one copper coin so tightly it has cut her palm.",
-        "\"Mara Vale,\" says Sebastien. \"No formal offering declared.\"",
-        "The second is a nobleman in a burial coat stitched with silver. Five polished funeral coins float around his head like little moons.",
-        "\"Lord Edric Vane. Considerable offering declared. Considerable unpleasantness suspected.\"",
+        "Sebastien taps the ledger. Three names seep through the pages like the mark of soot on clean sheets.",
+        "The first Soul is a woman in a river-soaked dirty dress. It is white and torn in places like she has been searching for something in thorny shrubbery. Her dark wet hair clings to her cheeks in black ropes. She holds one copper coin so tightly that it has cut her palm. Her fingernails are dirty, with dried blood that seems unconnected to the coin.",
+        "\"Mara Vale,\" says Sebastien. \"No formal offering declared.\" The last is said indifferently.",
+        "The second is clearly a nobleman in a burial coat stitched with gold. Five polished funeral coins float around his head like little moons. His stature is tall, his frame a little sickly despite his clear abundance in wealth.",
+        "\"Lord Edric Beaumont. Considerable offering declared. Considerable unpleasantness expected.\"",
         "The third is small and still. A porcelain mask covers its face. No mouth. No breath. Its shadow points away from the Gates, back toward the Living world.",
         "Sebastien's pen pauses.",
         "\"Unnamed.\"",
-        "For the first time, his smile thins.",
-        "\"Carefully, then.\""
+        "For the first time, he raises an eyebrow and breaks an ounce of composure.",
+        "\"Careful.\""
       ],
       choices: [
         {
@@ -227,7 +229,7 @@ window.GATEKEEPER_STORY = {
           goto: "mara_first_words"
         },
         {
-          label: "Hear Lord Edric Vane, the coin-bearer",
+          label: "Hear Lord Edric Beaumont, the coin-bearer",
           setFlags: { edricActive: true },
           goto: "edric_first_words"
         },
@@ -241,16 +243,15 @@ window.GATEKEEPER_STORY = {
     mara_first_words: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "Mara Vale",
-      art: "petitioners",
+      art: "mara",
       paragraphs: [
-        "Mara steps forward and leaves wet footprints on the black glass.",
-        "\"I do not have much,\" she says. Her voice is river-cold, but human. Painfully human. \"I know there is meant to be a toll. My mother always said there was a toll.\"",
+        "Mara steps forward and leaves wet footprints on the black glass underfoot. She is barefoot.",
+        "\"I don't have much,\" her voice trembles. Her tone is ice-cold, but not in an emotionally cool sense. It aches in a painfully human way. \"I know there's meant to be a toll,\" she says. \"My step-mother always said there would be a toll.\"",
         "She opens her hand.",
-        "One copper coin. Bent. Green at the edges.",
-        "\"It is not for me,\" she says quickly. \"It is for my boy, when he comes. If he comes. If the river...\"",
-        "Her face folds around the thought.",
-        "Behind her, the queue shifts. Some Souls look away. Others stare at the coin.",
-        "Sebastien murmurs, \"Sentiment often disguises value. Value often disguises rot. Ask better questions.\""
+        "One copper coin. Bent. Green at the edges. Dark dried-on crimson coats the centre.",
+        "\"It's not for me,\" she says quickly. \"It's for my boy, when he comes. If he comes. If the river...\" She trails off as her facial expression folds around the thought.",
+        "Behind her, the queue shifts. Some Souls look away. Others stare ravenously at the coin.",
+        "Sebastien murmurs, \"Sentiment often disguises value. Value often disguises rot.\""
       ],
       choices: [
         {
@@ -258,51 +259,51 @@ window.GATEKEEPER_STORY = {
           goto: "mara_child"
         },
         {
-          label: "Ask what the river took",
+          label: "Ask about the river",
           goto: "mara_river"
         },
         {
-          label: "Demand a Token toll",
+          label: "Demand the coin as Token",
+          text: "Mara closes her fist around the coin. The demand itself changes how the queue regards you.",
+          effects: { alignment: 30 },
           goto: "mara_toll"
         }
       ]
     },
     mara_child: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Coin for the Boy",
-      art: "petitioners",
+      title: "The Child With No Coin",
+      art: "mara",
       paragraphs: [
-        "\"My son is six,\" Mara says.",
-        "Then she frowns.",
-        "\"Was six? Is six? Time feels wrong here.\"",
-        "The coin trembles in her palm.",
-        "\"He was on the bank when the flood came. I pushed him up into the willow. I think he climbed. I think he lived. I need him to have the coin. Children should not arrive empty-handed.\"",
-        "The Gates listen.",
-        "You feel them listening.",
-        "Not judging. Not yet.",
-        "Waiting for you to become the judgement."
+        "\"My son, Jeremiah. He is five,\" Mara says as she looks off longingly.",
+        "\"He has beautiful light chestnut hair, of medium length. It's dishevelled, as he won't ever sit long enough for a cut.\"",
+        "The coin trembles in her palm now as her voice begins to break.",
+        "\"He was on the bank when the flood came and swept through our village. I pushed him up into the base of a willow tree. I think he climbed, but he began to slip as the current took me away. I need him to have this coin. Children should not arrive empty-handed. Though I hope not for a long time yet.\"",
+        "Sebastien raises an eyebrow again, saying in a hushed tone, \"Time has little consequence here. 'Yesterday' could be a millennia ago.\" He lets the point drift with her thoughts.",
+        "It feels as though the Gates are listening. As if their presence bears over the top of the three of you. Their metaphorical weight casts a shadow over your actions.",
+        "Though not judging. That's your task as Gatekeeper."
       ],
       choices: [
         {
           label: "Pass her and let her keep the coin",
-          text: "Mara steps through with the coin still closed in her fist. The Gates accept the mercy. A pale Soul settles into your palm like a coal remembering warmth.",
-          effects: { souls: 1, alignment: -8 },
+          text: "Mara passes through with the coin still clenched in her hand. The Gates open gently. For one breath, they do not seem wounded at all.",
+          effects: { souls: 2, alignment: -15 },
           setFlags: { maraResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Take the coin as toll, then pass her",
-          text: "The coin becomes a Token in your keeping. Mara does not curse you. That makes it worse.",
-          effects: { souls: 1, tokens: 1, alignment: 5 },
+          label: "Trick her into giving you the coin, then pass her",
+          text: "Mara gives up the coin without protest. She understands and trusts your words that you'll keep it safe for her son. The Gates accept her, but the copper stays warm in your palm long after she is gone.",
+          effects: { souls: 2, tokens: 1, alignment: 25 },
           setFlags: { maraResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
           label: "Keep her in Purgatory until the child is safe",
-          text: "Mara nods because she understands waiting. Her grief folds inward and brushes your mind like cold cloth.",
-          effects: { health: -1, alignment: -2 },
+          text: "You suggest that she should wait until the truth catches up. The decision hurts. Something resents delay. Mara bows as if you have given her a gift.",
+          effects: { alignment: -15 },
           setFlags: { maraResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
@@ -312,38 +313,73 @@ window.GATEKEEPER_STORY = {
     mara_river: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "What the River Took",
-      art: "petitioners",
+      art: "mara",
       paragraphs: [
-        "\"The river took the bridge first,\" Mara says. \"Then the cart. Then the horse. Then my husband, because he would not let go of the horse.\"",
-        "She laughs once, terribly.",
-        "\"I thought death would be louder.\"",
-        "Water runs from her sleeves and beads on the black glass. In each drop, you glimpse a different ending: a child climbing; a child falling; a mother lying to herself because the truth has no mercy.",
+        "\"The river took the bridge first,\" Mara says. \"Then the cart. Then our horse. Then my husband, because he would not let go of the horse.\"",
+        "Water runs from her sleeves and beads on the black glass. In each drop, you glimpse a different ending: a child climbing; a child falling into the current; a mother lying to herself because the truth has no mercy.",
         "Mara watches your face.",
-        "\"You know, do you not? Or you could. You could make yourself know.\"",
-        "Sebastien says nothing."
+        "\"You know, don't you? Or you could. You could make yourself know.\"",
+        "Sebastien suggests that you could expend a Soul to grant yourself the power to do so."
       ],
       choices: [
         {
           label: "Pass her without payment",
-          text: "The Gates open just enough for Mara. Her thank-you is quiet, and therefore harder to bear.",
-          effects: { souls: 1, alignment: -7 },
+          text: "The Gates take her softly but her scream bellows and cuts through you, as she demands you grant her the peace and knowledge she seeks. The line exhales. No coin changes hands.",
+          effects: { souls: 2, health: -1 },
           setFlags: { maraResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Ask for a memory as toll",
-          text: "Mara gives up the smell of her kitchen. It becomes a Token in your hand. She passes lighter, and less herself.",
-          effects: { souls: 1, tokens: 1, alignment: 4 },
+          label: "Pass her with payment",
+          text: "The Gates take her with force but not before her scream bellows and cuts through you like ice. She demands you grant her the knowledge she seeks or at least keep the coin for her son. The last is said as she vanishes from sight.",
+          effects: { souls: 2, health: -2, tokens: 1, alignment: 15 },
           setFlags: { maraResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Refuse her for arriving empty-handed",
-          text: "Mara's hurt lashes through you, not violent but intimate. The Gates do not move.",
-          effects: { health: -2, alignment: 8 },
+          label: "Ask for a memory to pay for this knowledge",
+          cost: { souls: 1 },
+          text: "Mara grants you the memory of her son grasping a low-hanging branch as she is swept away. You relive it as if you were there. The memory hardens into a small stormy Token.",
+          effects: { tokens: 1, alignment: -8 },
+          goto: "mara_river2"
+        },
+        {
+          label: "Refuse her for the time being",
+          text: "You decide she need not pass at this time and should wait in Purgatory for her son, to learn his fate in time. To your surprise, she does not seem upset. She imparts a cold wet kiss on your cheek as she fades back into the queue.",
+          effects: { health: 1, alignment: -15 },
           setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
+        }
+      ]
+    },
+    mara_river2: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Price of Knowledge",
+      art: "mara-son",
+      paragraphs: [
+        "Sebastien turns to you, nods and closes his eyes.",
+        "Warmth passes over your body as the strength imbued by the last Soul courses through your mind and into your eyes. They flash bright and then, like the trace that remains after staring directly at the sun, you see the truth.",
+        "You see a young, bright-eyed and wily-looking scrap of a lad scaling a tree with ease despite his size and frame. He is strong. His foot slips on the wet branch in the storm, but he regains it. In the next instant, you see a panic-stricken dark-haired woman - Mara - as her head sinks beneath the force of the waves. The boy cries out a heart-wrenching cry of 'Mamma', but his grip remains true.",
+        "The flickering memory speeds quicker. You see him telling tales of his mother to crowds at a celebratory event - a wedding, perhaps. Later, on his deathbed, he is surrounded by loved ones and children of his own.",
+        "Sebastien's ledger flicks open to a new page as a name emblazons in rich golden hue.",
+        "Jeremiah Vale.",
+        "A proud man with grey hair, strong despite his age, emerges from the queue and walks toward you.",
+        "Mara turns.",
+        "For a moment she does not understand what she is seeing. Then she breaks.",
+        "\"My boy,\" she exclaims.",
+        "Jeremiah catches her in an embrace as if she weighs nothing at all.",
+        "The Gates pulse above you. Not angry or kind, but interested. They will remember this exchange.",
+        "Mara's tears pour from her like a torrent. She thanks you profusely."
+      ],
+      choices: [
+        {
+          label: "Accept their Souls past the Gates",
+          text: "\"Keep it,\" she tells you. \"I am abundant in riches of love.\" Mara weeps once more as Jeremiah places an arm around her shoulder. They walk through the Gates with purpose as a light swells from beyond.",
+          effects: { souls: 5, tokens: 1, alignment: -30 },
+          setFlags: { maraResolved: true, maraReunited: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         }
@@ -352,30 +388,38 @@ window.GATEKEEPER_STORY = {
     mara_toll: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "The Price of Passage",
-      art: "petitioners",
+      art: "mara",
       paragraphs: [
         "\"A toll,\" Mara repeats.",
         "She looks at the copper coin, then closes her fist over it.",
-        "\"I can give you something else.\"",
+        "\"My boy needs this. I can give you something else.\"",
         "Her eyes cloud. The river inside her rises.",
-        "\"My boy's first laugh. I kept it. Do not ask me how. Mothers keep impossible things.\"",
+        "\"My Jeremiah's first laugh. I kept it. Don't ask me how. Mothers keep impossible things and never let go. I love this memory dearly, but if it will keep the coin payment for my son, I am willing.\"",
         "In her palm, beside the coin, a second object forms: a little bead of clear light, trembling with the sound of a child laughing in summer.",
         "Sebastien's pen hovers.",
-        "\"A memory-token,\" he says. \"Accepted in most jurisdictions. Rarely returned.\""
+        "\"A memory-token,\" he says. \"Accepted as a form of payment in most Circles.\""
       ],
       choices: [
         {
-          label: "Refuse the memory and pass her",
-          text: "The memory stays with Mara. The Gates accept her. You feel poorer and cleaner.",
-          effects: { souls: 1, alignment: -8 },
+          label: "Refuse the memory, insist upon the coin and pass her",
+          text: "The Gates take her with force, but not before her scream bellows and cuts through you like ice. She demands you keep the coin for her son. The last is said as she vanishes from sight.",
+          effects: { souls: 2, tokens: 1, health: -2, alignment: 30 },
           setFlags: { maraResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
           label: "Take the memory as Token, then pass her",
-          text: "The memory hardens into a Token. Mara passes without remembering why she had smiled.",
-          effects: { souls: 1, tokens: 1, alignment: 8 },
+          text: "The memory-token clicks into your hand. It is beautiful. That is the problem. Mara is accepted beyond the Gates.",
+          effects: { souls: 2, tokens: 3, alignment: 8 },
+          setFlags: { maraResolved: true },
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
+        },
+        {
+          label: "Refuse the memory, refuse the coin and pass her",
+          text: "\"Keep it,\" you tell her. Mara weeps and exclaims her love for her son and her gratitude toward you. She begs you to look out for him as she vanishes beyond the Gates.",
+          effects: { souls: 2, alignment: -30 },
           setFlags: { maraResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
@@ -384,47 +428,75 @@ window.GATEKEEPER_STORY = {
     },
     edric_first_words: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "Lord Edric Vane",
-      art: "petitioners",
+      title: "Lord Edric Beaumont",
+      art: "edric",
       paragraphs: [
-        "Lord Edric Vane does not approach so much as arrive.",
-        "Even dead, he carries the habit of rooms making space for him.",
-        "\"My condolences,\" he says, looking you over. \"Newly appointed, I assume. These transitions are rarely graceful.\"",
-        "Five funeral coins orbit his head: silver-bright, polished to a mirror shine. Each coin bears his profile on one side and a set of scales on the other.",
+        "Lord Edric Beaumont does not approach so much as arrive. Even dead, he carries the habit of rooms making space for him.",
+        "\"My condolences,\" he says, looking you over. You're not exactly sure what he means by that.",
+        "Five bright gold funeral coins orbit his head, polished to a mirror shine. Each coin bears his profile on one side and a set of scales on the other.",
         "\"I was assured,\" Edric says, \"that proper offerings would be recognised.\"",
         "Behind him, something small and bent-backed hisses.",
         "Edric does not turn.",
-        "Sebastien's voice is mild. \"Lord Vane funded three almshouses, two private prisons, and one war he neglected to attend.\"",
-        "Edric smiles.",
-        "\"Administration is the art of necessary distance.\""
+        "Sebastien's voice is mild. \"Lord Beaumont funded three orphanages, two private prisons and one war he neglected to attend.\"",
+        "Edric snarls.",
+        "\"Administration is the art of necessary distance and time.\""
       ],
       choices: [
         {
-          label: "Ask who polished the coins",
-          goto: "edric_accounts"
+          label: "Ask how he made his fortunes",
+          condition: { flagNot: "edricFortuneFailed" },
+          goto: "edric_fortune_gate"
         },
         {
           label: "Accept all five Tokens immediately",
-          text: "The coins leap into your hand. Edric passes smiling. Behind the Gates, something complains in a servant's voice.",
-          effects: { souls: 1, tokens: 5, gateStability: -8, alignment: 10 },
+          text: "The coins come willingly. Too willingly. Edric passes smiling, and the Gates shiver as if swallowing a hook.",
+          effects: { souls: -1, tokens: 5, gateStability: -20, alignment: 25 },
           setFlags: { edricResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Send him to Purgatory while you inspect",
+          label: "Ask to inspect the offering",
           goto: "edric_roll"
+        }
+      ]
+    },
+    edric_fortune_gate: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Price of Disclosure",
+      art: "edric",
+      paragraphs: [
+        "Edric's eyes move from you to the ledger, then to the Tokens in your keeping.",
+        "\"Fortunes are not made,\" he says. \"They are recognised by those with sufficient standing.\"",
+        "You can purchase his cooperation with a Token, or force the question through the authority of your office."
+      ],
+      roll: {
+        label: "Persuade Edric",
+        stat: "persuasion",
+        dc: 14,
+        successText: "Edric's smile tightens. Your question finds the one vanity he cannot resist: the need to explain why his wealth proves he deserved it.",
+        failureText: "Edric dismisses the question with a look polished by a lifetime of refusing scrutiny. That avenue closes; he will not indulge it again.",
+        successGoto: "edric_accounts",
+        failureGoto: "edric_first_words",
+        failureFlags: { edricFortuneFailed: true }
+      },
+      choices: [
+        {
+          label: "Spend 1 Token: Purchase his answer",
+          cost: { tokens: 1 },
+          text: "The Token vanishes into the orbit of Edric's coins. He accepts the transaction as proof that you understand the proper order of things.",
+          goto: "edric_accounts"
         }
       ]
     },
     edric_roll: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "Read the Coins",
-      art: "petitioners",
+      art: "edric",
       paragraphs: [
         "You reach for the orbiting coins.",
         "They spin faster.",
-        "In each polished face you glimpse a life Edric purchased distance from: a miner coughing black blood; a girl locked behind iron; a soldier freezing in a coat stamped with Vane silver; a judge looking down at a bribe and calling it evidence.",
+        "In each polished face you glimpse a life Edric purchased distance from: a miner coughing black blood; a girl locked behind iron; a soldier freezing in a coat stamped with Beaumont silver; a judge looking down at a bribe and calling it evidence.",
         "The fifth coin shows nothing.",
         "Not emptiness.",
         "A covered thing."
@@ -445,7 +517,7 @@ window.GATEKEEPER_STORY = {
     edric_accounts: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "The Noble Account",
-      art: "petitioners",
+      art: "edric",
       paragraphs: [
         "Edric adjusts his cuffs.",
         "\"Whatever you think you saw, it was context. I made hard decisions. The poor adore simple villains. They find systems less satisfying.\"",
@@ -457,24 +529,24 @@ window.GATEKEEPER_STORY = {
       choices: [
         {
           label: "Make him pay three Tokens as toll",
-          text: "Three coins become Tokens. Edric passes stripped of some shine, though not of pride.",
-          effects: { souls: 1, tokens: 3, alignment: 4 },
+          text: "Edric parts with three coins as if losing fingernails. The Gates accept him, but the threshold tastes of metal.",
+          effects: { souls: 1, tokens: 3, alignment: 8 },
           setFlags: { edricResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
           label: "Keep him in Purgatory",
-          text: "Edric's outrage strikes like a thrown glass. You keep your feet, barely.",
-          effects: { health: -2, alignment: 2 },
+          text: "\"You may wait,\" you tell him, \"until distance teaches you closeness.\" The office punishes delay. Edric's smile finally dies.",
+          effects: { health: -2, alignment: 15 },
           setFlags: { edricResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
           label: "Pass him for free to deny his bargain",
-          text: "Edric passes without purchase. He looks more insulted by mercy than by punishment.",
-          effects: { souls: 1, alignment: -3 },
+          text: "Edric passes without the dignity of a transaction. His coins fall uselessly to the glass and melt like frost.",
+          effects: { souls: 1, alignment: -15 },
           setFlags: { edricResolved: true },
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
@@ -484,7 +556,7 @@ window.GATEKEEPER_STORY = {
     mask_first_words: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "The Masked Soul",
-      art: "mask",
+      art: "mask-doll",
       paragraphs: [
         "The masked Soul makes no sound when it comes forward.",
         "Its porcelain face is smooth where the mouth should be. Two eyeholes open onto a dark too deep for such a small thing.",
@@ -519,7 +591,7 @@ window.GATEKEEPER_STORY = {
     mask_memory: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "A Memory Without Breath",
-      art: "mask",
+      art: "mask-doll",
       paragraphs: [
         "\"What do you remember?\" you ask.",
         "The mask tilts.",
@@ -556,7 +628,7 @@ window.GATEKEEPER_STORY = {
     mask_roll: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "Read the Mask",
-      art: "mask",
+      art: "mask-doll",
       paragraphs: [
         "You press the black ring to the porcelain.",
         "Cold runs up your arm.",
@@ -629,7 +701,7 @@ window.GATEKEEPER_STORY = {
           goto: "mara_first_words"
         },
         {
-          label: "Hear Lord Edric Vane",
+          label: "Hear Lord Edric Beaumont",
           condition: { flagNot: "edricResolved" },
           setFlags: { secondJudgement: true },
           goto: "edric_first_words"
@@ -820,8 +892,8 @@ window.GATEKEEPER_STORY = {
         reference: {
           health: 5,
           gateStability: 50,
-          souls: 4,
-          tokens: 6,
+          souls: 7,
+          tokens: 8,
           rewinds: 1
         },
         weights: {

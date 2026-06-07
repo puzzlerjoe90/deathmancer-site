@@ -64,11 +64,26 @@
     return clamp(((value + 60) / 120) * 100, 0, 100);
   }
 
+  function alignmentProfile(value) {
+    if (value <= -45) return { name: "Saint", side: "Mercy" };
+    if (value <= -25) return { name: "Benevolent", side: "Mercy" };
+    if (value <= -5) return { name: "Merciful", side: "Mercy" };
+    if (value >= 45) return { name: "Demon", side: "Wrath" };
+    if (value >= 25) return { name: "Ruthless", side: "Wrath" };
+    if (value >= 5) return { name: "Wrathful", side: "Wrath" };
+    return { name: "Balanced", side: "Balanced" };
+  }
+
   function alignmentName(value) {
-    const position = alignmentPosition(value);
-    if (position < 40) return "Merciful";
-    if (position > 60) return "Wrathful";
-    return "Balanced";
+    return alignmentProfile(value).name;
+  }
+
+  function alignmentScoreText(value) {
+    const profile = alignmentProfile(value);
+    if (profile.side === "Balanced") return "Balanced";
+
+    const intensity = Math.round((Math.abs(value) / 60) * 100);
+    return `${profile.name} - ${intensity}% ${profile.side}`;
   }
 
   function modifierFor(stat) {
@@ -603,8 +618,8 @@
           </div>
         `).join("")}
         <div>
-          <dt>Judgement</dt>
-          <dd>${alignmentName(state.alignment)}</dd>
+          <dt>Judgement Rank</dt>
+          <dd>${alignmentScoreText(state.alignment)}</dd>
         </div>
       </dl>
     `;

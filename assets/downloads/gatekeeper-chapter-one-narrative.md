@@ -1,75 +1,62 @@
 # The Gatekeeper: Roll for Judgement
 
-## Chapter One: The New Gatekeeper
+## Merge Contract
 
-Human-editable narrative draft converted from the current Word work-in-progress for the web prototype. Scene IDs, route notes, choices, effects, checkpoints, and D20 markers are retained so this can be revised and sent back for code conversion.
+This file combines the current Word work-in-progress with protected implementation rules. On future imports:
+
+- The Word document is authoritative for deliberate prose, titles, scene choices, routes, effects, and newly completed story branches.
+- The protected engine rules below remain authoritative unless the Word document explicitly says that an engine rule is being replaced.
+- Apparent conflicts should be reviewed rather than silently overwriting working behaviour.
+- Current implemented narrative scope: opening through Lord Edric Beaumont. Later Word scenes remain reference material until the author marks them ready.
+
+## Protected Engine Rules
+
+- Start at `chapter_one`, then route to `title`.
+- Health starts at 10/10; accepting the contract reduces it to 5/10. Gate Stability starts at 50%.
+- Show the consequence panel above the new scene prose.
+- Sequence audiovisual resource feedback as Souls, Tokens, Health, then Gate Stability.
+- D20 checks progress through the persistent D20 control. Show the rolled number and narrative effect, never visible DC arithmetic.
+- Use no more than four visible choices per scene.
+- Present three initial petitioners, judge only two, then force the undead event.
+- Use one checkpoint in Chapter One, immediately before the undead event. Rewind replenishes there and is otherwise unavailable.
+- A non-fatal tried choice returns to its preceding scene, sets a unique flag, and removes only that choice. It causes Game Over only if Health or Gate Stability actually reaches 0.
+- Mercy/Wrath labels use seven bands: Saint (<= -45), Benevolent (<= -25), Merciful (<= -5), Balanced (-4 to 4), Wrathful (>= 5), Ruthless (>= 25), Demon (>= 45).
+- Chapter scoring appears only after successful completion. It displays Health, Gate Stability, Souls, Tokens, unused Rewinds, Judgement Rank, total points, and an S/A/B/C grade.
+- The S/A/B/C grade measures survival and resource control. Mercy/Wrath is a separate Judgement Rank and neither extreme is automatically treated as failure.
+- Edric fortune enquiry: route to `edric_fortune_gate`. Spending 1 Token guarantees `edric_accounts`. The Persuasion D20 succeeds to `edric_accounts`; failure returns to `edric_first_words`, sets `edricFortuneFailed`, and permanently removes only the fortune enquiry.
+- `gatekeeper-edric-transformed.png` is stored and styled for a future vampire branch but must remain unused until that route is authored.
+
+## Current Word Draft
 
 Chapter One: The New Gatekeeper - Reworked Narrative Draft
+
+Human-editable narrative draft for Codex conversion into gatekeeper-story.js.
 
 This version keeps the current prototype structure, but rewrites the chapter so it feels less like placeholder fantasy and more like The Gatekeeper / Deathmancer: judgement, living/dead thresholds, offerings, Souls, Tokens, wounded Gates, Sebastien's dry efficacy, and the slow horror of inheriting a role whose true scale is not yet understood.
 
 ### Design Notes Preserved
 
-The game begins with a Chapter One title screen before the contract.
-
-The player starts at Health 10/10.
-
-Pressing Accept the contract causes the skull pain and drops Health to 5/10.
-
-Gate Stability starts at 50%.
-
-Souls and Tokens begin at 0.
-
-The opening is slower and more novel-like before the first judgement.
-
-The player chooses one of four light-touch backstory contexts.
-
-These are not classes and should only provide subtle hidden help on checks.
-
-The first judgement presents three petitioners, but only two are judged before the undead event.
-
-After two petitioners, the undead/Gate attack event is forced.
-
-There is one checkpoint in Chapter One, immediately before the undead event.
-
-Rewind is disabled before that checkpoint and can be used once after reaching it.
-
-D20 results should show the rolled number and narrative impact, not visible DC maths.
-
-Consequence presentation:
-
-- Show the consequence box before the new scene prose.
-- Present resource feedback in this order when multiple changes occur: Souls, Tokens, Health, Gate Stability.
-- Soul gains use a graceful glow and holy sound.
-- Token gains use a coin-pouch sound.
-- Health damage uses a red damage flash and impact sound.
-- Gate Stability damage uses a threshold flash and Gate impact sound.
-- Label alignment changes as Mercy or Wrath, never Temper.
-- Show Balanced from 40% through 60% of the Mercy/Wrath track, Merciful below 40%, and Wrathful above 60%.
-
-Chapter completion:
-
-- Calculate and display a Chapter Grade only when the completion scene is reached.
-- Grades are S, A, B, or C. Failure scenes do not receive a score.
-- Display Health, Gate Stability, Souls, Tokens, Rewinds Unused, and Judgement on the left.
-- Display the large grade and total score on the right.
-
+- The game begins with the contract, not the ring.
+- The player starts at Health 10/10.
+- Pressing Accept the contract causes the skull pain and drops Health to 5/10.
+- Gate Stability starts at 50%.
+- Souls and Tokens begin at 0.
+- The opening is slower and more novel-like before the first judgement.
+- The player chooses one of four light-touch backstory contexts.
+- These are not classes and should only provide subtle hidden help on checks.
+- The first judgement presents three petitioners, but only two are judged before the undead event.
+- After two petitioners, the undead/Gate attack event is forced.
+- There is one checkpoint in Chapter One, immediately before the undead event.
+- Rewind is disabled before that checkpoint and can be used once after reaching it.
+- D20 results should show the rolled number and narrative impact, not visible DC maths.
 ### Starting State
 
-Health: 10 / 10
-
-Gate Stability: 50%
-
-Souls: 0
-
-Tokens: 0
-
-Mercy/Wrath Alignment: Balanced
-
-Rewind: 1, usable only after checkpoint
-
-Retain the opening page (scene: chapter_one), i.e. title art, display title "Chapter One", text "The Gates do not open for the living. Tonight, they open on your command." Selection: "Begin As The New Gatekeeper".
-
+- Health: 10 / 10
+- Gate Stability: 50%
+- Souls: 0
+- Tokens: 0
+- Mercy/Wrath Alignment: Balanced
+- Rewind: 1, usable only after checkpoint
 ---
 
 ## Scene: chapter_one
@@ -81,8 +68,8 @@ Retain the opening page (scene: chapter_one), i.e. title art, display title "Cha
 - Chapter One
 ### Text
 
-The Gates do not open for the living. Tonight, they open on your command.
-
+- The Gates do not open for the living.
+- Tonight, they open for you.
 ### Choice
 
 - Begin As The New Gatekeeper. -> title
@@ -99,11 +86,11 @@ The Gates do not open for the living. Tonight, they open on your command.
 
 There is a table sitting elevated in a vast chasm of darkness, illuminated only by a subtle ethereal light.
 
-Not a room. Not a cave. Not anywhere a table has any right to be, you suppose.
+Not a room, or a cave. Not anywhere a table has any right to be, you suppose.
 
-All you can make out is the table. Black onyx wood. One chair with golden inlays to its otherwise ashen black wood. A candle hangs in the air above the table, illuminating its contents...a contract on parchment waits in the centre.
+All you can make out is the table. Black onyx wood. One chair with golden inlays set against ashen black wood. A candle hangs in the air above the table, illuminating its contents...a contract on parchment waits in the centre.
 
-The words appear as though they shift as you begin to read them.
+The words appear to shift and distort as you begin to read them.
 
 Vacancy: immediate. Tenure: indefinite. Benefits: unlimited. Consequences: unimaginable.
 
@@ -182,29 +169,28 @@ The place before the Gates is not Heaven. Neither is it Hell. Though some in the
 
 It is a border office built on grief. A court with no roof. A harbour where every ship has already sunk.
 
-Souls now wait in a seemingly endless line that bends as it twists into far off mist. Some shapes are nearly human. Some have forgotten their shape. One is nothing but a wedding veil filled with moths. Another is clearly a soldier, yet made from ash, holding his own crumbling jaw in both hands so he can speak when called.
+Souls now wait in a seemingly endless line that bends as it twists into far off mist. Some shapes are nearly human. Some have forgotten their shape. One is nothing but a wedding veil filled with moths. Another, a soldier made of ash, holding his crumbling jaw in both hands so he can speak when called.
 
 Some carry offerings.
 
-Coins from closed eyes. Rings from clenched fingers. Locks of hair tied in ribbon. Teeth. Knives.  Ornate daggers. Promises folded into little paper scrolls.
+Coins from closed eyes. Rings from clenched fingers. Locks of hair tied in ribbon. Teeth. Knives.  Ornate daggers. Promises folded into little paper notes.
 
-Tokens.  They are Tokens for the dead.
+Tokens.
 
 You understand the word before anyone need teach it to you.
 
 The Gates shudder and pulse.
 
-A crack of gold widens above the arch, then seals itself like a wound that need not bleed.
+A crack of gold widens above the arch, then seals itself like a wound.
 
 ### Choices
 
 - Stand and face the line of Souls. -> sebastien_arrives
 - Attempt to push the Gates open with both hands. -> world_before
-  - Effects: Health -1
-  - Consequence text: The Gates open for no man or being's hands. They open for judgement. You learn this a little too late.
-  - Set flag: pushedGatesByHand
-  - Follow-up: re-enter world_before with this choice removed.
-  - [The scene repeats, this time without the option to push the Gates]
+  - Effects: Health -1, Gate Stability -0
+  - Failure text: The Gates open for no man or being's hands. They open for judgement. You learn this a little too late.
+  - Follow-up:
+  - Re-enter world_before with [attempt to push the Gates] choice removed. Do not route to Game Over unless Health reaches 0.
 ---
 
 ## Scene: sebastien_arrives
@@ -218,7 +204,7 @@ A crack of gold widens above the arch, then seals itself like a wound that need 
 
 A man steps out of the mist carrying a ledger bound in dark weathered leather.
 
-He is slender, immaculate and dressed for a quirky funeral. His skin is black. His smile seems luminously white.
+He is slender, immaculate and dressed for a quirky funeral. His skin is black. His smile luminously white.
 
 "Good," he says, as if you have arrived only mildly late. "You are standing. That already places you above several of your predecessors."
 
@@ -230,17 +216,17 @@ He bows with the smallest possible amount of respect.
 
 He opens the ledger. The pages are blank until he looks at them.
 
-"The contract has been accepted. The role is filled. The queue is restless. Try not to disappoint the dead."
+"The contract now accepted. The role is filled. The queue is restless. Try not to disappoint the dead."
 
 ### Choices
 
 - Ask what a Gatekeeper does. -> sebastien_rules
 - Ask why your name evades you. -> sebastien_name
+  - Effects: Gate Stability -5, Health -0.
 - Ask him to open the Gates for you. -> sebastien_arrives
-  - Effects: Health -1.
-  - Consequence text: Sebastien's face remains resolute. Almost. "That," he says, "may be how your world ends one day. But alas, no."
-  - Set flag: askedSebastienToOpenGates
-  - Follow-up: re-enter sebastien_arrives with this choice removed.
+  - Effects: Gate Stability -5, Health -1.
+  - Failure text: Sebastien's face remains resolute. Almost. "That," he says, "may be how your world ends one day. But alas, no."
+  - Follow-up: Re-enter sebastien_arrives with [attempt to push the Gates] choice removed. Do not route to Game Over unless Health reaches 0.
 ---
 
 ## Scene: sebastien_name
@@ -248,31 +234,30 @@ He opens the ledger. The pages are blank until he looks at them.
 - Purpose: Explain the missing Living name without revealing divinity.
 ### Display Title
 
-- A Useful Absence
+- An Absence of Self
 ### Text
 
 "My name," you say. Or try to.
 
-The missing word scrapes against your teeth.
+The missing word remains at the tip of your tongue.
 
-Sebastien dips his pen into an ink bottle that contains no ink. "A Living name is an anchor. Useful for birthdays, debts, love letters, petty grudges. Quite dangerous here."
+Sebastien dips his pen into an ink bottle that seems to contain no obvious ink. "A Living name is an anchor to that world. Useful for birthdays, debts and love letters. Quite meaningless here."
 
-He turns the ledger toward you. Where your name should be, the page has burned clean through.
+He turns the ledger toward you. Where your name should be, the page is empty.
 
-"If the dead know who you were, they will tug at you. If the Living know what you are, they will pray at you. Both are tedious. Both are fatal in quantity."
+"If the dead know who you were, they will try to corrupt and influence you. If the Living know what you are, they will pray at you. Both are tedious and of little consequence."
 
 He closes the ledger.
 
-"For now, you are the office. The office is you."
+"For now, you are The Gatekeeper."
 
-The Gates groan behind him.
+The Gates beckon behind him.
 
-"And the office has work."
+"And you have work to do."
 
 ### Choices
 
 - Ask what the work requires. -> sebastien_rules
-- Approach the first petitioners. -> first_queue
 ---
 
 ## Scene: sebastien_rules
@@ -280,30 +265,32 @@ The Gates groan behind him.
 - Purpose: Teach the judgement loop in-world.
 ### Display Title
 
-- The Rules of Passing
+- The Rules of Judgement
 ### Text
 
-Sebastien walks beside you without seeming to move.
+Sebastien walks beside you now.
 
 "A Soul comes forward. You hear it. You weigh it. You pass it, hold it, or refuse it."
 
-He lifts one gloved finger.
+He lifts one finger with a truly striking ornate ruby and gold ring.
 
-"Passing a Soul feeds the Gates. Some Souls are little more than candle-smoke. Others are bonfires pretending to be people. The stronger the Soul, the greater the power you draw."
+"Passing a Soul feeds your power here at the Gates. You'll need that strength to face the challenges that yet await you. Some Souls are little more than smoke from a candle extinguished. Others are bonfires masquerading as people. The stronger the Soul, the greater the power you can draw."
 
-A second finger.
+A second finger raised to the air.
 
-"Tokens are offerings. Funeral coins, relics, memories, bribes, apologies, lies with polish on them. Take them when you must. Rely on them and you will become the sort of thing that takes them."
+"Tokens are offerings. Old world coins, relics, memories, bribes. Often lies with polish on them. Take them when you must. They have their uses as a form of currency. Rely on them however and you will become the sort of thing that craves them."
 
-A third.
+A third finger now.
 
-"The dead can lie."
+"The dead can, will and do lie. Adjudicate the worth of the Soul."
 
-The Gates tremble again. Something knocks from the far side. Not politely.
+The Gates tremble now. Something imperceptible knocks at it. Not politely.
 
-Sebastien glances at the crack of gold above the arch.
+Sebastien glances at the crack of gold stretching above the arch.
 
-"And when the restless press against the threshold, you may spend Souls to bind, steady, seal, or cast away. If you have none, you may use your body. I do not recommend making that a habit."
+"If the restless press too hard against the magic of the threshold, you may spend your power from Souls to bind, steady or seal them. If you have none, you may use your body. I do not recommend making that a habit.
+
+There is also a rather odd little fellow in these parts. He is a merchant of this place. He was denied passage beyond the Gates and now spends his time amassing Tokens to exchange for Tokens.  An attempt to make his time here meaningful. He can be a useful irritation."
 
 ### Choice
 
@@ -315,18 +302,18 @@ Sebastien glances at the crack of gold above the arch.
 - Purpose: Present three petitioners. The player judges two before the incursion.
 ### Display Title
 
-- The First Three
+- The Three
 ### Text
 
-Sebastien taps the ledger. Three names bleed through the page.
+Sebastien taps the ledger. Three names seep through the pages like the mark of soot on clean sheets.
 
-The first Soul is a woman in a river-soaked dress. Her hair clings to her cheeks in black ropes. She holds one copper coin so tightly it has cut her palm.
+The first Soul is a woman in a river-soaked dirty dress.  It's white and torn in places like she's been searching for something in thorny shrubbery. Her dark wet hair clings to her cheeks in black ropes. She holds one copper coin so tightly, that you can see it has cut her palm.  Her finger nails are dirty, with dried blood that seems unconnected to the coin.
 
-"Mara Vale," says Sebastien. "No formal offering declared."
+"Mara Vale," says Sebastien. "No formal offering declared."  The last, said indifferently.
 
-The second is a nobleman in a burial coat stitched with silver. Five polished funeral coins float around his head like little moons.
+The second is clearly a nobleman in a burial coat stitched with gold. Five polished funeral coins float around his head like little moons.  His stature is tall, his frame a little sickly despite his clear abundances in wealth.
 
-"Lord Edric Vane. Considerable offering declared. Considerable unpleasantness suspected."
+"Lord Edric Beaumont. Considerable offering declared. Considerable unpleasantness expected."
 
 The third is small and still. A porcelain mask covers its face. No mouth. No breath. Its shadow points away from the Gates, back toward the Living world.
 
@@ -334,14 +321,14 @@ Sebastien's pen pauses.
 
 "Unnamed."
 
-For the first time, his smile thins.
+For the first time, he raises an eyebrow and breaks an ounce of composure.
 
-"Carefully, then."
+"Careful."
 
 ### Choices
 
 - Hear Mara Vale, the river-woman. -> mara_first_words
-- Hear Lord Edric Vane, the coin-bearer. -> edric_first_words
+- Hear Lord Edric Beaumont, the coin-bearer. -> edric_first_words
 - Hear the masked Soul. -> mask_first_words
 ## Mara Branch
 
@@ -355,65 +342,60 @@ For the first time, his smile thins.
 - Mara Vale
 #### Text
 
-Mara steps forward and leaves wet footprints on the black glass.
+Mara steps forward and leaves wet footprints on the black glass underfoot.  She is bare foot.
 
-"I don't have much," she says. Her voice is river-cold, but human. Painfully human. "I know there's meant to be a toll. My mother always said there was a toll."
+"I don't have much," her voice trembles. Her tone is ice-cold, but not in an emotionally cool sense. It aches in a painfully human way. "I know there's meant to be a toll", she says. "My step-mother always said there would be a toll."
 
 She opens her hand.
 
-One copper coin. Bent. Green at the edges.
+One copper coin. Bent. Green at the edges.  Dark dried-on crimson coats the centre.
 
-"It's not for me," she says quickly. "It's for my boy, when he comes. If he comes. If the river-"
+"It's not for me," she says quickly. "It's for my boy, when he comes. If he comes. If the river..." she trails off as her facial expression folds around the thought.
 
-Her face folds around the thought.
+Behind her, the queue shifts. Some Souls look away. Others stare ravenously at the coin.
 
-Behind her, the queue shifts. Some Souls look away. Others stare at the coin.
-
-Sebastien murmurs, "Sentiment often disguises value. Value often disguises rot. Ask better questions."
+Sebastien murmurs, "Sentiment often disguises value. Value often disguises rot."
 
 #### Choices
 
 - Ask about the child. -> mara_child
-- Ask what the river took. -> mara_river
-- Demand a Token toll. -> mara_toll
+- Ask about the river. -> mara_river
+- Demand the coin as Token. -> mara_toll
+  - Effects: Tokens +0, Mercy shift to Wrath +30.
 ---
 
 ## Scene: mara_child
 
 #### Display Title
 
-- The Coin for the Boy
+- The Child With No Coin
 #### Text
 
-"My son is six," Mara says.
+"My son, Jeremiah. He is five," Mara says as she looks off longingly.
 
-Then she frowns.
+"He has beautiful light chestnut hair, of medium length.  It's disheveled, as he won't ever sit long enough for a cut."
 
-"Was six? Is six? Time feels wrong here."
+The coin trembles in her palm now as her voice begins to break.
 
-The coin trembles in her palm.
+"He was on the bank when the flood came and swept through our village. I pushed him up into the base of a willow tree. I think he climbed, but he began to slip as the current took me away. I need him to have this coin. Children should not arrive empty-handed. Though I hope not for a long time yet."
 
-"He was on the bank when the flood came. I pushed him up into the willow. I think he climbed. I think he lived. I need him to have the coin. Children should not arrive empty-handed."
+Sebastien raised an eyebrow again, with a hushed note, saying "Time has little consequence here.  'Yesterday' could be a millennia ago.".  He let the point drift with her thoughts.
 
-The Gates listen.
+It feels as though the Gates are listening.  As if their presence bears over the top of the three of you.  Their metaphorical weight casting a shadow over your actions.
 
-You feel them listening.
-
-Not judging. Not yet.
-
-Waiting for you to become the judgement.
+Though not judging.  That's your task as Gatekeeper.
 
 #### Final Judgement Choices
 
 - Pass her and let her keep the coin. -> after_judgement_router
-  - Effects: Souls +1, Mercy shift.
+  - Effects: Souls +2, Mercy shift.
   - Result text: Mara passes through with the coin still clenched in her hand. The Gates open gently. For one breath, they do not seem wounded at all.
-- Take the coin as toll, then pass her. -> after_judgement_router
-  - Effects: Souls +1, Tokens +1, Wrath/transactional shift.
-  - Result text: Mara gives up the coin without protest. That makes it worse. The Gates accept her, but the copper stays warm in your palm long after she is gone.
+- Trick her into giving you the coin, then pass her. -> after_judgement_router
+  - Effects: Souls +2 Tokens +1, Significant Wrath/transactional shift.
+  - Result text: Mara gives up the coin without protest. She understands and trusts your words that you'll keep it safe for her son. The Gates accept her, but the copper stays warm in your palm long after she is gone.
 - Keep her in Purgatory until the child is safe. -> after_judgement_router
-  - Effects: Health -1, Mercy shift.
-  - Result text: You refuse to pass her until the truth catches up. The decision hurts. Something resents delay. Mara bows as if you have given her a gift.
+  - Effects: Mercy shift.
+  - Result text: You suggest that she should wait until the truth catches up. The decision hurts. Something resents delay. Mara bows as if you have given her a gift.
 ---
 
 ## Scene: mara_river
@@ -423,31 +405,71 @@ Waiting for you to become the judgement.
 - What the River Took
 #### Text
 
-"The river took the bridge first," Mara says. "Then the cart. Then the horse. Then my husband, because he would not let go of the horse."
+"The river took the bridge first," Mara says. "Then the cart. Then our horse. Then my husband, because he would not let go of the horse."
 
-She laughs once, terribly.
-
-"I thought death would be louder."
-
-Water runs from her sleeves and beads on the black glass. In each drop, you glimpse a different ending: a child climbing; a child falling; a mother lying to herself because the truth has no mercy.
+Water runs from her sleeves and beads on the black glass. In each drop, you glimpse a different ending: a child climbing; a child falling into the current; a mother lying to herself because the truth has no mercy.
 
 Mara watches your face.
 
 "You know, don't you? Or you could. You could make yourself know."
 
-Sebastien says nothing.
+Sebastien suggests that you could expend a Soul to grant yourself the power to do so.
 
 #### Final Judgement Choices
 
 - Pass her without payment. -> after_judgement_router
-  - Effects: Souls +1, Mercy shift.
-  - Result text: The Gates take her softly. The line exhales. No coin changes hands.
-- Ask for a memory as toll. -> after_judgement_router
-  - Effects: Souls +1, Tokens +1, transactional/Wrath shift.
-  - Result text: Mara gives you the memory of her son's first laugh. It hardens into a small bright Token. You understand, immediately, why this office ruins people.
-- Refuse her for arriving empty-handed. -> after_judgement_router
-  - Effects: Health -2, Wrath shift.
-  - Result text: The words leave your mouth like someone else placed them there. Mara does not curse you. She simply fades back into the queue, and the Gates ache in your bones.
+  - Effects: Souls +2, Health -1. Neutral shift.
+  - Result text: The Gates take her softly but her scream bellows and cuts through you, as she demands you grant her the peace and knowledge she seeks. The line exhales. No coin changes hands.
+- Pass her with payment. -> after_judgement_router
+  - Effects: Souls +2, Health -2, Token +1. Wrath shift.
+  - Result text: The Gates take her with force but not before her scream bellows and cuts through you like ice. She demands you grant her the knowledge she seeks or at least keep the coin for her son. The last is said as she vanishes from sight.
+- Ask for a memory to pay the toll of this knowledge. -> mara_river2
+  - Requirement: Souls >= 1
+  - Effects: Souls -1, Tokens +1, transactional/Mercy shift.
+  - Result text: Mara grants you the memory of her son grasping to cling onto a low hanging branch as she swept away. You relive the moment like you were there. It hardens into a small stormy Token. You understand, immediately, the difficulty of this office.
+- Refuse her for the time being. -> after_judgement_router
+  - Effects: Health +1, Mercy shift.
+  - Result text: The decide she need not pass at this time and should wait in Purgatory for her son, to learn his fate in time.  To your surprise somewhat, she does not seem upset by this. She imparts a cold wet kiss on your cheek as she fades back into the queue.
+---
+
+## Scene: mara_river2
+
+#### Display Title
+
+- The Price of Knowledge
+#### Text
+
+Sebastien turns to you, nods and closes his eyes.
+
+You feel warmth pass over your body as the strength imbued by the last Soul courses through your mind and into your eyes.  They flash bright and then like the trace that remains after staring at the sun directly, you see the truth.
+
+You see a young, bright-eyed and wily looking scrap of a lad scaling a tree with ease, despite his size and frame.  He's strong.  His foot slips with the slick of the wet branch in stormy weather, but he regains it momentarily.  In the next instance, you see a panic-stricken dark-haired woman - Mara - as her head sinks underneath the strong flowing flash of waves.  The boy cries out a heart-wrenching cry of 'Mamma', but his grip remains true.
+
+The flickering memory speeds quicker now as you see him standing telling tales of his mother to crowds at a celebratory event - a wedding, perhaps.  Later, on his deathbed surrounded by loved ones - children of his own.
+
+At this moment, Sebastien's ledger book flicks open to a new page as a name emblazons in rich golden hue.
+
+Jeremiah Vale
+
+A proud man with grey hair, strong despite his age, emerges from the queue.  He walks up to you both.
+
+Mara turns.
+
+For a moment she does not understand what she is seeing. Then she breaks.
+
+"My boy," she exclaims.
+
+Jeremiah catches her in an embrace as if she weighs nothing at all.
+
+The Gates pulse above you. Not angry or kind, but interested. They will remember this exchange.
+
+Mara's tears pour from her like a torrent. She is grateful and thanks you profusely.
+
+#### Final Judgement Choices
+
+- Accept their Souls past the Gates. -> after_judgement_router
+  - Effects: Souls +5, Token +1, Strong Mercy shift.
+  - Result text: "Keep it," she tells you.  I am abundant in riches of love. Mara weeps once more, as Jeremiah places an arm round her shoulder. They walk through The Gates with purpose, as a light swells from beyond.
 ---
 
 ## Scene: mara_toll
@@ -461,26 +483,29 @@ Sebastien says nothing.
 
 She looks at the copper coin, then closes her fist over it.
 
-"I can give you something else."
+"My boy needs this. I can give you something else."
 
 Her eyes cloud. The river inside her rises.
 
-"My boy's first laugh. I kept it. Don't ask me how. Mothers keep impossible things."
+"My Jeremiah's first laugh. I kept it. Don't ask me how. Mothers keep impossible things and never let go. I love this memory dearly, but if it will keep the coin payment for my son, I am willing."
 
 In her palm, beside the coin, a second object forms: a little bead of clear light, trembling with the sound of a child laughing in summer.
 
 Sebastien's pen hovers.
 
-"A memory-token," he says. "Accepted in most jurisdictions. Rarely returned."
+"A memory-token," he says. "Accepted as a form of payment in most Circles."
 
 #### Final Judgement Choices
 
-- Refuse the memory and pass her. -> after_judgement_router
-  - Effects: Souls +1, Mercy shift.
-  - Result text: "Keep it," you tell her. Mara weeps once. The Gates open as if relieved.
+- Refuse the memory, insist upon the coin and pass her. -> after_judgement_router
+  - Effects: Souls +2, Token +1, Health -2, Strong Wrath shift.
+  - Result text: The Gates take her with force, but not before her scream bellows and cuts through you like ice. She demands you keep the coin for her son. The last is said as she vanishes from sight.
 - Take the memory as Token, then pass her. -> after_judgement_router
-  - Effects: Souls +1, Tokens +1, Wrath/transactional shift.
-  - Result text: The memory-token clicks into your hand. It is beautiful. That is the problem.
+  - Effects: Souls +2, Tokens +3, Minor Wrath/transactional shift.
+  - Result text: The memory-token clicks into your hand. It is beautiful. That is the problem. Mara is accepted beyond the Gates.
+- Refuse the memory, refuse the coin and pass her. -> after_judgement_router
+  - Effects: Souls +2, Strong Mercy shift.
+  - Result text: "Keep it," you tell her. Mara weeps and exclaims her love for her son and her gratitude towards you.  She begs you to look out for him, as she vanishes beyond The Gates.
 ## Edric Branch
 
 ---
@@ -490,16 +515,14 @@ Sebastien's pen hovers.
 - Purpose: Token temptation and suspicion.
 #### Display Title
 
-- Lord Edric Vane
+- Lord Edric Beaumont
 #### Text
 
-Lord Edric Vane does not approach so much as arrive.
+Lord Edric Beaumont does not approach so much as arrive. Even dead, he carries the habit of rooms making space for him.
 
-Even dead, he carries the habit of rooms making space for him.
+"My condolences," he says, looking you over. You're not exactly sure what he means by that.
 
-"My condolences," he says, looking you over. "Newly appointed, I assume. These transitions are rarely graceful."
-
-Five funeral coins orbit his head: silver-bright, polished to a mirror shine. Each coin bears his profile on one side and a set of scales on the other.
+Five bright gold funeral coins orbit his head: polished to a mirror shine. Each coin bears his profile on one side and a set of scales on the other.
 
 "I was assured," Edric says, "that proper offerings would be recognised."
 
@@ -507,19 +530,20 @@ Behind him, something small and bent-backed hisses.
 
 Edric does not turn.
 
-Sebastien's voice is mild. "Lord Vane funded three almshouses, two private prisons, and one war he neglected to attend."
+Sebastien's voice is mild. "Lord Beaumont funded three orphanages, two private prisons and one war he neglected to attend."
 
-Edric smiles.
+Edric snarls.
 
-"Administration is the art of necessary distance."
+"Administration is the art of necessary distance and time."
 
 #### Choices
 
-- Ask who polished the coins. -> edric_accounts
+- Ask how he made his fortunes. -> edric_accounts
+  - Requirement: Token>=1 OR D20 skill check: persuasion (DC14).  Success: -> edric_accounts; Failure: -> edric_first_words.  If token route, (-1 Tokens).
 - Accept all five Tokens immediately. -> after_judgement_router
-  - Effects: Souls +1, Tokens +5, Gate Stability -8, Wrath/transactional shift.
+  - Effects: Souls -1 (if able, otherwise 0), Tokens +5, Gate Stability -20, Wrath/transactional shift.
   - Result text: The coins come willingly. Too willingly. Edric passes smiling, and the Gates shiver as if swallowing a hook.
-- Send him to Purgatory while you inspect the offering. -> edric_roll
+- Ask to inspect the offering. -> edric_roll
 ---
 
 ## Scene: edric_roll
@@ -534,7 +558,7 @@ You reach for the orbiting coins.
 
 They spin faster.
 
-In each polished face you glimpse a life Edric purchased distance from: a miner coughing black blood; a girl locked behind iron; a soldier freezing in a coat stamped with Vane silver; a judge looking down at a bribe and calling it evidence.
+In each polished face you glimpse a life Edric purchased distance from: a miner coughing black blood; a girl locked behind iron; a soldier freezing in a coat stamped with Beaumont silver; a judge looking down at a bribe and calling it evidence.
 
 The fifth coin shows nothing.
 
@@ -780,7 +804,7 @@ It may be curiosity.
 Show only unresolved petitioners:
 
 - Hear Mara Vale. -> mara_first_words
-- Hear Lord Edric Vane. -> edric_first_words
+- Hear Lord Edric Beaumont. -> edric_first_words
 - Hear the masked Soul. -> mask_first_words
 After the second petitioner resolves, route to after_second_judgement.
 
@@ -831,7 +855,8 @@ Sebastien's ledger snaps shut.
 ## Scene: threshold_warning
 
 - Purpose: One chapter checkpoint before undead incursion.
-- Checkpoint: Yes
+Checkpoint: Yes
+
 #### Display Title
 
 - Checkpoint: The Threshold Holds
@@ -1018,10 +1043,44 @@ The wound it left behind.
 
 #### Choice
 
-- End Chapter One. -> trial_gate
+- See Chapter Score. -> trial_gate
 ---
 
 ## Scene: trial_gate
+
+- Purpose: Score summary. Free trial cliffhanger and monetisation gate.
+#### Display Title
+
+- Chapter One Completion Ranking
+#### Text
+
+Score Factors:
+
+Health remaining / 10
+
+Gate Stability remaining / 100
+
+Souls remaining
+
+Tokens remaining
+
+Rewinds unused
+
+Optional: Mercy/Wrath balance modifier
+
+Display:
+
+Show score grade large and bright on the right.
+
+Show score breakdown list on the left.
+
+#### Choice
+
+End Chapter One. -> trial_gate_2
+
+---
+
+## Scene: trial_gate_2
 
 - Purpose: Free trial cliffhanger and monetisation gate.
 #### Display Title
@@ -1029,26 +1088,21 @@ The wound it left behind.
 - End of Chapter One
 #### Text
 
-You have judged the dead.
+You have judged the dead and taken their offerings.
 
-You have taken offerings.
+You have spent their Souls.
 
-You have spent Souls.
+You have held the Gates. For now.
 
-You have held the Gates.
+But something powerful in the Dead Realm is seeking to test the threshold. The Gates may not be prepared.  Are you?
 
-For now.
+Sebastien will open the ledger again. But who will judge your Soul?
 
-But something in the Living world has found the threshold, and the Gates remember being broken.
-
-Sebastien opens the ledger again.
-
-This time, there is writing on the next page before his pen touches it.
-
-- Chapter Two: The Soul That Was Not Dead
+- Chapter Two: The Soul That Would Not Die
 #### Choices
 
 - Unlock Chapter Two - GBP 0.99 -> mock purchase flow
+- Unlock all Chapters of Book One - GBP 4.99 -> mock purchase flow
 - Replay Chapter One. -> title
 ## Game Over Scenes
 
@@ -1062,23 +1116,20 @@ This time, there is writing on the next page before his pen touches it.
 - The Gatekeeper Has Failed
 #### Text
 
-Your Health reaches nothing.
+Your life force is spent.
 
-Not death exactly.
+Not death exactly. Death would be simpler.
 
-Death would be simpler.
+Your connection to the threshold extinguishes and the Gated Realm removes you from play, snapped awake to consciousness. The queue at the Gates grows impatient. Who will accept Souls without your judgement.  How long can the Gates hold?
 
-Your connection to the threshold snaps, and the Spirit realm throws you out like a body from a wave. The ring goes cold. The queue screams. The Gates lose the shape of your judgement.
+The Last Gatekeeper is no more.
 
-For one breath, there is no Gatekeeper.
-
-One breath is enough.
-
-- The Gates are Lost.
+- The Gatekeeper is lost.
 #### Choices
 
 - Rewind to checkpoint.
-- Available only if checkpoint has been reached and rewind remains.
+Available only if checkpoint has been reached and rewind remains.
+
 - Restart Chapter One. -> title
 ---
 
@@ -1090,29 +1141,22 @@ One breath is enough.
 - The Gates Are Lost
 #### Text
 
-Gate Stability reaches nothing.
+The stability of the Gates has become uncontrollable. The seam opens.
 
-The seam opens.
+The dead do not pass through in a line, nor as intended. They flood. They claw through mercy, through law, through you.
 
-The dead do not pass through in a line. They flood. They claw through judgement, through mercy, through law, through you.
+Tokens scatter like teeth. Souls crash against metal and stone like waves.
 
-Tokens scatter like teeth.
+Sebastien's ledger burns to cinder, losing names already lost to time.
 
-Souls gutter out.
+A Gate without a Gatekeeper is not a doorway. It is a wound.
 
-Sebastien's ledger burns from the inside, page by page, name by name.
-
-At the threshold, the Gates stand open and empty.
-
-A Gate without a Gatekeeper is not a doorway.
-
-It is a wound.
-
-- The Gatekeeper has failed.
+- The Gates are lost.
 #### Choices
 
 - Rewind to checkpoint.
-- Available only if checkpoint has been reached and rewind remains.
+Available only if checkpoint has been reached and rewind remains.
+
 - Restart Chapter One. -> title
 ## Implementation Notes for Codex
 
@@ -1122,15 +1166,25 @@ The current prototype uses a router concept where after the first petitioner, th
 
 Codex should track resolved petitioners using flags:
 
+```text
 resolved: {
+```
 
+```text
 mara: false,
+```
 
+```text
 edric: false,
+```
 
+```text
 mask: false
+```
 
+```text
 }
+```
 
 When a final judgement happens, set the relevant flag true and increase judgementsCompleted by 1.
 
@@ -1144,37 +1198,27 @@ Backstory should remain subtle. Do not show it like a class system.
 
 Suggested hidden bonuses:
 
-Scholar: +2 on truth / reading / pattern checks
-
-Creative: +2 on empathy / unusual interpretation checks
-
-Sportsman: +2 on reflex / endurance / pressure checks
-
-Strong: +2 on force / resistance / combat checks
-
+- Scholar: +2 on truth / reading / pattern checks
+- Creative: +2 on empathy / unusual interpretation checks
+- Sportsman: +2 on reflex / endurance / pressure checks
+- Strong: +2 on force / resistance / combat checks
 These can affect roll outcomes quietly, with the result text saying something like:
 
-"Some old instinct helps you read the pattern."
-
-"Your body remembers how not to fall."
-
-"A maker's eye catches what the mask is not showing."
-
+- "Some old instinct helps you read the pattern."
+- "Your body remembers how not to fall."
+- "A maker's eye catches what the mask is not showing."
 ### D20 Result Presentation
 
 Avoid showing raw DC maths to the player.
 
 Show:
 
-The D20 result
-
-A short phrase such as "Success", "Failure", "Narrow Success", or "Costly Failure"
-
-Narrative consequence
-
+- The D20 result
+- A short phrase such as "Success", "Failure", "Narrow Success", or "Costly Failure"
+- Narrative consequence
 Example:
 
-You rolled 16. Success. The coin burns cold, and Edric's accounts open.
+> You rolled 16. Success. The coin burns cold, and Edric's accounts open.
 
 ### Moral Alignment
 
@@ -1188,20 +1232,13 @@ Some Wrath choices should be necessary. Some Mercy choices should be dangerous.
 
 Avoid generic phrasing such as:
 
-"You enter the chamber."
-
-"A mysterious figure appears."
-
-"You feel a strange power."
-
-"The enemy attacks."
-
+- "You enter the chamber."
+- "A mysterious figure appears."
+- "You feel a strange power."
+- "The enemy attacks."
 Prefer specific, tactile phrasing:
 
-"The Gates breathe like something asleep in pain."
-
-"The coins orbit his head like little moons."
-
-"The queue learns you."
-
-"A Gate without a Gatekeeper is not a doorway. It is a wound."
+- "The Gates breathe like something in pain."
+- "The coins orbit his head like little moons."
+- "The queue learns from you."
+- "A Gate without a Gatekeeper is not a doorway. It is a wound."
