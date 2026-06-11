@@ -724,7 +724,7 @@
     updateMusicButton();
 
     rewindButton.hidden = !isGameOver;
-    restartButton.hidden = !isGameOver;
+    restartButton.hidden = false;
     rewindButton.disabled = isResolving || !checkpoint || state.rewinds <= 0 || currentSceneId === checkpoint.sceneId;
     restartButton.disabled = isResolving;
     gameActions.classList.toggle("is-game-over", isGameOver);

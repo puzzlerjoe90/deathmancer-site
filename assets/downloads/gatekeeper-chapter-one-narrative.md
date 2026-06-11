@@ -13,8 +13,11 @@ The latest supplied Word source is authoritative for deliberate prose, titles, c
 - Display every resource-bearing choice with `(Cost: X Resource)` and apply its cost exactly once.
 - Use no more than four visible choices per scene.
 - Present three initial petitioners, judge only two, then end Chapter One on the unpaid-dead incursion cliffhanger.
+- Lord Edric must always be one of the two petitioners judged. If Mara or the masked Soul is chosen first, Edric forces himself forward as the second judgement.
 - Lord Edric is Chapter One's principal fight. The chapter's sole checkpoint is created when he transforms.
-- Rewind and Restart appear on Game Over screens, not during ordinary play. Rewind returns to the Edric checkpoint when it exists and remains unused.
+- Restart remains available during ordinary play and on Game Over screens. Rewind appears only on Game Over and returns to the Edric checkpoint when it exists and remains unused.
+- When authored scene text gives a route without presenting a choice, display a single `Continue` choice.
+- D20 success and failure prose must appear as their own authored outcome scenes, followed by `Continue`; do not replace that prose with inferred summaries.
 - A non-fatal tried choice returns to its preceding scene, removes only that choice, and causes Game Over only when Health or Gate Stability reaches 0 or the authored route is explicitly doomed.
 - Mercy/Wrath uses seven bands: Saint, Benevolent, Merciful, Balanced, Wrathful, Ruthless, and Demon.
 - Chapter scoring appears only after successful completion and displays Health, Gate Stability, Souls, Tokens, unused Rewinds, Judgement Rank, total points, and an S/A/B/C grade.

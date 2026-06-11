@@ -989,6 +989,11 @@ p {
   background-position: center 18%;
 }
 
+.story-art[data-scene-art="edric-boy"] {
+  background-image: url("./assets/images/gatekeeper-edric-boy.png");
+  background-position: center 38%;
+}
+
 .story-art[data-scene-art="edric-transformed"] {
   background-image: url("./assets/images/gatekeeper-edric-transformed.png");
   background-position: center 24%;
@@ -1015,6 +1020,7 @@ p {
 .story-art[data-scene-art="mara"]::before,
 .story-art[data-scene-art="mara-son"]::before,
 .story-art[data-scene-art="edric"]::before,
+.story-art[data-scene-art="edric-boy"]::before,
 .story-art[data-scene-art="edric-transformed"]::before,
 .story-art[data-scene-art="mask-doll"]::before,
 .story-art[data-scene-art="gameover"]::before {
@@ -1326,7 +1332,12 @@ p {
 }
 
 .game-actions:not(.is-game-over) {
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(5.75rem, 7.25rem) minmax(8rem, 1fr);
+  align-items: center;
+}
+
+.game-actions:not(.is-game-over) .icon-button {
+  min-height: 5.75rem;
 }
 
 .game-actions > [hidden] {
@@ -1347,8 +1358,11 @@ p {
 }
 
 .dice-button {
-  min-height: 4.15rem;
-  padding-inline: 1rem;
+  width: 100%;
+  max-width: 7.25rem;
+  min-height: 5.75rem;
+  aspect-ratio: 1 / 0.82;
+  padding: 0.75rem;
   clip-path: polygon(50% 0, 88% 18%, 100% 55%, 72% 100%, 28% 100%, 0 55%, 12% 18%);
   color: rgba(244, 240, 231, 0.48);
   font-size: 0.78rem;

@@ -451,14 +451,14 @@ window.GATEKEEPER_STORY = {
       art: "edric",
       paragraphs: [
         "Lord Edric Beaumont does not approach so much as arrive. Even dead, he carries the habit of rooms making space for him.",
-        "\"My condolences,\" he says, looking you over. You're not exactly sure what he means by that. He's the dead one...",
-        "Five bright gold funeral coins orbit his head like little moons, polished to a mirror shine. Each coin bears his profile on one side and a set of scales on the other.",
-        "\"I was assured,\" Edric says, \"that proper offerings would be recognised.\"",
+        "“My condolences,” he says, looking you over. You’re not exactly sure what he means by that. He’s the dead one...",
+        "Five bright gold funeral coins orbit his head, like little moons: polished to a mirror shine. Each coin bears his profile on one side and a set of scales on the other.",
+        "“I was assured,” Edric says, “that proper offerings would be recognised.”",
         "Behind him, something small and bent-backed hisses.",
         "Edric does not turn.",
-        "Sebastien's voice is mild. \"Lord Beaumont funded three orphanages, two private prisons and one war he neglected to attend.\"",
+        "Sebastien’s voice is mild. “Lord Beaumont funded three orphanages, two private prisons and one war he neglected to attend.”",
         "Edric snarls.",
-        "\"Administration is an art and requires distance from lessers.\""
+        "“Administration is an art and requires distance from lessers.”"
       ],
       choices: [
         {
@@ -512,21 +512,21 @@ window.GATEKEEPER_STORY = {
       title: "The Noble Account",
       art: "edric",
       paragraphs: [
-        "\"How did you make your fortune?\" you ask.",
-        "Edric looks genuinely offended, or perhaps bemused. Not because the question is rude. Because he believes the answer should be unnecessary.",
-        "\"Land,\" he says. \"Stewardship. Industry. Prudent marriages. Investments made where weaker men would see only inconvenience.\"",
+        "“How did you make your fortune?” you ask.",
+        "Edric looks genuinely offended, and/or bemused. Not because the question is rude. Because he believes the answer should be unnecessary.",
+        "“Land,” he says. “Stewardship. Industry. Prudent marriages. Investments made where weaker men would see only inconvenience.”",
         "One of the coins turns in its orbit. His profile gleams. The scales on the reverse remain hidden.",
         "Sebastien makes a small note in the ledger.",
-        "\"The dead are wonderfully concise when lying,\" he interrupts.",
-        "Edric's eyes cut toward him.",
+        "“The dead are wonderfully concise when lying,” he interrupts.",
+        "Edric’s eyes cut toward him.",
         "You focus on the coins. On the gold thread sewn through his burial coat. On the way the little bent-backed Soul behind him flinches whenever he breathes."
       ],
       roll: {
         label: "Follow the Money",
         stat: "truth",
         dc: 14,
-        successText: "The coins slow. Not enough to stop. Enough to show you what they have been hiding.",
-        failureText: "The coins flash like mirrors in sunlight. His contempt cuts deeper than it should.",
+        successText: "Success.",
+        failureText: "Failure.",
         successHiddenEffects: { _edricClues: 1 },
         successFlags: { edricClue: true },
         failureEffects: { gateStability: -5 },
@@ -537,21 +537,22 @@ window.GATEKEEPER_STORY = {
     },
     edric_fortune_roll_success: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Man Before the Title",
-      art: "edric",
+      title: "The Noble Account",
+      art: "edric-boy",
       paragraphs: [
+        "The coins slow. Not enough to stop. Enough to show you what they have been hiding.",
         "You see kitchens first. Not halls. Not courts. Kitchens.",
         "A boy with dirt under his nails carries a bucket through a stone passage while lords laugh overhead. Lowborn. Barely lettered. Quick with his hands. Quicker with anything smaller than him.",
         "Rats scatter under the shelves.",
         "He catches them because that is his work. Then he keeps some because that becomes his interest.",
         "A cage. A knife. A little notebook filled with marks he cannot properly spell but understands perfectly. Which rat survives hunger. Which one turns on the others. Which one learns the maze if pain waits at the wrong turning.",
-        "Then a visitor arrives at the Earl's house on political business. A pale gentleman who casts no proper reflection in the copper pans. The boy watches him from the kitchen door with great interest.",
+        "Then a visitor arrives at the Earl’s house on political business. A pale gentleman who casts no proper reflection in the copper pans. The boy watches him from the kitchen door with great interest.",
         "The visitor watches back.",
         "He smiles, as if he has found a useful tool left unattended."
       ],
       choices: [
         {
-          label: "Follow the vision",
+          label: "Continue",
           goto: "edric_master_hint"
         }
       ]
@@ -567,7 +568,7 @@ window.GATEKEEPER_STORY = {
       ],
       choices: [
         {
-          label: "Continue the judgement",
+          label: "Continue",
           goto: "edric_surface_answer"
         }
       ]
@@ -578,10 +579,10 @@ window.GATEKEEPER_STORY = {
       art: "edric",
       paragraphs: [
         "Edric adjusts his cuffs.",
-        "\"You see? Nothing but ordinary consequence. A fortune is structure. The weak resent structures because they are usually born or work beneath them.\"",
+        "“You see? Nothing but ordinary consequence. A fortune is structure. The weak resent structures because they are usually born or work beneath them.”",
         "His coins resume their orbit. Bright. Perfect. Unhelpful.",
         "Sebastien turns one page of the ledger, although you do not see him write.",
-        "\"There are two ways to build a house,\" he says. \"Stone by stone, or body by body. House Beaumont has experience in both.\""
+        "“There are two ways to build a house,” he says. “Stone by stone, or body by body. House Beaumont has experience in both.”"
       ],
       choices: [
         {
@@ -609,41 +610,76 @@ window.GATEKEEPER_STORY = {
       paragraphs: [
         "You reach toward the nearest coin.",
         "Edric does not move to stop you. That is almost enough to make you withdraw your hand.",
-        "\"Careful,\" Sebastien says. \"Some offerings are not gifts. Some are unwanted promises.\"",
-        "The coin turns, floating just above your outstretched hand. Edric's profile on one side. Scales on the other."
+        "“Careful,” Sebastien says. “Some offerings are not gifts. Some are unwanted promises.”",
+        "The coin turns, floating just above your outstretched hand. Edric’s profile on one side. Scales on the other."
       ],
       roll: {
         label: "Inspect the Offering",
         stat: "truth",
         dc: 10,
-        successText: "The scales twitch. For one blink they are fangs, biting down on the centre of the coin. The polished gold remembers blood, closed eyes and theft before the body cooled. These are not merely payment. They are alibis.",
-        failureText: "The coin reflects your face as Edric would prefer you to be: new, uncertain and hungry to be accepted by the dead. Your fingers close around empty air.",
+        successText: "Success.",
+        failureText: "Failure.",
         successEffects: { tokens: 1, alignment: -2 },
         successHiddenEffects: { _edricClues: 1 },
         successFlags: { edricClue: true },
-        successGoto: "edric_suspicion",
-        failureGoto: "edric_suspicion"
+        successGoto: "edric_coin_roll_success",
+        failureGoto: "edric_coin_roll_fail"
       },
       choices: []
+    },
+    edric_coin_roll_success: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Read the Coins",
+      art: "edric",
+      paragraphs: [
+        "The scales twitch imperceptibly.  To some, at least.  But not to you.",
+        "For one blink, they are not scales at all. They are fangs. Two perfect white points biting down on the centre of the coin.",
+        "Then they are scales again.",
+        "The polished gold remembers blood. It remembers being placed on closed eyes. It remembers being taken back before the body cooled.",
+        "You look at the other four coins and understand they are not merely payment.",
+        "They are alibis."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_suspicion"
+        }
+      ]
+    },
+    edric_coin_roll_fail: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Read the Coins",
+      art: "edric",
+      paragraphs: [
+        "The coin reflects your face.",
+        "Not as you are. As Edric would prefer you to be: new, uncertain, hungry to be accepted by the dead.",
+        "Your fingers close around empty air. The coin has already moved on."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_suspicion"
+        }
+      ]
     },
     edric_master_hint: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "The Man Before the Title",
-      art: "edric",
+      art: "edric-boy",
       paragraphs: [
         "The vision leaves a taste on your tongue like old iron and a scent in your nostrils like kitchen smoke.",
-        "Edric's face remains composed, but the coins have begun to orbit faster. Fear in the disguise of dignity.",
-        "\"You were not born Beaumont,\" you say.",
-        "The queue quiets. Edric's mouth tightens.",
-        "\"Names improve with use. Blood...blood is a fickle thing.\"",
-        "Sebastien's pen scratches once across the page.",
-        "\"Not an Elder,\" he murmurs. \"Important distinction. Elders are the beginnings of these things.\"",
-        "You see another shard of memory: the pale visitor standing over the rat-catcher boy in the kitchens, now a young man. A hand under his chin. A cup of crimson wine.",
-        "Then years fold over one another. Servant. Secretary. Agent. Landholder. Lord. The world forgets low birth quickly when money teaches it manners.",
+        "Edric’s face remains composed, but the coins have begun to orbit faster. Faster resembling fear in the disguise of dignity.",
+        "“You were not born Beaumont,” you say.",
+        "The queue quiets. Edric’s mouth tightens.",
+        "“Names improve with use. Blood.  Blood, is a fickle thing.”",
+        "Sebastien’s pen scratches once across the page.",
+        "“Not an Elder,” he murmurs. “Important distinction. Elders are the beginnings of these things.” He lets the thought drift.",
+        "You see another shard of memory: the pale visitor standing over the rat-catcher boy in the kitchens, yet now as a young man. A hand under his chin with a cup of red crimson wine.",
+        "Then years folding over one another. Servant. Secretary. Agent. Landholder. Lord. The world forgets low birth quickly when money teaches it manners.",
         "One final image tries to form.",
-        "A chamber. Edric kneeling. The same master behind him, a hand at Edric's throat, almost tender.",
-        "\"You were always better as an instrument,\" the master says, \"than a successor.\"",
-        "The memory breaks before you can see its resolution."
+        "A chamber. Edric kneeling. The same master behind him, but this time with a hand at Edric’s throat, almost tender.",
+        "“You were always better as an instrument,” the master says, “than a successor.”",
+        "The memory breaks before you can see the resolution."
       ],
       choices: [
         {
@@ -669,10 +705,10 @@ window.GATEKEEPER_STORY = {
       title: "Suspicions",
       art: "edric",
       paragraphs: [
-        "The five coins orbit Edric's head like small obedient moons. Now you cannot stop seeing the wrongness in them. They shine too brightly. They are not coins that want to be spent. They want to be accepted.",
+        "The five coins orbit Edric’s head like small obedient moons. Now you cannot stop seeing the wrongness in them. They shine too brightly. They’re not coins that want to be spent. They want to be accepted.",
         "The bent-backed thing behind Edric hisses again. This time you hear words in it:",
-        "\"Not dead enough.\"",
-        "Edric turns at last, his hand following behind him as a scathing whip akin to the flapping of a wing.",
+        "“Not dead enough.”",
+        "Edric turns at last, with his hand following behind him as a scathing whip akin to the flapping of a wing.",
         "The little crooked Soul folds in on itself."
       ],
       choices: [
@@ -720,16 +756,16 @@ window.GATEKEEPER_STORY = {
       title: "Delayed Accounts",
       art: "edric",
       paragraphs: [
-        "\"You may wait,\" you tell him.",
+        "“You may wait,” you tell him.",
         "Edric blinks in shock and disdain.",
         "It is not pure outrage yet. Outrage requires belief that there is order in things. This is something deeper: the shock of a law applying to someone unfamiliar with the concept.",
-        "\"I have paid,\" he begins.",
-        "\"You have offered,\" Sebastien corrects.",
-        "The Gates pulse. You feel that delay has a cost here, but you are not ready to adjudicate without knowing more."
+        "“I have paid,” he begins.",
+        "“You have offered,” Sebastien corrects.",
+        "The Gates pulse. You feel that delay has a cost here.  But you are not ready to adjudicate yet without knowing more."
       ],
       choices: [
         {
-          label: "Hold him safely in Purgatory while you investigate",
+          label: "Spend 2 Tokens to hold him safely in Purgatory while you investigate",
           cost: { tokens: 2 },
           effects: { gateStability: -5 },
           goto: "edric_fortune_roll_success"
@@ -741,7 +777,7 @@ window.GATEKEEPER_STORY = {
         },
         {
           label: "Give up the delay and accept his Tokens",
-          text: "The office is too new in your hands and you do not wish to add strain to the Gates. The coins are yours. The unintended wound to the Gates is also yours.",
+          text: "The office is too new in your hands and you don’t wish to add strain to The Gates. The coins are yours. You’ll need them. The unintended wound to the Gates is also yours.",
           effects: { souls: -2, tokens: 5, gateStability: -20, alignment: 25 },
           setFlags: { edricResolved: true },
           goto: "after_first_judgement",
@@ -754,15 +790,15 @@ window.GATEKEEPER_STORY = {
       title: "A Noble Reveal",
       art: "edric",
       paragraphs: [
-        "\"You are not a Soul seeking judgement. You seek further power,\" you suggest.",
+        "“You are not a Soul seeking judgement. You seek further power” you suggest.",
         "The five coins stop dead in the air above his head.",
-        "Sebastien's pen pauses. He seems to hold his breath.",
+        "Sebastien’s pen pauses, as he seems to hold his breath for what is to follow.",
         "Edric smiles unpleasantly.",
         "His lips draw back too far, revealing a pointed tooth.",
-        "\"I have had many names,\" Edric hisses. His voice arrives with another, deeper voice underneath it. \"Rat-boy. Lord. Monster. Survivor...\"",
+        "“I have had many names,” Edric hisses. His voice arrives with another deeper voice underneath it. “Rat-boy. Lord. Monster. Survivor...”",
         "He looks at the Gates as though they are his servant, slow to answer his beckoning call.",
-        "\"Open these Gates for me, boy.\" It is not a request.",
-        "The Gates remain unchanged and Edric's eyes lock onto yours."
+        "“Open these Gates for me boy”.  Said, not as a request.",
+        "The Gates remain unchanged and Edric’s eyes lock onto yours resolutely."
       ],
       choices: [
         {
@@ -776,7 +812,7 @@ window.GATEKEEPER_STORY = {
           goto: "edric_transforms"
         },
         {
-          label: "Bind his coins",
+          label: "Spend 1 Soul: Bind his coins",
           cost: { souls: 1 },
           goto: "edric_bind_roll"
         }
@@ -790,52 +826,92 @@ window.GATEKEEPER_STORY = {
         "You do not know his first name. The ledger did not give it to you. Perhaps it never knew.",
         "So you reach for the life you understand existed before the title instead.",
         "The boy who learned too early that small things suffer quietly if no one important is listening.",
-        "\"You were made into this,\" you say. \"But not all of it was made for you.\"",
+        "“You were made into this,” you say. “But not all of it was made for you.”",
         "Edric bares his teeth.",
-        "Sebastien's voice is quiet now.",
-        "\"A dangerous kindness. One almost never rewarded.\""
+        "Sebastien’s voice is quiet now.",
+        "“A dangerous kindness. One almost never rewarded.”"
       ],
       roll: {
-        label: "Call Out His Lowborn Name",
+        label: "Call out his Lowborn Name",
         stat: "redemption",
         dc: 20,
         modifierFrom: ["_edricClues"],
-        successText: "For one impossible moment, Lord Edric Beaumont looks frightened. Not of you. Not of the Gates. Of being seen for who he really was.",
-        failureText: "Something in him almost hears you. Almost is not enough. His face folds into hunger and the thing beneath it spreads its wings.",
-        failureEffects: { health: -1, gateStability: -10, souls: 2 },
-        successGoto: "edric_redemption",
-        failureGoto: "edric_transforms"
+        successText: "Critical success.",
+        failureText: "Non-critical result.",
+        successGoto: "edric_redemption_roll_success",
+        failureGoto: "edric_redemption_roll_fail"
       },
       choices: []
+    },
+    edric_redemption_roll_success: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Name Beneath Beaumont",
+      art: "edric",
+      paragraphs: [
+        "For one impossible moment, Lord Edric Beaumont looks frightened.",
+        "Not of you. Not of the Gates.",
+        "Of being seen for who he really was, long since he had forgotten.",
+        "The coins fall from orbit and clatter on the glass floor. They no longer shine like payment. They darken like damning evidence.",
+        "“He chose me,” Edric says. The words come out broken.",
+        "“He said the world was a cage and only fools pitied the rats”. His mouth trembles around the fangs.",
+        "“I worshipped him and he cast me off to this place.”",
+        "The Gates appear to be listening."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_redemption"
+        }
+      ]
+    },
+    edric_redemption_roll_fail: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Name Beneath Beaumont",
+      art: "edric",
+      paragraphs: [
+        "Something in him almost hears you.",
+        "Almost is not enough.",
+        "His face folds into hunger. His coins burn with fury. The thing beneath it spreads its wings."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          condition: { flagNot: "edricFinalRepentance" },
+          effects: { health: -1, gateStability: -10, souls: 2 },
+          goto: "edric_transforms"
+        },
+        {
+          label: "Continue",
+          condition: { flag: "edricFinalRepentance" },
+          effects: { health: -1 },
+          setFlags: { edricFinalRepentance: false },
+          goto: "edric_staggered"
+        }
+      ]
     },
     edric_redemption: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "Purgatory for a Lord",
       art: "edric",
       paragraphs: [
-        "The coins fall from orbit and clatter on the glass floor. They no longer shine like payment. They darken like damning evidence.",
-        "\"He chose me,\" Edric says. The words come out broken.",
-        "\"He said the world was a cage and only fools pitied the rats.\" His mouth trembles around the fangs.",
-        "\"I worshipped him and he cast me off to this place.\"",
-        "The Gates appear to be listening.",
         "Edric kneels.",
         "The motion looks painful, as though no part of him has been designed for humility in a very long time.",
-        "\"I do not ask to pass,\" he says.",
-        "Sebastien's eyebrows lift so sharply it is as though they have dislodged from his face.",
+        "“I do not ask to pass,” he says.",
+        "Sebastien’s eyebrows lifts so sharply it is as though they have dislodged from his face.",
         "Edric looks at the five darkened coins, then at the little bent-backed Soul still cowering behind him.",
-        "\"I ask for time to remember my misdeeds and the man I could have become before Him.\"",
-        "The Gates answer with a low golden pulse.",
+        "“I ask for time to remember my misdeeds and the man I could have become before Him.”",
+        "The Gates answer with a low golden hue pulsating.",
         "Not forgiveness. A sentence.",
         "Purgatory becomes a narrow black door with no handle.",
-        "\"How long?\" Edric asks.",
+        "“How long?” Edric asks.",
         "Sebastien consults the ledger.",
-        "\"Until the word necessary no longer applies to you.\"",
+        "“Until the word necessary no longer applies to you.”",
         "Edric chuckles once. It sounds almost human."
       ],
       choices: [
         {
           label: "Send Edric to Purgatory until absolution is achieved",
-          text: "Edric steps into Purgatory without his coins. Their power enters your hands, granted by judgement rather than taken from passage. Somewhere beyond the threshold, something old and pale becomes aware of the loss of an instrument.",
+          text: "Edric steps into Purgatory without his coins. They vanish and become power in your hands. That power enters you, not taken from passage, but granted by judgement. Somewhere beyond this threshold, something old and pale becomes aware of the loss of an instrument he sought to utilise beyond The Gates.",
           effects: { souls: 2, tokens: 5, gateStability: 10, alignment: -30 },
           setFlags: { edricResolved: true, edricRedeemed: true },
           goto: "after_first_judgement",
@@ -856,16 +932,46 @@ window.GATEKEEPER_STORY = {
         label: "Bind the Offering",
         stat: "force",
         dc: 2,
-        successText: "The five coins freeze in place. Edric jerks painfully as though he has lost a considerable element of his power.",
-        failureText: "The coins turn edge-first and cut through your command. One slices your palm. Another rings against the Gates. Edric laughs.",
+        successText: "Success.",
+        failureText: "Failure.",
         successEffects: { souls: 2 },
         failureEffects: { souls: 2, gateStability: -5 },
         successHiddenEffects: { _edricWounds: 1 },
         successFlags: { edricBound: true },
-        successGoto: "edric_transforms",
-        failureGoto: "edric_transforms"
+        successGoto: "edric_bind_roll_success",
+        failureGoto: "edric_bind_roll_fail"
       },
       choices: []
+    },
+    edric_bind_roll_success: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Bind the Coins",
+      art: "edric",
+      paragraphs: [
+        "The five coins freeze in place.",
+        "Edric jerks painfully as though he has just lost a considerable element of his power. Whatever he truly is, that offering is part of its shape."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_transforms"
+        }
+      ]
+    },
+    edric_bind_roll_fail: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Bind the Coins",
+      art: "edric",
+      paragraphs: [
+        "The coins turn edge-first and cut through your command.",
+        "One slices across your palm. Another rings against the Gates. Edric laughs, in a register dissimilar to what you heard before."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_transforms"
+        }
+      ]
     },
     edric_transforms: {
       chapter: "Chapter One: The New Gatekeeper",
@@ -873,14 +979,14 @@ window.GATEKEEPER_STORY = {
       art: "edric-transformed",
       checkpoint: true,
       paragraphs: [
-        "Edric's body does not break. It opens.",
-        "His burial coat splits along seams never stitched by human hands. Purple-black cloth stretches into ragged, torn-flesh wings. Gold thread crawls through the membrane like veins in old marble. His fingers lengthen into hooked claws. His face draws forward into a narrow bat-like muzzle.",
+        "Edric’s body does not break. It opens.",
+        "His burial coat splits along seams that were never stitched by human hands. Purple-black cloth now stretches into ragged, black, torn-flesh wings. Gold thread crawls through the membrane like veins in old marble. His fingers lengthen into hooked claws. His face draws forward sickeningly into a narrow bat-like muzzle.",
         "Blood falls from his mouth in frenzied drops.",
         "The queue becomes alive without a whisper of sound.",
         "Sebastien steps beside you, but not in front of you.",
-        "\"Instruction first,\" he says. \"You are not a warrior. You are a custodian. Let your judgement teach him.\"",
-        "A jolly little merchant appears from under Sebastien's coat, or possibly from behind a fold in the floor. He is no taller than your ankle, round as a purse and wearing six different coloured scarves.",
-        "\"Terrible time for business,\" he says brightly. \"Or the best kind. Chuck me a Token or two for a potion, Gatekeeper. You don't want to miss out...\""
+        "“Instruction first,” he says. “You are not a warrior. You are a custodian. Let your judgement teach him. I’ll grant you a little leftover power from your predecessor to help you on your way here.”",
+        "At this moment, a jolly little merchant appears from under Sebastien’s coat, or possibly from behind a fold in the floor. You are unsure. He is no taller than your ankle, round as a purse and wearing six different coloured scarves all at once as he rolls on by.",
+        "“Terrible time for business,” he says brightly. “Or, the best kind. Chuck me a Token or two for a potion, Gatekeeper. You don’t want to miss out...”"
       ],
       choices: [
         {
@@ -889,7 +995,7 @@ window.GATEKEEPER_STORY = {
           goto: "edric_elements"
         },
         {
-          label: "Roll aside and draw him toward the Gates' light",
+          label: "Roll aside and draw him toward the Gates light",
           goto: "edric_dodge_roll"
         },
         {
@@ -907,27 +1013,27 @@ window.GATEKEEPER_STORY = {
       title: "The Little Merchant",
       art: "edric-transformed",
       paragraphs: [
-        "The merchant produces three bottles from somewhere inside a sleeve far too small to contain even one.",
+        "The merchant produces three bottles from somewhere inside a sleeve far too small to contain even one of any substance.",
         "One is red. One is blue. One is making a noise like bees arguing in a cupboard.",
-        "\"Healing,\" he says. \"Mostly. Terms are excellent. My terms. One Token for a sip. Two for the bottle. And if you can't pay, we can set up a debt - ahem - I mean tab.\"",
+        "“Healing,” he says, pointing to the bottles. “Mostly. Terms are excellent. My terms. One Token for a sip. Two for the bottle. And if you can’t pay, we can setup a debt, [AHEM], I mean tab.”",
         "Lord Edric beats his wings once. The mist from the queue tears backward.",
-        "\"Quickly would be ideal,\" the merchant says, a little panicked."
+        "“Quickly would be ideal” he says, a little panicked."
       ],
       choices: [
         {
-          label: "Drink from the bottle",
+          label: "Spend 1 Token: drink from the bottle",
           cost: { tokens: 1 },
           effects: { health: 2 },
           goto: "edric_battle_return"
         },
         {
-          label: "Drink the full bottle",
+          label: "Spend 2 Tokens: drink the full bottle",
           cost: { tokens: 2 },
           effects: { health: 5 },
           goto: "edric_battle_return"
         },
         {
-          label: "Open a tab and drink",
+          label: "Spend 0 Tokens: drink from the bottle",
           effects: { health: 3 },
           setFlags: { merchantBound: true },
           goto: "edric_battle_return"
@@ -943,8 +1049,8 @@ window.GATEKEEPER_STORY = {
       title: "Lord Beaumont Fight",
       art: "edric-transformed",
       paragraphs: [
-        "Edric circles overhead above the black glass. The coins circle with him. Every beat of his wings creates a gust at your feet.",
-        "Sebastien calls over the wind, \"Instruction number two: most monsters want your fear. Use it.\""
+        "Edric circles overhead now above the black glass. The coins circle with him. Every beat of his wings creates a gust at your feet.",
+        "Sebastien calls over the wind, “Instruction number two: most monsters want your fear. Use it.”"
       ],
       choices: [
         {
@@ -953,11 +1059,11 @@ window.GATEKEEPER_STORY = {
           goto: "edric_elements"
         },
         {
-          label: "Draw his attention to the light of the Gates",
+          label: "Draw his attention over to the light of the Gates",
           goto: "edric_dodge_roll"
         },
         {
-          label: "Use his past against him",
+          label: "Use one of his coins against him",
           condition: { flag: "edricClue" },
           cost: { souls: 2 },
           goto: "edric_mirage"
@@ -969,25 +1075,25 @@ window.GATEKEEPER_STORY = {
       title: "Elemental Threshold",
       art: "edric-transformed",
       paragraphs: [
-        "You survey your options using the Souls you have gathered. It is not clear how you know how to do any of this. It feels intuitive.",
-        "You look for a means to control the wind Edric is summoning, but there is little of substance to call upon beyond the line of dead, the Gates and the two of you.",
-        "Sebastien's voice cuts through the noise.",
-        "\"Instruction number three: the form of power you choose for your Souls is up to you. Form and substance matter. Choose poorly and you may not live to regret it.\"",
-        "You note that he used the word choose."
+        "You surmise your options, using the Souls you have gathered. It’s not clear how it is you know how to do any of that you have accomplished to date. It just feels intuitive.",
+        "You look around for a means to control the wind Edric is summoning, but there’s little of substance to call upon, bar the line of dead, the Gates and you both standing there.",
+        "Sebastien’s voice cuts through the noise.",
+        "“Instruction number three: the form of power you choose for your Souls to take is up to you.  Typically, form and substance matters. Choose poorly and you may not live to regret it.”",
+        "You note that he used the word, ‘choose’. "
       ],
       choices: [
         {
-          label: "Summon a tornado to pull him in",
+          label: "Spend 1 Soul: Summon a tornado to pull him in",
           cost: { souls: 1 },
           goto: "edric_tornado"
         },
         {
-          label: "Summon lightning to strike him",
+          label: "Spend 1 Soul: Summon lightning to strike him",
           cost: { souls: 1 },
           goto: "edric_lightning"
         },
         {
-          label: "Summon an undead mirage",
+          label: "Spend 2 Souls: Summon an undead mirage",
           cost: { souls: 2 },
           goto: "edric_mirage"
         }
@@ -995,14 +1101,14 @@ window.GATEKEEPER_STORY = {
     },
     edric_tornado: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "It's Getting a Little Windy in Here",
+      title: "It’s Getting a Little Windy in Here",
       art: "edric-transformed",
       paragraphs: [
-        "You twist your hands as a tornado might and gusts of wind begin to stir. It builds and multiplies voraciously as the storm engulfs Lord Edric.",
-        "At first he tolerates the increased currents, but his large splintered wings begin to falter and bend backwards in a grotesque manner.",
-        "The wind consumes him.",
-        "It sucks him into the eye of the storm and he crashes onto the glass floor, shattering the area around his oversized form.",
-        "His eyes are pools of black malice as he rushes you."
+        "You twist your hands as a tornado might and from them gusts of wind begin to stir.  It builds and multiplies in intensity voraciously as the newly formed tornado engulfs Lord Edric.",
+        "At first, it seems as though he can tolerate the increased wind currents, but before long his large splintered black wings begin to falter and bend backwards in a grotesque manner.",
+        "The wind is consuming him.",
+        "It sucks him into the central eye of the storm you have brewed and he comes crashing down to the glass floor, shattering the area immediately around his oversized form.",
+        "His eyes are now pools of black malice, as he rushes you."
       ],
       choices: [
         {
@@ -1014,12 +1120,12 @@ window.GATEKEEPER_STORY = {
     },
     edric_lightning: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "You've Been Thunderstruck",
+      title: "You’ve Been Thunderstruck",
       art: "edric-transformed",
       paragraphs: [
-        "Your eyes flicker with the memory of a thunderstorm. A lightning bolt tears from the darkness and strikes Edric's right wing.",
-        "The energy dissipates and the black wet membrane looks undeterred.",
-        "He roars as his eyes flash with the light of the storm you created. He lands before you."
+        "Your eyes flicker with the memory of a witnessed thunderstorm and like a flash of thought, a lightning bolt tears from the darkness and strikes Edric’s right wing.",
+        "The energy dissipates and the black wet membrane of his wing looks undeterred in its flight path.",
+        "He roars a guttural sound as his eyes flash with the light of the storm you just created.  He lands before you."
       ],
       choices: [
         {
@@ -1033,15 +1139,14 @@ window.GATEKEEPER_STORY = {
       title: "The Master",
       art: "edric-transformed",
       paragraphs: [
-        "You imagine the embodiment of another vampiric being, more obvious in its menace than pure scale and muscle.",
-        "The summoned reflection stops Edric in his tracks. A coin hits the floor beside you with a flash of white on black glass.",
-        "The creature speaks with doom and deafening clarity: \"Rat-catcher.\"",
-        "You almost miss Edric's wide-eyed expression. He stands ten feet away on all four claws.",
-        "\"Master,\" he speaks."
+        "You’re not sure if it’s intuitive or a recollection, but you imagine the embodiment of another vampiric being.  This host being more obvious in its menace beyond pure scale and muscle.",
+        "This summoned reflection stops Edric in his tracks, as a coin thunderously hits the floor beside you, creating a flash of white on the black glass floor.",
+        "The summoned creature speaks to your surprise: “Rat-catcher”.  Those two words are said with such doom and deafening clarity that you nearly miss the wide-eyed expression of Edric.  Now stood 10 feet from you on all four claws.",
+        "“Master”, he speaks."
       ],
       choices: [
         {
-          label: "Exploit his terror",
+          label: "Continue",
           effects: { gateStability: -10 },
           hiddenEffects: { _edricWounds: 2 },
           goto: "edric_finish_choice"
@@ -1053,68 +1158,128 @@ window.GATEKEEPER_STORY = {
       title: "Under the Wing",
       art: "edric-transformed",
       paragraphs: [
-        "Edric drops from the dark mist above like a torn piece of the night's canvas.",
+        "Edric drops from the dark mist above like a torn piece of the night’s canvas.",
         "You attempt to move with speed, because staying still seems unwise."
       ],
       roll: {
         label: "Dodge the Swoop",
         stat: "reflex",
         dc: 12,
-        successText: "You fall beneath his claws. They tear sparks from the Gates where your throat would have been. His momentum carries him into the gold light and he covers his eyes with one wing.",
-        failureText: "You move a little too late. His claws find an opening in your shoulder. The wound is cold and detached from the pain it should produce.",
+        successText: "Success.",
+        failureText: "Failure.",
         successEffects: { gateStability: -5 },
         failureEffects: { health: -2 },
-        successGoto: "edric_staggered",
-        failureGoto: "edric_counterstrike"
+        successGoto: "edric_dodge_roll_success",
+        failureGoto: "edric_dodge_roll_fail"
       },
       choices: []
+    },
+    edric_dodge_roll_success: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Under the Wing",
+      art: "edric-transformed",
+      paragraphs: [
+        "You fall beneath the incoming sweep of his claws. They tear sparks from the Gates marbled entranceway where your throat otherwise would have been.",
+        "Edric’s momentum carried him into the light of the Gates. The gold crack above the arch flares and he covers his eyes with his right wing."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_staggered"
+        }
+      ]
+    },
+    edric_dodge_roll_fail: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Under the Wing",
+      art: "edric-transformed",
+      paragraphs: [
+        "You move a little too late.",
+        "His claws find an opening in your shoulder. The wound is cold and detached, dissimilar to the pain it should produce. He beats his wings back as he makes ready for another attack."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_counterstrike"
+        }
+      ]
     },
     edric_ground_roll: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "Stand Your Ground",
       art: "edric-transformed",
       paragraphs: [
-        "You raise your hands in defence. It feels absurdly weak against the force making its way toward you.",
-        "You say a prayer, asking whatever Deity put you in charge of this post to aid you now."
+        "You raise your hands in defence. It now feels absurdly weak and meaningless against the force of the thing making its way for you.",
+        "You say a prayer to yourself.  Asking whatever Deity put you in charge of this post to aid you now."
       ],
       roll: {
         label: "Ward the Threshold",
         stat: "ward",
         dc: 15,
-        successText: "The light of a shield emanates from your braced arms. Edric slams into it and recoils, smoke rising from the cold membrane of his wing.",
-        failureText: "Whatever Deity you called upon feigns ignorance. Edric hits you with enormous force and your body strikes the Gates.",
+        successText: "Success.",
+        failureText: "Failure.",
         failureEffects: { health: -5, gateStability: -15 },
-        successGoto: "edric_staggered",
-        failureGoto: "edric_counterstrike"
+        successGoto: "edric_ground_roll_success",
+        failureGoto: "edric_ground_roll_fail"
       },
       choices: []
+    },
+    edric_ground_roll_success: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Stand Your Ground",
+      art: "edric-transformed",
+      paragraphs: [
+        "The light of a shield emanates from your braced arms, like an unknown holy Paladin.",
+        "Edric slams into the circle of light and recoils, smoke rising from the cold wet membrane of his wing."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_staggered"
+        }
+      ]
+    },
+    edric_ground_roll_fail: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Stand Your Ground",
+      art: "edric-transformed",
+      paragraphs: [
+        "Your actions are meaningless as whatever Deity you called upon feigned ignorance to your plea.",
+        "Edric hits you with the weight of a truck behind his wing. You hear the Gates groan as your body strikes into them with the force."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_counterstrike"
+        }
+      ]
     },
     edric_counterstrike: {
       chapter: "Chapter One: The New Gatekeeper",
       title: "Bloodied Frenzy",
       art: "edric-transformed",
       paragraphs: [
-        "Edric's battered and menacing form races toward you.",
-        "Your back presses against the Gates.",
-        "The bat lowers its head in an impaling charge. Blood flies from its mouth in dark threads. You cannot know whether the Gates are better able to take the charge than you.",
-        "\"The Gates have stood the test of time for countless ages,\" Sebastien says, squinting as though bracing for an outcome even he cannot foretell."
+        "Edric's battered and menacing form races towards you.",
+        "You stand with your back now pressing against the Gates.",
+        "The bat Edric lowers its head in an impaling charge. Blood flies from its mouth in dark threads as it does so. You’re not sure how much damage the Gates can sustain, but at this moment you question whether they are better taking this charge, or you.",
+        "“The Gates have stood the test of time for countless ages,” Sebastien says.  In doing so, you could be sure you see him squint a little, like he too is bracing for an outcome he too cannot foretell."
       ],
       choices: [
         {
-          label: "Stand before the Gates and brace for his charge",
-          text: "The massive head of the bat ruptures your core as all sense of the world slips from you.",
+          label: "Stand in front of the Gates and brace yourself for his charge",
+          text: "The massive head of the bad ruptures your core as all sense of the world you inhabit is lost. You feel your connection slipping, as your eyes roll into the back of your head.",
           effects: { health: -9, gateStability: -20 },
           goto: "edric_staggered"
         },
         {
-          label: "Mount a counter-attack",
+          label: "Spend Souls to mount a counter-attack against him",
           cost: { souls: 1 },
-          text: "You summon a great lance of light, but your defences are less rehearsed. A newly formed gash opens in your side.",
+          text: "You summon a great lance of light – the first thing you could think to summon which embodied the act of impaling. You imagined it like the Romans would have stuck their spears out from under their towering shields. Unfortunately, your defences were a little less well-rehearsed, as you notice a newly formed gash display from your side.",
           effects: { health: -2 },
           goto: "edric_finish_choice"
         },
         {
-          label: "Dodge and let the Gates sustain the attack",
+          label: "Attempt to dodge and let the Gates sustain the attack",
           goto: "edric_gate_roll"
         }
       ]
@@ -1124,31 +1289,31 @@ window.GATEKEEPER_STORY = {
       title: "The Lord Vampire",
       art: "edric-transformed",
       paragraphs: [
-        "Lord Edric stands before you with the confidence of practised violence. He pulls back one wing and exposes the other claw.",
+        "Lord Edric stands before you now with a menacing expression of confidence and practiced experience.  He pulls back one wing and exposes the other claw.",
         "He looks excited to toy with you.",
         "Sebastien points with his pen.",
-        "\"There. The offering is no longer orbiting him. He has a solitary coin defending him.\""
+        "“There. The offering is no longer orbiting him. He has a solitary coin defending him.”"
       ],
       choices: [
         {
-          label: "Use what you learned of the coin as bait",
+          label: "Use the coin as bait",
           condition: { flag: "edricClue" },
           goto: "edric_coin_bait_roll"
         },
         {
-          label: "Use a Token as bait",
+          label: "Use the coin as bait",
           condition: { flagNot: "edricClue" },
           cost: { tokens: 1 },
           goto: "edric_coin_bait_roll"
         },
         {
-          label: "Prepare for his impending attack",
+          label: "Prepare yourself for his impending attack",
           goto: "edric_gate_roll"
         },
         {
-          label: "Mount a counter-attack",
+          label: "Spend Souls to mount a counter-attack against him",
           cost: { souls: 1 },
-          text: "You summon a great lance of light, but a gash opens in your side.",
+          text: "You summon a great lance of light – the first thing you could think to summon which embodied the act of impaling. You imagined it like the Romans would have stuck their spears out from under their towering shields. Unfortunately, your defences were a little less well-rehearsed, as you notice a newly formed gash display from your side.",
           effects: { health: -2 },
           goto: "edric_finish_choice"
         }
@@ -1159,45 +1324,103 @@ window.GATEKEEPER_STORY = {
       title: "Bait the Lord",
       art: "edric-transformed",
       paragraphs: [
-        "You flash a Token at Lord Edric, conjured in the image of one of his own.",
-        "Edric's eyes fix on the gold. <em>Had you obtained one of his precious trophies unbeknownst to him?</em>",
-        "There he is. Not the ferocious bat. Not the over-indulgent lord. The boy in the kitchen, watching a small thing enter his trap."
+        "You flash a Token at Lord Edric which you conjure as one of his own from a flashback you witnessed.",
+        "Edric’s eyes fix on the gold.  <em>Had you obtained one of his precious trophies unbeknownst to him?</em>",
+        "There he is. Not the ferocious bat you see before you now. Not the over-indulgent lord. The boy in the kitchen, once more watching a small thing enter his trap."
       ],
       roll: {
         label: "Bait the Lord",
         stat: "trap",
         dc: 7,
-        successText: "You throw the coin at the Gates. Edric follows before he can stop himself. The gold crack opens and brands him with its own reflection.",
-        failureText: "Edric sees the trap and punishes the attempt. His claw connects with your stomach and the coins laugh in bright little taunts.",
+        successText: "Success.",
+        failureText: "Failure.",
         successEffects: { gateStability: -5 },
         failureEffects: { health: -5, gateStability: -5 },
         successHiddenEffects: { _edricWounds: 1 },
-        successGoto: "edric_finish_choice",
-        failureGoto: "edric_last_chance"
+        successGoto: "edric_coin_bait_roll_success",
+        failureGoto: "edric_coin_bait_roll_fail"
       },
       choices: []
     },
-    edric_gate_roll: {
+    edric_coin_bait_roll_success: {
       chapter: "Chapter One: The New Gatekeeper",
-      title: "The Gates That Stood the Test of Time",
+      title: "Bait the Lord",
       art: "edric-transformed",
       paragraphs: [
-        "You wait until what you believe is the last possible moment before throwing yourself out of Edric's head-first charge."
+        "You throw the coin at the Gates.",
+        "Edric follows before he can stop himself. The gold crack above the arch opens once more and brands him with its own reflection."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_finish_choice"
+        }
+      ]
+    },
+    edric_coin_bait_roll_fail: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Bait the Lord",
+      art: "edric-transformed",
+      paragraphs: [
+        "Edric sees the trap and punishes the attempt.",
+        "He strikes low as his claw connect with your stomach and empties its contents. The coins laugh in bright little taunts."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_last_chance"
+        }
+      ]
+    },
+    edric_gate_roll: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Gates That Stood The Test of Time",
+      art: "edric-transformed",
+      paragraphs: [
+        "You wait until you believe is the last possible moment, before attempting to throw yourself out of the way of Edric’s head-first charge."
       ],
       roll: {
         label: "Dodge the Beast",
         stat: "reflex",
         dc: 12,
-        successText: "The Gates sustain the brunt of his force and repel him to frenzied shrieks, though the structure pays a heavy price.",
-        failureText: "You move too late. Edric slams into both you and the Gates. Your leg takes much of the force, but the threshold repels him.",
+        successText: "Success.",
+        failureText: "Failure.",
         successEffects: { gateStability: -20 },
         failureEffects: { health: -3, gateStability: -10 },
         successHiddenEffects: { _edricWounds: 1 },
         failureHiddenEffects: { _edricWounds: 1 },
-        successGoto: "edric_finish_choice",
-        failureGoto: "edric_finish_choice"
+        successGoto: "edric_gate_roll_success",
+        failureGoto: "edric_gate_roll_fail"
       },
       choices: []
+    },
+    edric_gate_roll_success: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Gates That Stood The Test of Time",
+      art: "edric-transformed",
+      paragraphs: [
+        "The Gates sustain the not inconsiderable brunt of his force.  In doing so, they repel him to his frenzied shrieks but equally take their toll on the defence of the structure."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_finish_choice"
+        }
+      ]
+    },
+    edric_gate_roll_fail: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "The Gates That Stood The Test of Time",
+      art: "edric-transformed",
+      paragraphs: [
+        "You move a little too late and Edric slams into both you and the Gates head-first.  Your leg takes much of the brunt of the force, but the Gates seem to repel as much damage as they sustain to Edric’s apparent surprise."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_finish_choice"
+        }
+      ]
     },
     edric_finish_choice: {
       chapter: "Chapter One: The New Gatekeeper",
@@ -1205,10 +1428,10 @@ window.GATEKEEPER_STORY = {
       art: "edric-transformed",
       paragraphs: [
         "Edric is wounded now.",
-        "Not bleeding, exactly. Blood already flowed from his gaping maw. But he is losing discernible shape, becoming part of the mist surrounding him.",
-        "His bat-form wisps like smoke at the edges. Lord Beaumont appears fragmented.",
-        "Sebastien's voice is low.",
-        "\"Your last instruction: not every Soul is gained by passage through the Gates. Some are claimed by ending what should not cross.\""
+        "Not bleeding, exactly. Blood already flowed from his gaping maw. But he was losing discernible shape now. Becoming part of the mist surrounding him.",
+        "His bat-form whisps like smoke at the edges. Lord Beaumont appears fragmented.",
+        "Sebastien’s voice is low.",
+        "“Your last instruction: not every Soul is gained by passage through the Gates. Some are claimed by ending what should not cross.”"
       ],
       choices: [
         {
@@ -1217,6 +1440,7 @@ window.GATEKEEPER_STORY = {
         },
         {
           label: "Offer one final chance to repent (risky)",
+          setFlags: { edricFinalRepentance: true },
           goto: "edric_redemption_roll"
         }
       ]
@@ -1245,16 +1469,50 @@ window.GATEKEEPER_STORY = {
             value: 3
           }
         ],
-        successText: "You do not kill him. That word belongs elsewhere. You eradicate the part of him that has forgotten it has an end. The bat-form collapses into ash and five remaining gold coins.",
-        failureText: "Edric is faster. His claws punch through your guard and pin you to the black glass. His wings blot out the Gates as he towers above you.",
+        successText: "Success.",
+        failureText: "Failure.",
         successEffects: { souls: 5, tokens: 5, gateStability: 25, alignment: 20 },
         failureEffects: { health: -5, gateStability: -15 },
         successFlags: { edricResolved: true, edricVanquished: true },
-        successGoto: "after_first_judgement",
-        failureGoto: "edric_last_chance",
-        successGotoIfFlag: { secondJudgement: "after_second_judgement" }
+        successGoto: "edric_final_roll_success",
+        failureGoto: "edric_final_roll_fail"
       },
       choices: []
+    },
+    edric_final_roll_success: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Vanquish the Undead",
+      art: "edric-transformed",
+      paragraphs: [
+        "You do not “kill” him. That word belongs elsewhere.",
+        "You eradicate the part of him that has forgotten it has an end.  Judgement.",
+        "Edric’s wings fold inward. His mouth opens as if to lodge a final protest, but the Gates silence the sound before he can make it audible.",
+        "The bat-form collapses into ash and five remaining gold coins.",
+        "Five unique souls enter your power, one after another. The memories of those he fed upon. Somewhere beyond this threshold, something old and pale becomes aware of the loss of an instrument he sought to utilise beyond The Gates."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "after_first_judgement",
+          gotoIfFlag: { secondJudgement: "after_second_judgement" }
+        }
+      ]
+    },
+    edric_final_roll_fail: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "Vanquish the Undead",
+      art: "edric-transformed",
+      paragraphs: [
+        "Edric is faster than your impending judgement.",
+        "His claws punch through your guard and pin you to the black glass underneath. His wings blot out the Gates as he towers above you. His mouth lowers, dripping with every life he has savoured.",
+        "Sebastien says something you do not understand in time."
+      ],
+      choices: [
+        {
+          label: "Continue",
+          goto: "edric_last_chance"
+        }
+      ]
     },
     edric_last_chance: {
       chapter: "Chapter One: The New Gatekeeper",
@@ -1262,14 +1520,14 @@ window.GATEKEEPER_STORY = {
       art: "edric-transformed",
       paragraphs: [
         "You are on your back. The towering bat form of Lord Edric is above you.",
-        "Sebastien's voice comes from somewhere just out of sight.",
-        "\"Bonus instruction,\" he says. \"Survive first. Be elegant later.\"",
+        "Sebastien’s voice comes from somewhere just out of sight.",
+        "“Bonus instruction,” he says. “Survive first. Be elegant later.”",
         "The merchant peers over your shoulder.",
-        "\"Still selling potions,\" he whispers. \"Heroic deeds can be indebted.\""
+        "“Still selling potions,” he whispers. “Heroic deeds can be indebted.”"
       ],
       choices: [
         {
-          label: "Expel him using the light of the Gates",
+          label: "Spend 1 Soul: Expel him using the light of the Gates",
           cost: { souls: 1 },
           text: "You eradicate the part of Edric that has forgotten it has an end. His bat-form collapses into ash and five gold coins.",
           effects: { souls: 5, tokens: 5, gateStability: 25, alignment: 20 },
@@ -1278,15 +1536,15 @@ window.GATEKEEPER_STORY = {
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         },
         {
-          label: "Take the Little Merchant's paid offer",
+          label: "Spend 1 Token: Take the Little Merchant up on his offer",
           cost: { tokens: 1 },
-          effects: { souls: 5, gateStability: 25, alignment: 8 },
+          effects: { souls: 5, tokens: 5, gateStability: 25, alignment: 8 },
           setFlags: { edricResolved: true, edricVanquished: true },
           goto: "edric_merchant_vanquish"
         },
         {
-          label: "Accept the Little Merchant's debt",
-          effects: { souls: 5, gateStability: 25, alignment: 8 },
+          label: "Spend 0 Token: Take the Little Merchant up on his indebted offer",
+          effects: { souls: 5, tokens: 5, gateStability: 25, alignment: 8 },
           setFlags: { edricResolved: true, edricVanquished: true, merchantBound: true },
           goto: "edric_merchant_vanquish"
         }
@@ -1297,14 +1555,14 @@ window.GATEKEEPER_STORY = {
       title: "A Most Helpful Little Fellow",
       art: "edric-transformed",
       paragraphs: [
-        "At your nod, the little merchant gestures toward the bat towering over you. A pale fluid that sounds like angry bees trickles down Edric's winged back.",
-        "Edric opens his mouth in protest before his bat-form collapses into ash on top of you. Five gold coins hit the floor and the merchant scoops them up.",
-        "\"Payment accepted!\" he says, making for a seam in the mist and vanishing.",
-        "Somewhere beyond the threshold, something old and pale becomes aware of the loss of an instrument it sought to use beyond the Gates."
+        "At your nod, the little merchant gestures towards the bat Edrich towering over you and you notice a pale looking fluid that sounds like the hum of angry bees trickle down from his winged back.",
+        "Edrich begins to open his mouth in protest before his bat-form collapses into ash on top of you. Five gold coins hit the floor, just before the merchant scoops them up.",
+        "“Payment accepted!” he says, just before he makes off for a seam in the mist and is gone in an instant.",
+        "Somewhere beyond this threshold, something old and pale becomes aware of the loss of an instrument he sought to utilise beyond The Gates."
       ],
       choices: [
         {
-          label: "Return to the queue",
+          label: "Continue",
           goto: "after_first_judgement",
           gotoIfFlag: { secondJudgement: "after_second_judgement" }
         }
@@ -1427,6 +1685,12 @@ window.GATEKEEPER_STORY = {
       choices: [
         {
           label: "Hear one more Soul",
+          condition: { flagNot: "edricResolved" },
+          goto: "edric_forces_queue"
+        },
+        {
+          label: "Hear one more Soul",
+          condition: { flag: "edricResolved" },
           goto: "second_queue"
         },
         {
@@ -1434,6 +1698,26 @@ window.GATEKEEPER_STORY = {
           text: "You open the Gates by a finger-width. The dead make that enough.",
           effects: { gateStability: -50 },
           goto: "failure_gate"
+        }
+      ]
+    },
+    edric_forces_queue: {
+      chapter: "Chapter One: The New Gatekeeper",
+      title: "A Lord Will Not Wait",
+      art: "edric",
+      paragraphs: [
+        "Before another name can rise through Sebastien’s ledger, Lord Edric Beaumont pushes his way to the front of the queue.",
+        "The dead part around him with the old instinct of people trained to make room for rank.",
+        "His five funeral coins orbit faster.",
+        "“Enough delay,” he says. “You will hear my petition now.”",
+        "Sebastien regards him over the ledger.",
+        "“It appears your second judgement has volunteered itself.”"
+      ],
+      choices: [
+        {
+          label: "Continue",
+          setFlags: { secondJudgement: true },
+          goto: "edric_first_words"
         }
       ]
     },
@@ -1453,19 +1737,23 @@ window.GATEKEEPER_STORY = {
       choices: [
         {
           label: "Hear Mara Vale",
-          condition: { flagNot: "maraResolved" },
+          condition: {
+            all: [
+              { flag: "edricResolved" },
+              { flagNot: "maraResolved" }
+            ]
+          },
           setFlags: { secondJudgement: true },
           goto: "mara_first_words"
         },
         {
-          label: "Hear Lord Edric Beaumont",
-          condition: { flagNot: "edricResolved" },
-          setFlags: { secondJudgement: true },
-          goto: "edric_first_words"
-        },
-        {
           label: "Hear the masked Soul",
-          condition: { flagNot: "maskResolved" },
+          condition: {
+            all: [
+              { flag: "edricResolved" },
+              { flagNot: "maskResolved" }
+            ]
+          },
           setFlags: { secondJudgement: true },
           goto: "mask_first_words"
         }
