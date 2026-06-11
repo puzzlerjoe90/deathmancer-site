@@ -89,10 +89,10 @@
   function modifierFor(stat) {
     const background = state.flags.background;
     const backgroundBonuses = {
-      scholar: { truth: 2 },
-      creative: { empathy: 2 },
+      scholar: { truth: 2, ward: 2 },
+      creative: { empathy: 2, redemption: 2, trap: 2 },
       sportsman: { reflex: 2 },
-      strong: { force: 2 }
+      strong: { force: 2, combat: 3 }
     };
 
     if (backgroundBonuses[background]?.[stat]) {
@@ -103,6 +103,11 @@
     if (stat === "wrath") return Math.round(state.alignment / 25);
     if (stat === "gate") return state.gateStability >= 55 ? 1 : -1;
     return 0;
+  }
+
+  function stateValue(key) {
+    if (Object.prototype.hasOwnProperty.call(state, key)) return state[key];
+    return state.flags[key] || 0;
   }
 
   function setFlags(flags) {
@@ -143,8 +148,13 @@
   function conditionMet(condition) {
     if (!condition) return true;
 
+    if (condition.any && !condition.any.some((entry) => conditionMet(entry))) return false;
+    if (condition.all && !condition.all.every((entry) => conditionMet(entry))) return false;
+    if (condition.flag && !state.flags[condition.flag]) return false;
     if (condition.flagNot && state.flags[condition.flagNot]) return false;
     if (condition.flags && !condition.flags.every((flag) => state.flags[flag])) return false;
+    if (condition.min && !Object.entries(condition.min).every(([key, value]) => stateValue(key) >= value)) return false;
+    if (condition.max && !Object.entries(condition.max).every(([key, value]) => stateValue(key) <= value)) return false;
 
     return true;
   }
@@ -394,6 +404,10 @@
     render(true);
   }
 
+  function applyHiddenEffects(effects) {
+    applyEffects(effects);
+  }
+
   async function choose(choice) {
     if (isResolving) return;
     ensureAudioContext();
@@ -438,6 +452,7 @@
     }
 
     changes = changes.concat(applyEffects(choice.effects));
+    applyHiddenEffects(choice.hiddenEffects);
     setFlags(choice.setFlags);
 
     lastResult = choice.text
@@ -486,13 +501,20 @@
       window.clearInterval(animation);
 
       const die = Math.floor(Math.random() * 20) + 1;
-      const total = die + modifierFor(roll.stat) + (roll.modifier || 0);
+      const stateModifier = (roll.modifierFrom || [])
+        .reduce((sum, key) => sum + stateValue(key), 0);
+      const conditionalModifier = (roll.conditionalModifiers || [])
+        .filter((entry) => conditionMet(entry.condition))
+        .reduce((sum, entry) => sum + entry.value, 0);
+      const total = die + modifierFor(roll.stat) + (roll.modifier || 0)
+        + stateModifier + conditionalModifier;
       const passed = total >= roll.dc;
       const changes = applyEffects(passed ? roll.successEffects : roll.failureEffects);
+      applyHiddenEffects(passed ? roll.successHiddenEffects : roll.failureHiddenEffects);
       setFlags(passed ? roll.successFlags : roll.failureFlags);
 
       lastResult = {
-        title: `D20 Result: ${die}`,
+        title: `D20 Result: ${die} - ${passed ? "Success" : "Failure"}`,
         body: passed ? roll.successText : roll.failureText,
         changes
       };
@@ -693,14 +715,20 @@
   }
 
   function render(shouldScroll) {
+    const scene = currentScene();
+    const isGameOver = Boolean(scene.gameOver);
+
     renderStats();
     renderResult();
     renderScene();
     updateMusicButton();
 
+    rewindButton.hidden = !isGameOver;
+    restartButton.hidden = !isGameOver;
     rewindButton.disabled = isResolving || !checkpoint || state.rewinds <= 0 || currentSceneId === checkpoint.sceneId;
     restartButton.disabled = isResolving;
-    gameActions.setAttribute("aria-hidden", currentScene().score ? "true" : "false");
+    gameActions.classList.toggle("is-game-over", isGameOver);
+    gameActions.setAttribute("aria-hidden", scene.score ? "true" : "false");
 
     if (shouldScroll) {
       window.requestAnimationFrame(() => {

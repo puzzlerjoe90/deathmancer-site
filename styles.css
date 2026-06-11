@@ -1325,6 +1325,14 @@ p {
   gap: 0.6rem;
 }
 
+.game-actions:not(.is-game-over) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.game-actions > [hidden] {
+  display: none;
+}
+
 .icon-button,
 .dice-button {
   display: inline-flex;
