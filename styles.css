@@ -278,12 +278,21 @@ p {
   box-shadow: 0 1.5rem 4rem var(--shadow);
 }
 
-.hero__art img {
+.hero__art img,
+.hero__art video {
   width: 100%;
   min-height: 18rem;
   max-height: 24rem;
   object-fit: cover;
+}
+
+.hero__art img {
   filter: grayscale(0.42) saturate(0.52) contrast(1.18) brightness(0.5);
+}
+
+.hero__art video {
+  display: block;
+  filter: saturate(0.96) contrast(1.04) brightness(0.92);
 }
 
 .hero__art::after {
@@ -471,6 +480,120 @@ p {
   margin-bottom: clamp(1.4rem, 4vw, 2.5rem);
 }
 
+.character-hero--wide {
+  max-width: 58rem;
+}
+
+.commander-gateway {
+  display: grid;
+  gap: 1rem;
+}
+
+.commander-tile {
+  display: grid;
+  min-height: 20rem;
+  overflow: hidden;
+  align-content: end;
+  gap: 0.55rem;
+  padding: 1rem;
+  border: 1px solid rgba(241, 215, 120, 0.42);
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(3, 3, 4, 0.82) 62%),
+    #08090b;
+  box-shadow: 0 1.2rem 3rem var(--shadow);
+  color: var(--text);
+  isolation: isolate;
+  position: relative;
+  text-decoration: none;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.commander-tile:hover,
+.commander-tile:focus-visible {
+  border-color: var(--gold-bright);
+  transform: translateY(-2px);
+}
+
+.commander-tile img {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.8) contrast(1.04) brightness(0.55);
+  transition: filter 180ms ease, transform 180ms ease;
+}
+
+.commander-tile:hover img,
+.commander-tile:focus-visible img {
+  filter: saturate(1) contrast(1.06) brightness(0.68);
+  transform: scale(1.02);
+}
+
+.commander-tile strong {
+  color: #fffaf0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 8vw, 3.4rem);
+  line-height: 1;
+}
+
+.commander-tile > span:last-child {
+  max-width: 22rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.commander-tile--pending {
+  background:
+    linear-gradient(145deg, rgba(241, 215, 120, 0.08), transparent 46%),
+    #08090b;
+}
+
+.commander-tile__mark {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: rgba(241, 215, 120, 0.18);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(4rem, 18vw, 8rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.character-page-hero {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: clamp(1.8rem, 5vw, 3.5rem);
+}
+
+.character-page-hero__media {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(241, 215, 120, 0.42);
+  background: #050506;
+  box-shadow: 0 1.4rem 3rem var(--shadow);
+}
+
+.character-page-hero__media img,
+.character-page-hero__media video {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.character-page-hero__media video {
+  display: block;
+  filter: saturate(0.98) contrast(1.06) brightness(0.9);
+}
+
+.character-page-hero__media--duo {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.35rem;
+}
+
 .character-jump {
   position: sticky;
   top: 4.45rem;
@@ -533,6 +656,23 @@ p {
   box-shadow: 0 1.2rem 3rem var(--shadow);
 }
 
+.character-card--button {
+  width: 100%;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: border-color 180ms ease, transform 180ms ease, background-color 180ms ease;
+}
+
+.character-card--button:hover,
+.character-card--button:focus-visible {
+  border-color: var(--gold-bright);
+  background-color: rgba(18, 19, 23, 0.94);
+  transform: translateY(-2px);
+}
+
 .character-card img {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -540,15 +680,20 @@ p {
   background: #050506;
 }
 
-.character-card > div:not(.character-card__duo) {
+.character-card > div:not(.character-card__duo),
+.character-card__body {
   display: grid;
   gap: 0.65rem;
   padding: 1rem;
 }
 
-.character-card h3 {
+.character-card h3,
+.character-card strong {
   margin-bottom: 0;
+  color: #fffaf0;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.65rem, 6vw, 2.35rem);
+  line-height: 1.08;
 }
 
 .character-card p {
@@ -571,6 +716,14 @@ p {
   text-transform: uppercase;
 }
 
+.character-card__action {
+  color: var(--gold-bright);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .character-card--commander {
   margin-bottom: 1rem;
 }
@@ -580,6 +733,69 @@ p {
   gap: 0.35rem;
   padding: 0.35rem;
   background: #030304;
+}
+
+.character-modal {
+  width: min(100% - 2rem, 58rem);
+  max-height: min(88svh, 48rem);
+  padding: 0;
+  border: 1px solid rgba(241, 215, 120, 0.58);
+  background: #08090b;
+  color: var(--text);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.82);
+}
+
+.character-modal::backdrop {
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.character-modal__close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  z-index: 2;
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 1px solid rgba(241, 215, 120, 0.5);
+  background: rgba(3, 3, 4, 0.9);
+  color: var(--gold-bright);
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.character-modal__layout {
+  display: grid;
+  gap: 0;
+}
+
+.character-modal__layout > img {
+  width: 100%;
+  max-height: 22rem;
+  object-fit: cover;
+  background: #030304;
+}
+
+.character-modal__copy {
+  display: grid;
+  gap: 0.8rem;
+  padding: clamp(1rem, 4vw, 1.5rem);
+}
+
+.character-modal__copy h2 {
+  margin-bottom: 0;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+}
+
+.character-modal__copy p {
+  margin-bottom: 0;
+}
+
+.character-modal__copy strong {
+  color: var(--gold-bright);
 }
 
 .timeline {
@@ -1577,12 +1793,26 @@ p {
   .feature-grid,
   .gallery-grid,
   .video-grid,
-  .character-grid {
+  .character-grid,
+  .commander-gateway {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .commander-gateway {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .character-card__duo {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .character-modal__layout {
+    grid-template-columns: minmax(16rem, 0.82fr) minmax(0, 1fr);
+  }
+
+  .character-modal__layout > img {
+    height: 100%;
+    max-height: none;
   }
 
   .player-grid {
@@ -1657,8 +1887,17 @@ p {
     min-height: calc(100svh - 7.5rem);
   }
 
-  .hero__art img {
+  .hero__art img,
+  .hero__art video {
     max-height: none;
+  }
+
+  .character-page-hero {
+    grid-template-columns: minmax(0, 0.8fr) minmax(18rem, 1fr);
+  }
+
+  .character-page-hero__media--duo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .characters-callout {

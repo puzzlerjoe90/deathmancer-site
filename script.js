@@ -29,6 +29,67 @@ nav?.addEventListener("click", (event) => {
 window.addEventListener("scroll", updateHeaderState, { passive: true });
 updateHeaderState();
 
+const characterDialog = document.querySelector("[data-character-dialog]");
+const characterButtons = document.querySelectorAll("[data-character-modal]");
+
+if (characterDialog && characterButtons.length) {
+  const title = characterDialog.querySelector("[data-character-title]");
+  const commander = characterDialog.querySelector("[data-character-commander]");
+  const type = characterDialog.querySelector("[data-character-type]");
+  const known = characterDialog.querySelector("[data-character-known]");
+  const history = characterDialog.querySelector("[data-character-history]");
+  const closing = characterDialog.querySelector("[data-character-closing]");
+  const image = characterDialog.querySelector("[data-character-image]");
+  const closeButton = characterDialog.querySelector("[data-character-close]");
+
+  function setText(target, value) {
+    if (!target) {
+      return;
+    }
+
+    target.textContent = value || "";
+    target.hidden = !value;
+  }
+
+  characterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setText(title, button.dataset.name);
+      setText(commander, button.dataset.commander);
+      setText(type, button.dataset.type);
+      setText(known, button.dataset.known);
+      setText(history, button.dataset.history);
+      setText(closing, button.dataset.closing);
+
+      if (image && button.dataset.image) {
+        image.src = button.dataset.image;
+        image.alt = `${button.dataset.name || "Character"} artwork for Deathmancer.`;
+      }
+
+      if (typeof characterDialog.showModal === "function") {
+        characterDialog.showModal();
+      } else {
+        characterDialog.setAttribute("open", "");
+      }
+    });
+  });
+
+  function closeCharacterDialog() {
+    if (typeof characterDialog.close === "function") {
+      characterDialog.close();
+    } else {
+      characterDialog.removeAttribute("open");
+    }
+  }
+
+  closeButton?.addEventListener("click", closeCharacterDialog);
+
+  characterDialog.addEventListener("click", (event) => {
+    if (event.target === characterDialog) {
+      closeCharacterDialog();
+    }
+  });
+}
+
 const scorekeeper = document.querySelector("[data-scorekeeper]");
 
 if (scorekeeper) {
