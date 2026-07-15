@@ -160,8 +160,28 @@ code {
   padding: clamp(2rem, 6vw, 4.5rem) 0 2rem;
 }
 
+.hero--feature {
+  min-height: auto;
+  align-items: start;
+  padding-top: clamp(1.2rem, 4vw, 3rem);
+}
+
 .hero__content {
   max-width: 43rem;
+}
+
+.hero--feature .hero__content {
+  max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero--feature .hero__actions {
+  justify-content: center;
+}
+
+.hero--feature .stat-strip {
+  margin-inline: auto;
 }
 
 .eyebrow {
@@ -295,6 +315,17 @@ p {
   filter: saturate(0.96) contrast(1.04) brightness(0.92);
 }
 
+.hero__art--feature {
+  width: 100%;
+}
+
+.hero__art--feature img {
+  min-height: 17rem;
+  max-height: 34rem;
+  aspect-ratio: 16 / 9;
+  filter: none;
+}
+
 .hero__art::after {
   position: absolute;
   inset: 0;
@@ -303,6 +334,12 @@ p {
     linear-gradient(90deg, rgba(3, 3, 4, 0.36), transparent 48%),
     linear-gradient(0deg, rgba(3, 3, 4, 0.78), transparent 50%);
   pointer-events: none;
+}
+
+.hero__art--feature::after {
+  background:
+    linear-gradient(0deg, rgba(3, 3, 4, 0.34), transparent 48%),
+    linear-gradient(90deg, rgba(3, 3, 4, 0.24), transparent 48%);
 }
 
 .hero__art figcaption {
@@ -1887,9 +1924,18 @@ p {
     min-height: calc(100svh - 7.5rem);
   }
 
+  .hero--feature {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
   .hero__art img,
   .hero__art video {
     max-height: none;
+  }
+
+  .hero__art--feature img {
+    max-height: 34rem;
   }
 
   .character-page-hero {
