@@ -163,6 +163,7 @@ code {
 .hero--feature {
   min-height: auto;
   align-items: start;
+  justify-items: center;
   padding-top: clamp(1.2rem, 4vw, 3rem);
 }
 
@@ -317,12 +318,15 @@ p {
 
 .hero__art--feature {
   width: 100%;
+  max-width: 58rem;
+  margin-inline: auto;
 }
 
 .hero__art--feature img {
   min-height: 17rem;
   max-height: 34rem;
   aspect-ratio: 16 / 9;
+  object-position: center center;
   filter: none;
 }
 
@@ -1979,6 +1983,11 @@ p {
 @media (max-width: 420px) {
   .button {
     width: 100%;
+  }
+
+  .hero__art--feature img {
+    min-height: 13.5rem;
+    object-position: center center;
   }
 
   .story-panel.is-score-scene .choice-list {
