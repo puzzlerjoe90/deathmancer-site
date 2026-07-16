@@ -36,6 +36,8 @@ if (characterDialog && characterButtons.length) {
   const title = characterDialog.querySelector("[data-character-title]");
   const commander = characterDialog.querySelector("[data-character-commander]");
   const type = characterDialog.querySelector("[data-character-type]");
+  const unit = characterDialog.querySelector("[data-character-unit]");
+  const unitPanel = characterDialog.querySelector("[data-character-unit-panel]");
   const known = characterDialog.querySelector("[data-character-known]");
   const history = characterDialog.querySelector("[data-character-history]");
   const closing = characterDialog.querySelector("[data-character-closing]");
@@ -51,13 +53,55 @@ if (characterDialog && characterButtons.length) {
     target.hidden = !value;
   }
 
+  function setFormattedText(target, value) {
+    if (!target) {
+      return;
+    }
+
+    target.textContent = "";
+    target.hidden = !value;
+
+    if (!value) {
+      return;
+    }
+
+    value.split("*").forEach((part, index) => {
+      if (!part) {
+        return;
+      }
+
+      const appendTextWithBreaks = (parent, text) => {
+        text.split("\n").forEach((line, lineIndex) => {
+          if (lineIndex > 0) {
+            parent.append(document.createElement("br"));
+          }
+          if (line) {
+            parent.append(document.createTextNode(line));
+          }
+        });
+      };
+
+      if (index % 2 === 1) {
+        const emphasis = document.createElement("em");
+        appendTextWithBreaks(emphasis, part);
+        target.append(emphasis);
+      } else {
+        appendTextWithBreaks(target, part);
+      }
+    });
+  }
+
   characterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       setText(title, button.dataset.name);
       setText(commander, button.dataset.commander);
       setText(type, button.dataset.type);
-      setText(known, button.dataset.known);
-      setText(history, button.dataset.history);
+      setText(unit, button.dataset.unit);
+      if (unitPanel) {
+        unitPanel.hidden = !button.dataset.unit;
+      }
+      setFormattedText(known, button.dataset.known);
+      setFormattedText(history, button.dataset.history);
       setText(closing, button.dataset.closing);
 
       if (image && button.dataset.image) {
