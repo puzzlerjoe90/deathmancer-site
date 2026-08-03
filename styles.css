@@ -1086,6 +1086,40 @@ p {
   background: rgba(241, 215, 120, 0.1);
 }
 
+.score-flash--gain {
+  animation: score-gain-flash 780ms ease;
+}
+
+.score-flash--spend {
+  animation: score-spend-flash 780ms ease;
+}
+
+@keyframes score-gain-flash {
+  0%,
+  100% {
+    color: var(--gold-bright);
+    text-shadow: none;
+  }
+
+  45% {
+    color: #b9ffd2;
+    text-shadow: 0 0 1rem rgba(88, 255, 150, 0.8);
+  }
+}
+
+@keyframes score-spend-flash {
+  0%,
+  100% {
+    color: var(--gold-bright);
+    text-shadow: none;
+  }
+
+  45% {
+    color: #ff9a8f;
+    text-shadow: 0 0 1rem rgba(255, 82, 68, 0.78);
+  }
+}
+
 .number-stepper {
   display: grid;
   grid-template-columns: 3rem minmax(0, 1fr) 3rem;
@@ -2108,6 +2142,50 @@ input {
   padding: 0.62rem;
 }
 
+.status-pill__button {
+  justify-self: start;
+  min-height: 2rem;
+  margin-top: 0.35rem;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid rgba(241, 215, 120, 0.62);
+  background: rgba(241, 215, 120, 0.12);
+  color: var(--gold-bright);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-pill__button:active,
+.status-pill__button:focus-visible {
+  background: rgba(241, 215, 120, 0.22);
+  outline: 2px solid rgba(241, 215, 120, 0.18);
+  outline-offset: 2px;
+}
+
+.initiative-badge {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.48rem;
+}
+
+.initiative-badge img {
+  width: 2.1rem;
+  height: 2.1rem;
+  flex: 0 0 auto;
+  border: 1px solid rgba(241, 215, 120, 0.42);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.initiative-badge strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .status-pill strong,
 .match-panel strong,
 .score-preview strong,
@@ -2443,10 +2521,216 @@ input {
   }
 }
 
+.scorekeeper-effect {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.scorekeeper-effect::before {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(241, 215, 120, 0.18), transparent 18rem),
+    rgba(3, 3, 4, 0.38);
+  content: "";
+  animation: effect-fade 1200ms ease both;
+}
+
+.scorekeeper-effect__mark {
+  position: relative;
+  display: grid;
+  width: min(48vw, 11rem);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid var(--gold-bright);
+  background:
+    linear-gradient(145deg, rgba(241, 215, 120, 0.18), rgba(3, 3, 4, 0.92)),
+    #050506;
+  color: var(--gold-bright);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.3rem, 16vw, 7rem);
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 0 3rem rgba(241, 215, 120, 0.32);
+  animation: effect-mark 900ms cubic-bezier(0.17, 0.84, 0.44, 1) both;
+}
+
+.scorekeeper-effect p {
+  position: absolute;
+  top: calc(50% + min(28vw, 6.5rem));
+  width: min(88vw, 28rem);
+  margin: 0;
+  color: #fff7d8;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  animation: effect-copy 1150ms ease both;
+}
+
+.scorekeeper-effect--terrain .scorekeeper-effect__mark {
+  border-radius: 18%;
+  transform: rotate(8deg);
+  animation-name: dice-roll;
+}
+
+.scorekeeper-effect--victory .scorekeeper-effect__mark {
+  border-color: #fff7d8;
+  color: #fff7d8;
+  box-shadow: 0 0 4rem rgba(241, 215, 120, 0.62);
+}
+
+.victory-dialog {
+  width: min(100% - 1.5rem, 38rem);
+  padding: 0;
+  border: 1px solid rgba(241, 215, 120, 0.72);
+  background: transparent;
+  color: var(--text);
+}
+
+.victory-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(0.25rem);
+}
+
+.victory-dialog__panel {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1rem, 4vw, 1.6rem);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(241, 215, 120, 0.2), transparent 18rem),
+    #07080a;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.7);
+}
+
+.victory-dialog__panel h2 {
+  margin-bottom: 0;
+}
+
+.victory-dialog__panel p {
+  margin-bottom: 0;
+}
+
+.victory-dialog__summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.victory-dialog__summary p,
+.victory-dialog__log {
+  padding: 0.72rem;
+  border: 1px solid rgba(241, 215, 120, 0.32);
+  background: rgba(3, 3, 4, 0.62);
+}
+
+.victory-dialog__summary strong,
+.victory-dialog__summary span {
+  display: block;
+}
+
+.victory-dialog__summary strong,
+.victory-dialog__log h3 {
+  color: var(--gold-bright);
+}
+
+.victory-dialog__summary span,
+.victory-dialog__log p {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.victory-dialog__log {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+
+.victory-dialog__log h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+@keyframes effect-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  12%,
+  72% {
+    opacity: 1;
+  }
+}
+
+@keyframes effect-mark {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+
+  45% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes dice-roll {
+  0% {
+    opacity: 0;
+    transform: rotate(-38deg) scale(0.72);
+  }
+
+  35% {
+    opacity: 1;
+    transform: rotate(22deg) scale(1.08);
+  }
+
+  70% {
+    opacity: 1;
+    transform: rotate(-8deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(8deg) scale(1.14);
+  }
+}
+
+@keyframes effect-copy {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+
+  25%,
+  78% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .game-effect-flash,
   .resource-chip,
-  .meter-block {
+  .meter-block,
+  .scorekeeper-effect::before,
+  .scorekeeper-effect__mark,
+  .scorekeeper-effect p,
+  .score-flash--gain,
+  .score-flash--spend {
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
   }

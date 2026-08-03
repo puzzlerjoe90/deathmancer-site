@@ -5,18 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta
     name="description"
-    content="Deathmancer scorekeeper for tracking score, Living ATK, Undead multipliers, initiative, terrain, spending, and round flow."
+    content="Deathmancer scorekeeper for tracking score, Living POW, Undead multipliers, initiative, terrain, spending, and round flow."
   >
   <title>Scorekeeper | Deathmancer</title>
   <link rel="canonical" href="https://deathmancer.com/scorekeeper.html">
-  <link rel="icon" type="image/png" href="./assets/images/logo-icon-dark.png">
-  <link rel="apple-touch-icon" href="./assets/images/logo-icon-dark.png">
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/images/favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/apple-touch-icon.png">
   <link rel="manifest" href="./site.webmanifest">
   <meta property="og:site_name" content="Deathmancer">
   <meta property="og:title" content="Scorekeeper | Deathmancer">
   <meta
     property="og:description"
-    content="A lightweight Deathmancer companion for score, Living ATK, Undead multipliers, initiative, terrain, spending, and round flow."
+    content="A lightweight Deathmancer companion for score, Living POW, Undead multipliers, initiative, terrain, spending, and round flow."
   >
   <meta property="og:image" content="https://deathmancer.com/assets/images/grief.jpg">
   <meta property="og:image:alt" content="Deathmancer illustration of a crowned figure facing a skull.">
@@ -26,7 +28,7 @@
   <meta name="twitter:title" content="Scorekeeper | Deathmancer">
   <meta
     name="twitter:description"
-    content="A lightweight Deathmancer companion for score, Living ATK, Undead multipliers, initiative, terrain, spending, and round flow."
+    content="A lightweight Deathmancer companion for score, Living POW, Undead multipliers, initiative, terrain, spending, and round flow."
   >
   <meta name="twitter:image" content="https://deathmancer.com/assets/images/grief.jpg">
   <link rel="stylesheet" href="./styles.css">
@@ -69,10 +71,14 @@
         <span class="panel-label">Round</span>
         <strong data-round-display>1</strong>
         <p data-round-note>Rounds 1-2 have no terrain roll.</p>
+        <button class="status-pill__button" type="button" data-round-next>Next Round</button>
       </div>
       <div class="status-pill">
         <span class="panel-label">Initiative</span>
-        <strong data-initiative-display>Player 1</strong>
+        <div class="initiative-badge">
+          <img src="./assets/images/characters/archimedes-undead.jpg" alt="" aria-hidden="true" data-initiative-icon>
+          <strong data-initiative-display>Archimedes</strong>
+        </div>
         <p>Higher score starts.</p>
       </div>
       <div class="win-banner" data-win-banner hidden aria-live="polite"></div>
@@ -84,11 +90,11 @@
           <img class="player-card__commander" src="./assets/images/characters/archimedes-undead.jpg" alt="" aria-hidden="true">
           <label>
             <span>Player name</span>
-            <input type="text" value="Player 1" data-player-name>
+            <input type="text" value="Archimedes" data-player-name>
           </label>
           <div class="player-total">
             <span>Total</span>
-            <strong data-total-score>0</strong>
+            <strong data-total-score>12</strong>
           </div>
         </div>
 
@@ -99,11 +105,11 @@
 
         <div class="control-grid">
           <div class="control-field">
-            <span>ATK</span>
+            <span>POW</span>
             <div class="number-stepper">
-              <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living ATK total">-</button>
-              <input type="number" inputmode="numeric" min="0" max="99" step="1" value="0" data-living-atk>
-              <button type="button" data-step-field="atk" data-step-amount="1" aria-label="Increase Living ATK total">+</button>
+              <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living POW total">-</button>
+              <input type="number" inputmode="numeric" min="0" max="99" step="1" value="8" data-living-atk>
+              <button type="button" data-step-field="atk" data-step-amount="1" aria-label="Increase Living POW total">+</button>
             </div>
           </div>
           <div class="control-field">
@@ -133,7 +139,7 @@
           <summary>Edit total</summary>
           <label>
             <span>Current score</span>
-            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-score>
+            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="12" data-score>
             <small>Manual total changes ask for confirmation.</small>
           </label>
         </details>
@@ -144,11 +150,11 @@
           <img class="player-card__commander" src="./assets/images/characters/balthazar-undead.jpg" alt="" aria-hidden="true">
           <label>
             <span>Player name</span>
-            <input type="text" value="Player 2" data-player-name>
+            <input type="text" value="Balthazar" data-player-name>
           </label>
           <div class="player-total">
             <span>Total</span>
-            <strong data-total-score>0</strong>
+            <strong data-total-score>8</strong>
           </div>
         </div>
 
@@ -159,11 +165,11 @@
 
         <div class="control-grid">
           <div class="control-field">
-            <span>ATK</span>
+            <span>POW</span>
             <div class="number-stepper">
-              <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living ATK total">-</button>
-              <input type="number" inputmode="numeric" min="0" max="99" step="1" value="0" data-living-atk>
-              <button type="button" data-step-field="atk" data-step-amount="1" aria-label="Increase Living ATK total">+</button>
+              <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living POW total">-</button>
+              <input type="number" inputmode="numeric" min="0" max="99" step="1" value="5" data-living-atk>
+              <button type="button" data-step-field="atk" data-step-amount="1" aria-label="Increase Living POW total">+</button>
             </div>
           </div>
           <div class="control-field">
@@ -193,7 +199,7 @@
           <summary>Edit total</summary>
           <label>
             <span>Current score</span>
-            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-score>
+            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="8" data-score>
             <small>Manual total changes ask for confirmation.</small>
           </label>
         </details>
@@ -240,6 +246,21 @@
       </section>
     </details>
   </main>
+
+  <div class="scorekeeper-effect" data-scorekeeper-effect hidden aria-live="polite">
+    <div class="scorekeeper-effect__mark" data-effect-symbol></div>
+    <p data-effect-copy></p>
+  </div>
+
+  <dialog class="victory-dialog" data-victory-dialog>
+    <div class="victory-dialog__panel">
+      <p class="eyebrow">Victory</p>
+      <h2 data-victory-title>Victory</h2>
+      <p data-victory-copy></p>
+      <div class="victory-dialog__stats" data-victory-stats></div>
+      <button class="button button--primary" type="button" data-victory-close>Close</button>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <p>Deathmancer &copy; 2026 Joe Green. All rights reserved. Illustrations &copy; Glen Holman. Contact: <a href="mailto:contact@deathmancer.com">contact@deathmancer.com</a>.</p>
