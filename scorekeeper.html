@@ -57,69 +57,49 @@
 
   <main class="scorekeeper-app" data-scorekeeper>
     <section class="scorekeeper-intro" aria-labelledby="scorekeeper-title">
-      <p class="eyebrow">Scorekeeper Draft</p>
-      <h1 id="scorekeeper-title">Track the race to 100.</h1>
+      <p class="eyebrow">Scorekeeper</p>
+      <h1 id="scorekeeper-title">Fast scoring for the table.</h1>
       <p class="hero__lede">
-        A lightweight table companion for score, Living ATK, Undead multipliers, initiative, terrain, and the six-round race.
+        Keep the board physical and the arithmetic light: score, multiplier, initiative, terrain, and Purgatory in one compact companion.
       </p>
     </section>
 
-    <section class="match-panel" aria-label="Match state">
-      <div>
+    <section class="scorekeeper-status" aria-label="Match state">
+      <div class="status-pill">
         <span class="panel-label">Round</span>
         <strong data-round-display>1</strong>
         <p data-round-note>Rounds 1-2 have no terrain roll.</p>
       </div>
-      <div>
+      <div class="status-pill">
         <span class="panel-label">Initiative</span>
         <strong data-initiative-display>Player 1</strong>
-        <p>Higher score takes initiative. Ties stay with Player 1 for this draft.</p>
-      </div>
-      <div>
-        <span class="panel-label">Target</span>
-        <strong>100</strong>
-        <p>Highest score wins if nobody reaches 100 before the end of Round 6.</p>
+        <p>Higher score starts.</p>
       </div>
       <div class="win-banner" data-win-banner hidden aria-live="polite"></div>
-      <div class="match-actions">
-        <button class="button button--ghost" type="button" data-round-prev>Previous Round</button>
-        <button class="button button--primary" type="button" data-round-next>Next Round</button>
-        <button class="button button--ghost" type="button" data-purgatory disabled>Purgatory</button>
-      </div>
-    </section>
-
-    <section class="terrain-panel" aria-labelledby="terrain-title">
-      <div>
-        <p class="eyebrow">Terrain</p>
-        <h2 id="terrain-title">Roll from Round 3 onward.</h2>
-        <p data-terrain-result>No terrain in play yet.</p>
-      </div>
-      <button class="button button--ghost" type="button" data-roll-terrain>Roll Terrain</button>
     </section>
 
     <section class="player-grid" aria-label="Player score controls">
       <article class="player-card" data-player-card data-player="0">
         <div class="player-card__header">
+          <img class="player-card__commander" src="./assets/images/characters/archimedes-undead.jpg" alt="" aria-hidden="true">
           <label>
             <span>Player name</span>
             <input type="text" value="Player 1" data-player-name>
           </label>
-          <strong data-total-score>0</strong>
+          <div class="player-total">
+            <span>Total</span>
+            <strong data-total-score>0</strong>
+          </div>
         </div>
 
         <div class="score-preview">
-          <span>Score this turn</span>
+          <span>This turn</span>
           <strong data-score-preview>0</strong>
         </div>
 
         <div class="control-grid">
-          <label>
-            <span>Current score</span>
-            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-score>
-            <small>Manual total changes ask for confirmation.</small>
-          </label>
           <div class="control-field">
-            <span>Living ATK total</span>
+            <span>ATK</span>
             <div class="number-stepper">
               <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living ATK total">-</button>
               <input type="number" inputmode="numeric" min="0" max="99" step="1" value="0" data-living-atk>
@@ -127,7 +107,7 @@
             </div>
           </div>
           <div class="control-field">
-            <span>Undead multiplier</span>
+            <span>Mult</span>
             <div class="number-stepper">
               <button type="button" data-step-field="multiplier" data-step-amount="-0.1" aria-label="Decrease Undead multiplier">-</button>
               <input type="number" inputmode="decimal" min="1" max="20" step="0.1" value="1.0" data-multiplier>
@@ -135,7 +115,7 @@
             </div>
           </div>
           <div class="control-field">
-            <span>Spend score</span>
+            <span>Spend</span>
             <div class="number-stepper">
               <button type="button" data-step-field="spend" data-step-amount="-1" aria-label="Decrease score spend">-</button>
               <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-spend>
@@ -148,30 +128,38 @@
           <button class="button button--primary" type="button" data-apply-score>Post Score</button>
           <button class="button button--ghost" type="button" data-apply-spend>Spend</button>
         </div>
+
+        <details class="player-advanced">
+          <summary>Edit total</summary>
+          <label>
+            <span>Current score</span>
+            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-score>
+            <small>Manual total changes ask for confirmation.</small>
+          </label>
+        </details>
       </article>
 
       <article class="player-card" data-player-card data-player="1">
         <div class="player-card__header">
+          <img class="player-card__commander" src="./assets/images/characters/balthazar-undead.jpg" alt="" aria-hidden="true">
           <label>
             <span>Player name</span>
             <input type="text" value="Player 2" data-player-name>
           </label>
-          <strong data-total-score>0</strong>
+          <div class="player-total">
+            <span>Total</span>
+            <strong data-total-score>0</strong>
+          </div>
         </div>
 
         <div class="score-preview">
-          <span>Score this turn</span>
+          <span>This turn</span>
           <strong data-score-preview>0</strong>
         </div>
 
         <div class="control-grid">
-          <label>
-            <span>Current score</span>
-            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-score>
-            <small>Manual total changes ask for confirmation.</small>
-          </label>
           <div class="control-field">
-            <span>Living ATK total</span>
+            <span>ATK</span>
             <div class="number-stepper">
               <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living ATK total">-</button>
               <input type="number" inputmode="numeric" min="0" max="99" step="1" value="0" data-living-atk>
@@ -179,7 +167,7 @@
             </div>
           </div>
           <div class="control-field">
-            <span>Undead multiplier</span>
+            <span>Mult</span>
             <div class="number-stepper">
               <button type="button" data-step-field="multiplier" data-step-amount="-0.1" aria-label="Decrease Undead multiplier">-</button>
               <input type="number" inputmode="decimal" min="1" max="20" step="0.1" value="1.0" data-multiplier>
@@ -187,7 +175,7 @@
             </div>
           </div>
           <div class="control-field">
-            <span>Spend score</span>
+            <span>Spend</span>
             <div class="number-stepper">
               <button type="button" data-step-field="spend" data-step-amount="-1" aria-label="Decrease score spend">-</button>
               <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-spend>
@@ -200,20 +188,57 @@
           <button class="button button--primary" type="button" data-apply-score>Post Score</button>
           <button class="button button--ghost" type="button" data-apply-spend>Spend</button>
         </div>
+
+        <details class="player-advanced">
+          <summary>Edit total</summary>
+          <label>
+            <span>Current score</span>
+            <input type="number" inputmode="numeric" min="0" max="999" step="1" value="0" data-score>
+            <small>Manual total changes ask for confirmation.</small>
+          </label>
+        </details>
       </article>
     </section>
 
-    <section class="notes-panel" aria-labelledby="scorekeeper-notes-title">
-      <div>
-        <p class="eyebrow">Table Notes</p>
-        <h2 id="scorekeeper-notes-title">Keep rulings and reminders close.</h2>
-      </div>
-      <label>
-        <span>Notes</span>
-        <textarea rows="5" data-match-notes placeholder="Purgatory, The Fallen, Commander flips, terrain reminders..."></textarea>
-      </label>
-      <button class="button button--ghost" type="button" data-reset-match>Reset Match</button>
-    </section>
+    <details class="scorekeeper-drawer">
+      <summary>Round, Terrain & Tools</summary>
+      <section class="match-panel" aria-label="Match tools">
+        <div>
+          <span class="panel-label">Target</span>
+          <strong>100</strong>
+          <p>Highest score wins if nobody reaches 100 before the end of Round 6.</p>
+        </div>
+        <div class="match-actions">
+          <button class="button button--ghost" type="button" data-round-prev>Previous Round</button>
+          <button class="button button--primary" type="button" data-round-next>Next Round</button>
+          <button class="button button--ghost" type="button" data-purgatory disabled>Purgatory</button>
+          <button class="button button--ghost" type="button" data-reset-match>Reset Match</button>
+        </div>
+      </section>
+
+      <section class="terrain-panel" aria-labelledby="terrain-title">
+        <div>
+          <p class="eyebrow">Terrain</p>
+          <h2 id="terrain-title">Optional round roll.</h2>
+          <p data-terrain-result>No terrain in play yet.</p>
+        </div>
+        <button class="button button--ghost" type="button" data-roll-terrain>Roll Terrain</button>
+      </section>
+    </details>
+
+    <details class="scorekeeper-drawer">
+      <summary>Notes</summary>
+      <section class="notes-panel" aria-labelledby="scorekeeper-notes-title">
+        <div>
+          <p class="eyebrow">Table Notes</p>
+          <h2 id="scorekeeper-notes-title">Keep rulings and reminders close.</h2>
+        </div>
+        <label>
+          <span>Notes</span>
+          <textarea rows="4" data-match-notes placeholder="Purgatory, The Fallen, Commander flips, terrain reminders..."></textarea>
+        </label>
+      </section>
+    </details>
   </main>
 
   <footer class="site-footer">
