@@ -96,9 +96,12 @@ code {
   height: 2.25rem;
   place-items: center;
   border: 1px solid var(--line);
-  background: linear-gradient(145deg, #16171b, #030304);
+  background:
+    linear-gradient(145deg, rgba(241, 215, 120, 0.08), transparent 44%),
+    #030304 url("./assets/images/logo-icon-dark.png") center / 92% no-repeat;
   color: var(--gold-bright);
   font-family: Georgia, serif;
+  font-size: 0;
 }
 
 .nav-toggle {
@@ -1826,6 +1829,10 @@ p {
   padding: 1rem;
 }
 
+.video-card--featured {
+  grid-column: 1 / -1;
+}
+
 .video-card h2 {
   margin-bottom: 0;
   font-size: clamp(1.55rem, 5vw, 2.2rem);
@@ -1843,6 +1850,18 @@ p {
   background:
     linear-gradient(145deg, rgba(241, 215, 120, 0.1), transparent 42%),
     #050506;
+}
+
+.video-card__media {
+  overflow: hidden;
+  border: 1px solid rgba(241, 215, 120, 0.32);
+  background: #030304;
+}
+
+.video-card__media video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .video-card__frame span {

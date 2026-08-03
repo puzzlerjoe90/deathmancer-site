@@ -1,0 +1,16 @@
+{
+  "name": "Deathmancer",
+  "short_name": "Deathmancer",
+  "description": "A competitive engine-building card game across the Living and Dead Realms.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030304",
+  "theme_color": "#030304",
+  "icons": [
+    {
+      "src": "/assets/images/logo-icon-dark.png",
+      "sizes": "800x800",
+      "type": "image/png"
+    }
+  ]
+}
