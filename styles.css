@@ -948,6 +948,22 @@ p {
   background: #030304;
 }
 
+.character-lore-panel {
+  display: grid;
+  gap: 1rem;
+  max-width: 58rem;
+  padding: clamp(1rem, 4vw, 1.5rem);
+  border: 1px solid rgba(241, 215, 120, 0.36);
+  background:
+    linear-gradient(145deg, rgba(241, 215, 120, 0.07), transparent 36%),
+    rgba(12, 13, 16, 0.86);
+  box-shadow: 0 1.2rem 3rem var(--shadow);
+}
+
+.character-lore-panel p {
+  margin-bottom: 0;
+}
+
 .character-modal {
   width: min(100% - 2rem, 58rem);
   max-height: min(88svh, 48rem);
