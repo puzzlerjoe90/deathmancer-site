@@ -2099,10 +2099,22 @@ p {
   background: #030304;
 }
 
+.video-card__media--short {
+  width: min(100%, 22rem);
+  margin-inline: auto;
+}
+
 .video-card__media video {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.video-card__media iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: 0;
 }
 
 .video-card__frame span {
