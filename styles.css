@@ -441,8 +441,88 @@ p {
   gap: 0.75rem;
 }
 
+.commander-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+  max-width: 32rem;
+}
+
+.commander-showcase figure {
+  margin: 0;
+  border: 1px solid rgba(241, 215, 120, 0.46);
+  background: rgba(12, 13, 16, 0.82);
+  overflow: hidden;
+}
+
+.commander-showcase img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center;
+}
+
+.commander-showcase figcaption {
+  padding: 0.65rem 0.75rem;
+  color: var(--gold-bright);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .commander-list article {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
   padding: 1rem;
+}
+
+.commander-card__icon {
+  display: grid;
+  width: 4rem;
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(241, 215, 120, 0.72);
+  border-radius: 50%;
+  background: #050506;
+  color: var(--gold-bright);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  box-shadow: 0 0 0 2px rgba(5, 5, 6, 0.86);
+}
+
+.commander-card__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.commander-card__icon--placeholder {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(241, 215, 120, 0.18), transparent 42%),
+    #050506;
+}
+
+.commander-card__icon--split {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.commander-card__icon--split img {
+  min-width: 0;
+}
+
+.commander-card__icon--split img:first-child {
+  object-position: 46% center;
+}
+
+.commander-card__icon--split img:last-child {
+  object-position: 54% center;
 }
 
 .commander-list p,
