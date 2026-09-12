@@ -13,7 +13,8 @@ First static website for **Deathmancer**, a competitive engine-building card gam
 ├── script.js
 ├── assets/
 │   ├── downloads/
-│   │   └── deathmancer-rulebook-v1.pdf
+│   │   ├── deathmancer-rulebook-v2.pdf
+│   │   └── deathmancer-solobook-v2.pdf
 │   └── images/
 │       ├── card-placeholder-living.svg
 │       ├── card-placeholder-undead.svg
@@ -46,7 +47,7 @@ Then visit `http://localhost:8000`.
 - Mobile navigation behavior lives in `script.js`.
 - Final illustrations currently used by the site are `assets/images/grief.jpg` and `assets/images/mercy.jpg`.
 - The gallery uses `assets/images/proxy-playtest.jpg` for the early proxy playtest concept.
-- The rulebook download currently points to `assets/downloads/deathmancer-rulebook-v1.pdf`.
+- Current rulebook downloads are `assets/downloads/deathmancer-rulebook-v2.pdf` and `assets/downloads/deathmancer-solobook-v2.pdf`. These stable paths contain the latest supplied PDFs; dated query strings on website links refresh cached copies.
 - Artwork and rulebook content are project assets; preserve credit and copyright notes when publishing.
 
 ## GitHub Pages Deployment

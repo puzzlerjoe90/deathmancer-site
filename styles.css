@@ -355,6 +355,26 @@ a.commander-card__icon:focus-visible {
   font-size: 3rem;
 }
 
+.commander-preview .character-card {
+  max-width: 32rem;
+  margin: 0 0 1.5rem;
+}
+
+.commander-preview .character-card > img {
+  aspect-ratio: 2048 / 1570;
+}
+
+.character-modal--gatekeeper .character-modal__copy h2 {
+  font-size: 2rem;
+}
+
+.character-modal--gatekeeper .character-modal__layout > img {
+  height: auto;
+  max-height: 32rem;
+  object-fit: contain;
+  align-self: start;
+}
+
 .commander-preview__abilities {
   margin: 2rem 0;
   border-block: 1px solid var(--line);
