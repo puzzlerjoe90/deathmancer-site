@@ -57,7 +57,16 @@ This site is ready for GitHub Pages because it uses static files only.
 2. Open the repository settings.
 3. Go to **Pages**.
 4. Set the source to **Deploy from a branch**.
-5. Choose the `main` branch and the repository root folder.
+5. Choose the `gh-pages` branch and the repository root folder.
 6. Save, then wait for GitHub Pages to publish the site.
 
 No build command is required.
+
+The source branch is `main`, but the live site is served from `gh-pages`.
+After checking the changes, push the same commit to both branches:
+
+```powershell
+git push origin HEAD:main HEAD:gh-pages
+```
+
+Confirm the changed content at https://deathmancer.com after Pages finishes publishing.

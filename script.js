@@ -171,6 +171,7 @@ if (scorekeeper) {
 
   const state = {
     round: 1,
+    initiativeByRound: [0],
     terrainIndex: null,
     notes: "",
     lastSnapshot: null,
@@ -226,6 +227,7 @@ if (scorekeeper) {
   function createSnapshot() {
     return {
       round: state.round,
+      initiativeByRound: [...state.initiativeByRound],
       terrainIndex: state.terrainIndex,
       notes: state.notes,
       roundLog: state.roundLog.map((entry) => ({ ...entry })),
@@ -239,6 +241,7 @@ if (scorekeeper) {
 
   function resetMatch() {
     state.round = 1;
+    state.initiativeByRound = [0];
     state.terrainIndex = null;
     state.notes = "";
     state.roundLog = [];
@@ -382,8 +385,7 @@ if (scorekeeper) {
         ? "Rounds 1-2 have no terrain roll."
         : "Roll terrain at the start of the round.";
 
-    const [firstPlayer, secondPlayer] = state.players;
-    const initiativeIndex = firstPlayer.score >= secondPlayer.score ? 0 : 1;
+    const initiativeIndex = state.initiativeByRound[state.round - 1];
     initiativeDisplay.textContent = getPlayerName(initiativeIndex);
     if (initiativeIcon) {
       initiativeIcon.src = commanderIcons[initiativeIndex];
@@ -501,7 +503,7 @@ if (scorekeeper) {
 
     try {
       const parsed = JSON.parse(savedState);
-      state.round = Number.isInteger(parsed.round) ? parsed.round : state.round;
+      state.round = Number.isInteger(parsed.round) && parsed.round >= 1 ? parsed.round : state.round;
       state.terrainIndex = Number.isInteger(parsed.terrainIndex) ? parsed.terrainIndex : null;
       state.notes = typeof parsed.notes === "string" ? parsed.notes : "";
       state.lastSnapshot = parsed.lastSnapshot || null;
@@ -524,6 +526,7 @@ if (scorekeeper) {
       if (isLegacyBlankStart) {
         state.players = getDefaultPlayers();
       }
+      state.initiativeByRound = restoreInitiative(parsed);
     } catch {
       localStorage.removeItem(storageKey);
     }
@@ -624,16 +627,34 @@ if (scorekeeper) {
     render();
   });
 
+  function restoreInitiative(saved) {
+    // Older saved matches do not include who started each round.
+    const leader = state.players[0].score >= state.players[1].score ? 0 : 1;
+    return Array.from({ length: state.round }, (_, index) => {
+      const stored = saved.initiativeByRound?.[index];
+      return stored === 0 || stored === 1 ? stored : index === 0 ? 0 : leader;
+    });
+  }
+
+  function advanceRound() {
+    const currentInitiative = state.initiativeByRound[state.round - 1];
+    const [first, second] = state.players;
+    const nextInitiative = first.score === second.score
+      ? 1 - currentInitiative
+      : first.score > second.score ? 0 : 1;
+    state.initiativeByRound = state.initiativeByRound.slice(0, state.round);
+    state.initiativeByRound.push(nextInitiative);
+    state.round += 1;
+  }
+
   function nextRound() {
     updateStateFromInputs();
-    rememberLastAction();
     const tiedBelowTarget = state.players[0].score === state.players[1].score && state.players[0].score < 100;
-
-    if (state.round >= 6 && tiedBelowTarget) {
-      state.round += 1;
-    } else {
-      state.round = Math.min(6, state.round + 1);
+    if (state.round >= 6 && !tiedBelowTarget) {
+      return;
     }
+    rememberLastAction();
+    advanceRound();
 
     if (state.round < 3) {
       state.terrainIndex = null;
@@ -650,8 +671,8 @@ if (scorekeeper) {
   scorekeeper.querySelector("[data-roll-terrain]").addEventListener("click", () => {
     updateStateFromInputs();
     rememberLastAction();
-    if (state.round < 3) {
-      state.round = 3;
+    while (state.round < 3) {
+      advanceRound();
     }
     state.terrainIndex = Math.floor(Math.random() * terrain.length);
     render();
@@ -678,6 +699,7 @@ if (scorekeeper) {
     state.notes = snapshot.notes;
     state.roundLog = Array.isArray(snapshot.roundLog) ? snapshot.roundLog.map((entry) => ({ ...entry })) : [];
     state.players = snapshot.players.map((player) => ({ ...player }));
+    state.initiativeByRound = restoreInitiative(snapshot);
     state.lastSnapshot = null;
     render();
   });

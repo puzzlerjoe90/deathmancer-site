@@ -93,6 +93,13 @@
   </header>
 
   <main id="top">
+    <section class="launch-banner" aria-label="Kickstarter pre-launch">
+      <a href="https://www.kickstarter.com/projects/deathmancer/deathmancer" target="_blank" rel="noopener noreferrer">
+        <span>Pre-Launch Live on Kickstarter</span>
+        <img src="./assets/images/kickstarter-logo-white.png" width="959" height="101" alt="Kickstarter">
+        <span class="launch-banner__invitation">Follow the campaign &rarr;</span>
+      </a>
+    </section>
     <section class="hero hero--feature">
       <figure class="hero__art hero__art--feature">
         <img src="./assets/images/grief.jpg" alt="Deathmancer illustration of a crowned figure facing a skull.">
@@ -172,15 +179,15 @@
         <p class="eyebrow">Commanders</p>
         <h2>Your Commander defines your tempo and afterlife.</h2>
         <p>
-          Each Commander has Living and Undead sides. While Living, your Commander can recruit Heroes or summon Undead. If killed, it flips into the Dead Realm and gains access to Commander Override: score or summon during the Undead Action instead of attacking.
+          Each Commander has Living and Undead sides. While Living, your Commander can summon Undead (or score/recruit with the Living). If killed, it flips into the Dead Realm and gains access to Commander Override: score or summon during the Undead Action instead of attacking or using an ability with your Undead.
         </p>
         <div class="commander-showcase" aria-label="Living Commander artwork">
           <figure>
-            <img src="./assets/images/characters/archimedes-living.jpg" alt="Archimedes Living Commander artwork.">
+            <a href="./characters-archimedes.html" aria-label="Explore Archimedes and his units"><img src="./assets/images/characters/archimedes-living.jpg" alt="Archimedes Living Commander artwork."></a>
             <figcaption>Archimedes</figcaption>
           </figure>
           <figure>
-            <img src="./assets/images/characters/balthazar-living.jpg" alt="Balthazar Living Commander artwork.">
+            <a href="./characters-balthazar.html" aria-label="Explore Balthazar and his units"><img src="./assets/images/characters/balthazar-living.jpg" alt="Balthazar Living Commander artwork."></a>
             <figcaption>Balthazar</figcaption>
           </figure>
         </div>
@@ -188,18 +195,18 @@
 
       <div class="commander-list" aria-label="Commander archetypes">
         <article>
-          <span class="commander-card__icon" aria-hidden="true">
+          <a class="commander-card__icon" href="./characters-archimedes.html" aria-label="Explore Archimedes">
             <img src="./assets/images/characters/archimedes-living.jpg" alt="">
-          </span>
+          </a>
           <div>
             <h3>Archimedes, The Virtuous</h3>
             <p>Starts with initiative. Has increased power in the Living Realm. Defensive and consistent scoring.</p>
           </div>
         </article>
         <article>
-          <span class="commander-card__icon" aria-hidden="true">
+          <a class="commander-card__icon" href="./characters-balthazar.html" aria-label="Explore Balthazar">
             <img src="./assets/images/characters/balthazar-living.jpg" alt="">
-          </span>
+          </a>
           <div>
             <h3>Balthazar, The Ascendant Angel</h3>
             <p>Has greater command over the Undead for an increasingly scaling army. Comes back stronger in Death.</p>
@@ -209,7 +216,7 @@
           <span class="commander-card__icon commander-card__icon--placeholder" aria-hidden="true">?</span>
           <div>
             <h3>Commanders In-Progress</h3>
-            <p>The Gatekeeper and Time. One controls the boundary, the other the flow between the Living and Dead Realms.</p>
+            <p>The Gatekeeper and Chronos control Space and Time. One commands the boundary between the Living and Dead Realms; the other commands the passage of the rounds.</p>
           </div>
         </article>
         <article>
