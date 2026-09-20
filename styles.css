@@ -3130,3 +3130,25 @@ input {
     animation-iteration-count: 1 !important;
   }
 }
+.score-adjustments {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.score-adjustments button {
+  min-width: 0;
+  height: 44px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 20px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.score-adjustments button:disabled { opacity: .4; cursor: default; }
+.score-adjustments button:active:not(:disabled) { background: #ffffff20; }
+.score-adjustments button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+@media (max-width: 380px) { .score-adjustments { gap: 2px; } }

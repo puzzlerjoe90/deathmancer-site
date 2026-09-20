@@ -175,6 +175,7 @@ if (scorekeeper) {
     terrainIndex: null,
     notes: "",
     lastSnapshot: null,
+    scoreAdjustments: [[], []],
     roundLog: [],
     players: getDefaultPlayers(),
   };
@@ -232,11 +233,29 @@ if (scorekeeper) {
       notes: state.notes,
       roundLog: state.roundLog.map((entry) => ({ ...entry })),
       players: state.players.map((player) => ({ ...player })),
+      scoreAdjustments: state.scoreAdjustments.map((history) => [...history]),
     };
   }
 
-  function rememberLastAction() {
+  function rememberLastAction({ keepAdjustments = false } = {}) {
     state.lastSnapshot = createSnapshot();
+    if (!keepAdjustments) state.scoreAdjustments = [[], []];
+  }
+
+  function adjustScore(index, amount, undo = false) {
+    updateStateFromInputs();
+    const history = state.scoreAdjustments[index];
+    const before = state.players[index].score;
+    const after = undo ? history.at(-1) : clampScore(before + amount);
+    if (after === undefined || after === before) return;
+    rememberLastAction({ keepAdjustments: true });
+    if (undo) history.pop();
+    else history.push(before);
+    state.players[index].score = after;
+    addRoundLog({ type: "Adjustment", player: getPlayerName(index), amount: after - before, before, after });
+    // The live victory banner updates without a modal interrupting rapid taps.
+    render();
+    flashPlayerTotal(index, after < before ? "spend" : "gain");
   }
 
   function resetMatch() {
@@ -410,6 +429,8 @@ if (scorekeeper) {
       setInputValue(card.querySelector("[data-spend]"), player.spend, preserveFocusedInput);
       card.querySelector("[data-total-score]").textContent = player.score;
       card.querySelector("[data-score-preview]").textContent = scoreForTurn(player);
+      card.querySelector("[data-score-undo]").disabled = !state.scoreAdjustments[index].length;
+      card.querySelector(".score-adjustments").setAttribute("aria-label", `${getPlayerName(index)} score adjustments`);
       card.classList.toggle("has-initiative", index === initiativeIndex);
     });
 
@@ -507,6 +528,7 @@ if (scorekeeper) {
       state.terrainIndex = Number.isInteger(parsed.terrainIndex) ? parsed.terrainIndex : null;
       state.notes = typeof parsed.notes === "string" ? parsed.notes : "";
       state.lastSnapshot = parsed.lastSnapshot || null;
+      state.scoreAdjustments = restoreAdjustments(parsed);
       state.roundLog = Array.isArray(parsed.roundLog) ? parsed.roundLog : [];
 
       parsed.players?.slice(0, 2).forEach((player, index) => {
@@ -557,6 +579,15 @@ if (scorekeeper) {
     });
 
     card.addEventListener("click", (event) => {
+      const adjustment = event.target.closest("[data-score-adjust]");
+      if (adjustment) {
+        adjustScore(index, Number(adjustment.dataset.scoreAdjust));
+        return;
+      }
+      if (event.target.closest("[data-score-undo]")) {
+        adjustScore(index, 0, true);
+        return;
+      }
       const stepButton = event.target.closest("[data-step-field]");
 
       if (!stepButton) {
@@ -626,6 +657,12 @@ if (scorekeeper) {
     state.terrainIndex = state.round < 3 ? null : state.terrainIndex;
     render();
   });
+
+  function restoreAdjustments(saved) {
+    return [0, 1].map((index) => Array.isArray(saved.scoreAdjustments?.[index])
+      ? saved.scoreAdjustments[index].filter((score) => Number.isInteger(score) && score >= 0)
+      : []);
+  }
 
   function restoreInitiative(saved) {
     // Older saved matches do not include who started each round.
@@ -699,6 +736,7 @@ if (scorekeeper) {
     state.notes = snapshot.notes;
     state.roundLog = Array.isArray(snapshot.roundLog) ? snapshot.roundLog.map((entry) => ({ ...entry })) : [];
     state.players = snapshot.players.map((player) => ({ ...player }));
+    state.scoreAdjustments = restoreAdjustments(snapshot);
     state.initiativeByRound = restoreInitiative(snapshot);
     state.lastSnapshot = null;
     render();
@@ -746,6 +784,8 @@ if (scorekeeper) {
           const item = document.createElement("p");
           if (entry.type === "Post Score") {
             item.textContent = `${entry.player}: POW ${entry.pow} x ${Number(entry.multiplier).toFixed(1)} = +${entry.amount} (${entry.before} to ${entry.after}).`;
+          } else if (entry.type === "Adjustment") {
+            item.textContent = `${entry.player}: score adjustment (${entry.before} to ${entry.after}).`;
           } else if (entry.type === "Override") {
             item.textContent = `${entry.player}: manual total override (${entry.before} to ${entry.after}).`;
           } else {

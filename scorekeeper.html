@@ -95,6 +95,11 @@
 
     <section class="player-grid" aria-label="Player score controls">
       <article class="player-card" data-player-card data-player="0">
+        <div class="score-adjustments" role="group" aria-label="Archimedes score adjustments">
+          <button type="button" data-score-adjust="1" aria-label="Add 1 score" title="Add 1 score">+1</button>
+          <button type="button" data-score-adjust="-1" aria-label="Subtract 1 score" title="Subtract 1 score">-1</button>
+          <button type="button" data-score-undo aria-label="Undo last score adjustment" title="Undo last score adjustment" disabled>&#8630;</button>
+        </div>
         <div class="player-card__header">
           <img class="player-card__commander" src="./assets/images/characters/archimedes-undead.jpg" alt="" aria-hidden="true">
           <label>
@@ -155,6 +160,11 @@
       </article>
 
       <article class="player-card" data-player-card data-player="1">
+        <div class="score-adjustments" role="group" aria-label="Balthazar score adjustments">
+          <button type="button" data-score-adjust="1" aria-label="Add 1 score" title="Add 1 score">+1</button>
+          <button type="button" data-score-adjust="-1" aria-label="Subtract 1 score" title="Subtract 1 score">-1</button>
+          <button type="button" data-score-undo aria-label="Undo last score adjustment" title="Undo last score adjustment" disabled>&#8630;</button>
+        </div>
         <div class="player-card__header">
           <img class="player-card__commander" src="./assets/images/characters/balthazar-undead.jpg" alt="" aria-hidden="true">
           <label>
