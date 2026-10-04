@@ -31,16 +31,7 @@
     content="A lightweight Deathmancer companion for score, Living POW, Undead multipliers, initiative, terrain, spending, and round flow."
   >
   <meta name="twitter:image" content="https://deathmancer.com/assets/images/grief.jpg">
-  <link rel="stylesheet" href="./styles.css">
-  <!-- MailerLite Universal -->
-  <script>
-    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-    ml('account', '2631999');
-  </script>
-  <!-- End MailerLite Universal -->
+  <link rel="stylesheet" href="./styles.css?v=0.9">
 </head>
 <body class="scorekeeper-page">
   <header class="site-header" data-header>
@@ -101,7 +92,7 @@
           <button type="button" data-score-undo aria-label="Undo last score adjustment" title="Undo last score adjustment" disabled>&#8630;</button>
         </div>
         <div class="player-card__header">
-          <img class="player-card__commander" src="./assets/images/characters/archimedes-undead.jpg" alt="" aria-hidden="true">
+          <label class="commander-picker"><img class="player-card__commander" src="./assets/images/characters/archimedes-living.jpg" alt=""><select data-commander-select aria-label="Choose Commander for player 1"><option value="archimedes" selected>Archimedes</option><option value="balthazar">Balthazar</option><option value="chronos">Chronos</option><option value="gatekeeper">Gatekeeper</option></select></label>
           <label>
             <span>Player name</span>
             <input type="text" value="Archimedes" data-player-name>
@@ -122,7 +113,7 @@
             <span>POW</span>
             <div class="number-stepper">
               <button type="button" data-step-field="atk" data-step-amount="-1" aria-label="Decrease Living POW total">-</button>
-              <input type="number" inputmode="numeric" min="0" max="99" step="1" value="8" data-living-atk>
+              <input type="number" inputmode="numeric" min="0" max="99" step="1" value="6" data-living-atk>
               <button type="button" data-step-field="atk" data-step-amount="1" aria-label="Increase Living POW total">+</button>
             </div>
           </div>
@@ -166,7 +157,7 @@
           <button type="button" data-score-undo aria-label="Undo last score adjustment" title="Undo last score adjustment" disabled>&#8630;</button>
         </div>
         <div class="player-card__header">
-          <img class="player-card__commander" src="./assets/images/characters/balthazar-undead.jpg" alt="" aria-hidden="true">
+          <label class="commander-picker"><img class="player-card__commander" src="./assets/images/characters/balthazar-living.jpg" alt=""><select data-commander-select aria-label="Choose Commander for player 2"><option value="archimedes">Archimedes</option><option value="balthazar" selected>Balthazar</option><option value="chronos">Chronos</option><option value="gatekeeper">Gatekeeper</option></select></label>
           <label>
             <span>Player name</span>
             <input type="text" value="Balthazar" data-player-name>
@@ -286,6 +277,6 @@
     <a href="./index.html">Back to home</a>
   </footer>
 
-  <script src="./script.js"></script>
+  <script src="./script.js?v=0.9"></script>
 </body>
 </html>

@@ -138,6 +138,12 @@ const scorekeeper = document.querySelector("[data-scorekeeper]");
 
 if (scorekeeper) {
   const storageKey = "deathmancer-scorekeeper-draft";
+  const commanders = {
+    archimedes: {name:'Archimedes',score:12,atk:6,icon:'archimedes-living.jpg'},
+    balthazar: {name:'Balthazar',score:8,atk:5,icon:'balthazar-living.jpg'},
+    chronos: {name:'Chronos',score:10,atk:8,icon:'chronos-temp.jpg'},
+    gatekeeper: {name:'Gatekeeper',score:6,atk:3,icon:'the-gatekeeper.jpg'},
+  };
   const commanderIcons = [
     "./assets/images/characters/archimedes-undead.jpg",
     "./assets/images/characters/balthazar-undead.jpg",
@@ -203,8 +209,8 @@ if (scorekeeper) {
 
   function getDefaultPlayers() {
     return [
-      { name: "Archimedes", score: 12, atk: 8, multiplier: 1, spend: 0 },
-      { name: "Balthazar", score: 8, atk: 5, multiplier: 1, spend: 0 },
+      { commander:'archimedes', name: "Archimedes", score: 12, atk: 6, multiplier: 1, spend: 0 },
+      { commander:'balthazar', name: "Balthazar", score: 8, atk: 5, multiplier: 1, spend: 0 },
     ];
   }
 
@@ -407,7 +413,7 @@ if (scorekeeper) {
     const initiativeIndex = state.initiativeByRound[state.round - 1];
     initiativeDisplay.textContent = getPlayerName(initiativeIndex);
     if (initiativeIcon) {
-      initiativeIcon.src = commanderIcons[initiativeIndex];
+      initiativeIcon.src = './assets/images/characters/'+commanders[state.players[initiativeIndex].commander|| (initiativeIndex?'balthazar':'archimedes')].icon;
       initiativeIcon.alt = `${getPlayerName(initiativeIndex)} initiative icon`;
     }
 
@@ -423,6 +429,9 @@ if (scorekeeper) {
     playerCards.forEach((card, index) => {
       const player = state.players[index];
       setInputValue(card.querySelector("[data-player-name]"), player.name, preserveFocusedInput);
+      const faction=commanders[player.commander] ? player.commander : (index?'balthazar':'archimedes');
+      card.querySelector('.player-card__commander').src='./assets/images/characters/'+commanders[faction].icon;
+      card.querySelector('[data-commander-select]').value=faction;
       setInputValue(card.querySelector("[data-score]"), player.score, preserveFocusedInput);
       setInputValue(card.querySelector("[data-living-atk]"), player.atk, preserveFocusedInput);
       setInputValue(card.querySelector("[data-multiplier]"), player.multiplier.toFixed(1), preserveFocusedInput);
@@ -556,6 +565,7 @@ if (scorekeeper) {
 
   playerCards.forEach((card, index) => {
     card.addEventListener("input", (event) => {
+      if(event.target.matches('[data-commander-select]'))return;
       if (event.target?.matches("[data-score]")) {
         event.target.classList.add("is-pending");
         return;
@@ -566,6 +576,11 @@ if (scorekeeper) {
     });
 
     card.addEventListener("change", (event) => {
+      if(event.target.matches('[data-commander-select]')){
+        const faction=event.target.value,c=commanders[faction];if(!c)return;
+        state.players[index]={commander:faction,name:c.name,score:c.score,atk:c.atk,multiplier:1,spend:0};
+        state.scoreAdjustments[index]=[];state.lastSnapshot=null;render();saveState();return;
+      }
       if (event.target?.matches("[data-score]")) {
         confirmScoreOverride(card, index);
       }
