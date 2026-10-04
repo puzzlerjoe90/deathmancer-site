@@ -102,6 +102,8 @@ if (characterDialog && characterButtons.length) {
       }
       setFormattedText(known, button.dataset.known);
       setFormattedText(history, button.dataset.history);
+      if (known?.parentElement) known.parentElement.hidden = !button.dataset.known;
+      if (history?.previousElementSibling) history.previousElementSibling.hidden = !button.dataset.history;
       setText(closing, button.dataset.closing);
 
       if (image && button.dataset.image) {
